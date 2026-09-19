@@ -81,7 +81,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
         <ChoiceRow values={restOptions} selected={restSeconds} onSelect={(value) => setRestSeconds(Number(value))} suffix="s" />
 
         <View style={styles.movementHeader}>
-          <FieldLabel>Movements ({filledMovements.length})</FieldLabel>
+          <FieldLabel>{`Movements (${filledMovements.length})`}</FieldLabel>
           <Pressable onPress={() => setMovements((current) => [...current, ''])}><Text style={styles.addMovement}>＋ Add</Text></Pressable>
         </View>
         {movements.map((movement, index) => (
