@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
+import { dailyWorkoutIndex, orderWorkoutsForDailyRotation } from '../../application/dailyWorkout';
 import type { WorkoutSession } from '../../domain/session';
 import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
@@ -26,12 +27,29 @@ export function HomeScreen(props: Props) {
 
   useEffect(() => {
     Promise.all([props.container.workouts.listVault(), props.container.sessions.getActiveSession()]).then(([vault, session]) => {
-      const preferredIndex = vault.findIndex((workout) => workout.id === 'vault-kettlebell-1');
-      setWorkouts(vault);
-      setFeaturedIndex(preferredIndex >= 0 ? preferredIndex : 0);
+      const dailyRotation = orderWorkoutsForDailyRotation(vault);
+      setWorkouts(dailyRotation);
+      setFeaturedIndex(dailyWorkoutIndex(new Date(), dailyRotation.length));
       setActive(session);
     });
   }, [props.container]);
+
+  useEffect(() => {
+    if (workouts.length === 0) return;
+
+    let midnightTimer: ReturnType<typeof setTimeout>;
+    const scheduleNextDay = () => {
+      const now = new Date();
+      const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      midnightTimer = setTimeout(() => {
+        setFeaturedIndex(dailyWorkoutIndex(new Date(), workouts.length));
+        scheduleNextDay();
+      }, nextDay.getTime() - now.getTime() + 100);
+    };
+
+    scheduleNextDay();
+    return () => clearTimeout(midnightTimer);
+  }, [workouts.length]);
 
   const quickStart = workouts[featuredIndex] ?? null;
   const refreshWorkout = () => {
@@ -53,7 +71,7 @@ export function HomeScreen(props: Props) {
       {quickStart ? (
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionLabel}>QUICK START</Text>
+            <Text style={styles.sectionLabel}>WORKOUT OF THE DAY</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8}>
               <Text style={styles.refresh}>↻ Refresh</Text>
             </Pressable>

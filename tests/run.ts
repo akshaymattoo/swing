@@ -1,5 +1,6 @@
 import { SessionService } from '../src/application/sessionService';
 import { WorkoutService } from '../src/application/workoutService';
+import { dailyWorkoutIndex, orderWorkoutsForDailyRotation } from '../src/application/dailyWorkout';
 import {
   advanceTimer,
   createTimerState,
@@ -105,7 +106,7 @@ async function serviceTests() {
   equal(completed.status, 'completed', 'refresh completes a fully elapsed workout');
   assert(completed.endedAt !== null, 'completed session stores an end time');
 
-  await sessionService.deleteHistoryEntry(completed.id);
+  await sessions.deleteHistoryEntry(completed.id);
   equal(await sessions.getById(completed.id), null, 'deleting history removes the persisted session');
 
   const created = await workoutService.createWorkout({
@@ -153,11 +154,29 @@ async function vaultSeedTests() {
   equal((await workouts.listVault()).length, 12, 'Vault refresh is idempotent');
 }
 
+async function dailyWorkoutTests() {
+  const morning = new Date(2026, 8, 19, 8, 15);
+  const evening = new Date(2026, 8, 19, 23, 45);
+  const nextDay = new Date(2026, 8, 20, 0, 5);
+
+  const morningIndex = dailyWorkoutIndex(morning, 12);
+  equal(dailyWorkoutIndex(evening, 12), morningIndex, 'the workout stays consistent throughout the local calendar day');
+  equal(dailyWorkoutIndex(nextDay, 12), (morningIndex + 1) % 12, 'the workout rotates on the next local calendar day');
+  equal(dailyWorkoutIndex(morning, 0), -1, 'an empty Vault has no daily workout');
+
+  const reordered = orderWorkoutsForDailyRotation([
+    { ...workout, id: 'vault-z' },
+    { ...workout, id: 'vault-a' }
+  ]);
+  equal(reordered[0]?.id, 'vault-a', 'daily rotation order is stable regardless of database update order');
+}
+
 async function run() {
   const tests: Array<[string, () => Promise<void>]> = [
     ['absolute timestamp timer', timerTests],
     ['application services', serviceTests],
-    ['Vault content refresh', vaultSeedTests]
+    ['Vault content refresh', vaultSeedTests],
+    ['daily workout selection', dailyWorkoutTests]
   ];
   for (const [name, test] of tests) {
     await test();
