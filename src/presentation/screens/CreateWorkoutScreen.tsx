@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
-import { equipmentOptions, intensityOptions, type Equipment, type Intensity, type WorkoutTemplate } from '../../domain/workout';
+import { DEFAULT_STARTUP_SECONDS, equipmentOptions, intensityOptions, type Equipment, type Intensity, type WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
@@ -16,7 +16,8 @@ type Props = {
 };
 
 const workOptions = [20, 30, 40, 45, 60];
-const restOptions = [10, 15, 20, 30];
+const startupOptions = [0, 5, 10, 20, 30, 45, 60];
+const restOptions = [0, 5, 10, 15, 20, 30, 45, 60];
 
 export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
   const [name, setName] = useState('');
@@ -24,6 +25,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
   const [equipment, setEquipment] = useState<Equipment>('bodyweight');
   const [intensity, setIntensity] = useState<Intensity>('spicy');
   const [rounds, setRounds] = useState(4);
+  const [startupSeconds, setStartupSeconds] = useState(DEFAULT_STARTUP_SECONDS);
   const [workSeconds, setWorkSeconds] = useState(40);
   const [restSeconds, setRestSeconds] = useState(20);
   const [movements, setMovements] = useState(['', '', '']);
@@ -31,8 +33,8 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
 
   const filledMovements = movements.filter((movement) => movement.trim());
   const estimatedSeconds = useMemo(() => container.workouts.calculateDuration({
-    rounds, workSeconds, restSeconds, exercises: filledMovements
-  }), [container, filledMovements.join('|'), restSeconds, rounds, workSeconds]);
+    rounds, startupSeconds, workSeconds, restSeconds, exercises: filledMovements
+  }), [container, filledMovements.join('|'), restSeconds, rounds, startupSeconds, workSeconds]);
 
   const updateMovement = (index: number, value: string) => {
     setMovements((current) => current.map((movement, position) => position === index ? value : movement));
@@ -42,7 +44,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
     setSaving(true);
     try {
       const workout = await container.workouts.createWorkout({
-        name, emoji, equipment, intensity, rounds, workSeconds, restSeconds, exercises: filledMovements
+        name, emoji, equipment, intensity, rounds, startupSeconds, workSeconds, restSeconds, exercises: filledMovements
       });
       onCreated(workout);
     } catch (error) {
@@ -79,6 +81,10 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
           <View style={styles.stepperValue}><Text style={styles.stepperNumber}>{rounds}</Text><Text style={styles.stepperCaption}>rounds</Text></View>
           <Pressable style={styles.stepperButton} onPress={() => setRounds((value) => Math.min(20, value + 1))}><Text style={styles.stepperSymbol}>＋</Text></Pressable>
         </View>
+
+        <FieldLabel>Initial start time</FieldLabel>
+        <Text style={styles.helper}>Runs once before the first movement.</Text>
+        <ChoiceRow values={startupOptions} selected={startupSeconds} onSelect={(value) => setStartupSeconds(Number(value))} suffix="s" />
 
         <FieldLabel>Work per movement</FieldLabel>
         <ChoiceRow values={workOptions} selected={workSeconds} onSelect={(value) => setWorkSeconds(Number(value))} suffix="s" />
@@ -143,6 +149,7 @@ function ChoiceRow({ values, selected, onSelect, labels, suffix = '' }: {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   label: { color: colors.text, fontSize: 14, fontWeight: '800', marginBottom: -spacing.sm },
+  helper: { color: colors.textMuted, fontSize: 13, marginTop: -spacing.md },
   input: { minHeight: 50, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: radii.md, color: colors.text, fontSize: 16, paddingHorizontal: spacing.lg },
   nameRow: { flexDirection: 'row', gap: spacing.sm },
   emojiInput: { width: 64, textAlign: 'center', fontSize: 22, paddingHorizontal: spacing.sm },

@@ -30,6 +30,7 @@ const workout: WorkoutTemplate = {
   equipment: 'bodyweight',
   intensity: 'spicy',
   rounds: 2,
+  startupSeconds: 20,
   workSeconds: 30,
   restSeconds: 10,
   exercises: [
@@ -77,8 +78,17 @@ async function timerTests() {
 
   const complete = advanceTimer(snapshot, initial, 170_000);
   equal(complete.phase, 'complete', 'timer completes after every interval');
-  equal(workoutDurationSeconds(workout), 150, 'duration matches timer sequence');
+  equal(workoutDurationSeconds(workout), 170, 'duration includes the one-time preparation period');
   equal(nextExercise(snapshot, { ...initial, phase: 'rest' })?.name, 'Push-ups', 'rest previews the next movement');
+
+  const noDelaySnapshot: WorkoutSnapshot = { ...snapshot, startupSeconds: 0, restSeconds: 0 };
+  const noDelayInitial = createTimerState(noDelaySnapshot, 0);
+  const immediateWork = advanceTimer(noDelaySnapshot, noDelayInitial, 0);
+  equal(immediateWork.phase, 'work', 'zero-second initial start begins work immediately');
+  const secondMovement = advanceTimer(noDelaySnapshot, immediateWork, 30_000);
+  equal(secondMovement.exerciseIndex, 1, 'zero-second rest advances directly to the next movement');
+  const immediateNextRound = advanceTimer(noDelaySnapshot, secondMovement, 60_000);
+  equal(roundBellCue(noDelaySnapshot, secondMovement, immediateNextRound), 'round-complete', 'zero-second rest keeps a round boundary bell');
 }
 
 async function serviceTests() {
@@ -100,9 +110,11 @@ async function serviceTests() {
 
   const created = await workoutService.createWorkout({
     name: 'Fresh Start', emoji: '✨', equipment: 'bands', intensity: 'mild',
-    rounds: 3, workSeconds: 30, restSeconds: 15, exercises: ['Rows', 'Squats']
+    rounds: 3, startupSeconds: 5, workSeconds: 30, restSeconds: 0, exercises: ['Rows', 'Squats']
   });
   equal(created.exercises.length, 2, 'workout creation persists every movement');
+  equal(created.startupSeconds, 5, 'workout creation stores its one-time start delay');
+  equal(created.restSeconds, 0, 'workout creation allows zero-second rests');
   equal((await workouts.getById(created.id))?.name, 'Fresh Start', 'created workout is stored through repository port');
 }
 
@@ -121,7 +133,7 @@ async function vaultSeedTests() {
   const spidey = await workouts.getById('vault-bodyweight-1');
   equal(spidey?.name, 'Spidey Bite 20', 'existing installs receive refreshed Vault names');
   equal(spidey?.isSaved, true, 'Vault refresh preserves the saved state');
-  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1190, 'Spidey Bite is approximately twenty minutes');
+  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1210, 'Spidey Bite is approximately twenty minutes including preparation');
   equal((await workouts.listVault()).length, 12, 'Vault contains twelve curated workouts');
 
   await seedVault(workouts);

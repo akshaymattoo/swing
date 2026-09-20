@@ -3,6 +3,7 @@ export type Equipment = (typeof equipmentOptions)[number];
 
 export const intensityOptions = ['mild', 'spicy', 'hot'] as const;
 export type Intensity = (typeof intensityOptions)[number];
+export const DEFAULT_STARTUP_SECONDS = 20;
 
 export type WorkoutExercise = {
   id: string;
@@ -17,6 +18,7 @@ export type WorkoutTemplate = {
   equipment: Equipment;
   intensity: Intensity;
   rounds: number;
+  startupSeconds: number;
   workSeconds: number;
   restSeconds: number;
   exercises: WorkoutExercise[];
@@ -29,16 +31,16 @@ export type WorkoutTemplate = {
 
 export type WorkoutDraft = Pick<
   WorkoutTemplate,
-  'name' | 'emoji' | 'equipment' | 'intensity' | 'rounds' | 'workSeconds' | 'restSeconds'
+  'name' | 'emoji' | 'equipment' | 'intensity' | 'rounds' | 'startupSeconds' | 'workSeconds' | 'restSeconds'
 > & {
   exercises: string[];
   sourceTemplateId?: string | null;
 };
 
-export function workoutDurationSeconds(workout: Pick<WorkoutTemplate, 'rounds' | 'workSeconds' | 'restSeconds' | 'exercises'>) {
+export function workoutDurationSeconds(workout: Pick<WorkoutTemplate, 'rounds' | 'startupSeconds' | 'workSeconds' | 'restSeconds' | 'exercises'>) {
   const intervals = workout.rounds * workout.exercises.length;
   if (intervals === 0) return 0;
-  return intervals * workout.workSeconds + Math.max(0, intervals - 1) * workout.restSeconds;
+  return workout.startupSeconds + intervals * workout.workSeconds + Math.max(0, intervals - 1) * workout.restSeconds;
 }
 
 export function intensityLabel(intensity: Intensity) {

@@ -46,6 +46,7 @@ export class SessionService {
       equipment: workout.equipment,
       intensity: workout.intensity,
       rounds: workout.rounds,
+      startupSeconds: workout.startupSeconds,
       workSeconds: workout.workSeconds,
       restSeconds: workout.restSeconds,
       exercises: workout.exercises

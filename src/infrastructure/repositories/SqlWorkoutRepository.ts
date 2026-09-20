@@ -9,6 +9,7 @@ type WorkoutRow = {
   equipment: Equipment;
   intensity: Intensity;
   rounds: number;
+  startup_seconds: number;
   work_seconds: number;
   rest_seconds: number;
   is_vault: number;
@@ -48,15 +49,16 @@ export class SqlWorkoutRepository implements WorkoutRepository {
     await this.database.transaction(async (transaction) => {
       await transaction.run(
         `INSERT INTO workout_templates (
-          id, name, emoji, equipment, intensity, rounds, work_seconds, rest_seconds,
+          id, name, emoji, equipment, intensity, rounds, startup_seconds, work_seconds, rest_seconds,
           is_vault, is_saved, source_template_id, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(id) DO UPDATE SET
           name = excluded.name,
           emoji = excluded.emoji,
           equipment = excluded.equipment,
           intensity = excluded.intensity,
           rounds = excluded.rounds,
+          startup_seconds = excluded.startup_seconds,
           work_seconds = excluded.work_seconds,
           rest_seconds = excluded.rest_seconds,
           is_vault = excluded.is_vault,
@@ -65,7 +67,7 @@ export class SqlWorkoutRepository implements WorkoutRepository {
           updated_at = excluded.updated_at`,
         [
           workout.id, workout.name, workout.emoji, workout.equipment, workout.intensity,
-          workout.rounds, workout.workSeconds, workout.restSeconds,
+          workout.rounds, workout.startupSeconds, workout.workSeconds, workout.restSeconds,
           workout.isVault ? 1 : 0, workout.isSaved ? 1 : 0,
           workout.sourceTemplateId, workout.createdAt, workout.updatedAt
         ]
@@ -106,6 +108,7 @@ export class SqlWorkoutRepository implements WorkoutRepository {
       equipment: row.equipment,
       intensity: row.intensity,
       rounds: row.rounds,
+      startupSeconds: row.startup_seconds,
       workSeconds: row.work_seconds,
       restSeconds: row.rest_seconds,
       exercises: exercises as WorkoutExercise[],

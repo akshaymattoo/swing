@@ -1,4 +1,5 @@
 import type { Equipment, Intensity, WorkoutTemplate } from '../../domain/workout';
+import { DEFAULT_STARTUP_SECONDS } from '../../domain/workout';
 import type { WorkoutRepository } from '../../application/ports';
 
 type Seed = {
@@ -36,6 +37,7 @@ export async function seedVault(workouts: WorkoutRepository) {
     if (existing?.updatedAt === contentVersion) continue;
     const workout: WorkoutTemplate = {
       ...seed,
+      startupSeconds: DEFAULT_STARTUP_SECONDS,
       exercises: seed.exercises.map((name, position) => ({
         id: `${seed.id}-exercise-${position + 1}`,
         name,

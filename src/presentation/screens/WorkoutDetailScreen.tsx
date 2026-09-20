@@ -24,6 +24,7 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onSave }: Props)
 
       <View style={styles.metrics}>
         <View style={styles.metric}><Text style={styles.metricValue}>{workout.rounds}</Text><Text style={styles.metricLabel}>Rounds</Text></View>
+        <View style={styles.metric}><Text style={styles.metricValue}>{workout.startupSeconds}s</Text><Text style={styles.metricLabel}>Start</Text></View>
         <View style={styles.metric}><Text style={styles.metricValue}>{workout.workSeconds}s</Text><Text style={styles.metricLabel}>Work</Text></View>
         <View style={styles.metric}><Text style={styles.metricValue}>{workout.restSeconds}s</Text><Text style={styles.metricLabel}>Rest</Text></View>
       </View>

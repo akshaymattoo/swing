@@ -18,7 +18,7 @@ export class WorkoutService {
     return this.workouts.getById(id);
   }
 
-  calculateDuration(draft: Pick<WorkoutDraft, 'rounds' | 'workSeconds' | 'restSeconds' | 'exercises'>) {
+  calculateDuration(draft: Pick<WorkoutDraft, 'rounds' | 'startupSeconds' | 'workSeconds' | 'restSeconds' | 'exercises'>) {
     return workoutDurationSeconds({
       ...draft,
       exercises: draft.exercises.map((name, position) => ({ id: `${position}`, name, position }))
@@ -35,6 +35,7 @@ export class WorkoutService {
       equipment: draft.equipment,
       intensity: draft.intensity,
       rounds: draft.rounds,
+      startupSeconds: draft.startupSeconds,
       workSeconds: draft.workSeconds,
       restSeconds: draft.restSeconds,
       exercises: draft.exercises.map((name, position) => ({
@@ -63,6 +64,7 @@ export class WorkoutService {
   private validateDraft(draft: WorkoutDraft) {
     if (!draft.name.trim()) throw new Error('Give your workout a name');
     if (draft.rounds < 1 || draft.rounds > 20) throw new Error('Rounds must be between 1 and 20');
+    if (draft.startupSeconds < 0 || draft.startupSeconds > 300) throw new Error('Initial start time must be between 0 and 300 seconds');
     if (draft.workSeconds < 5 || draft.workSeconds > 600) throw new Error('Work time must be between 5 and 600 seconds');
     if (draft.restSeconds < 0 || draft.restSeconds > 300) throw new Error('Rest time must be between 0 and 300 seconds');
     if (draft.exercises.length === 0 || draft.exercises.some((name) => !name.trim())) {

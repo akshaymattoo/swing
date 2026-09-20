@@ -2,11 +2,10 @@ import type { WorkoutTemplate } from './workout';
 
 export type SessionStatus = 'active' | 'completed' | 'abandoned';
 export type TimerPhase = 'prepare' | 'work' | 'rest' | 'complete';
-export const STARTUP_SECONDS = 20;
 
 export type WorkoutSnapshot = Pick<
   WorkoutTemplate,
-  'id' | 'name' | 'emoji' | 'equipment' | 'intensity' | 'rounds' | 'workSeconds' | 'restSeconds' | 'exercises'
+  'id' | 'name' | 'emoji' | 'equipment' | 'intensity' | 'rounds' | 'startupSeconds' | 'workSeconds' | 'restSeconds' | 'exercises'
 >;
 
 export type TimerState = {
@@ -32,7 +31,7 @@ export function createTimerState(workout: WorkoutSnapshot, now: number): TimerSt
     roundIndex: 0,
     exerciseIndex: 0,
     phase: 'prepare',
-    intervalEndsAt: now + STARTUP_SECONDS * 1000,
+    intervalEndsAt: now + workout.startupSeconds * 1000,
     pausedRemainingMs: null
   };
 }
@@ -93,7 +92,8 @@ export function roundBellCue(workout: WorkoutSnapshot, previous: TimerState, nex
   if (previous.phase === 'prepare' && next.phase === 'work') return 'round-start';
 
   const finalExercise = previous.exerciseIndex === workout.exercises.length - 1;
-  if (previous.phase === 'work' && finalExercise && (next.phase === 'rest' || next.phase === 'complete')) {
+  const advancedToNextRound = next.phase === 'work' && next.roundIndex > previous.roundIndex;
+  if (previous.phase === 'work' && finalExercise && (next.phase === 'rest' || next.phase === 'complete' || advancedToNextRound)) {
     return 'round-complete';
   }
   if (previous.phase === 'rest' && finalExercise && next.phase === 'work' && next.roundIndex > previous.roundIndex) {
