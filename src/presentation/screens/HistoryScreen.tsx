@@ -38,7 +38,7 @@ export function HistoryScreen({ container, onBack }: Props) {
   };
 
   return (
-    <AppScreen eyebrow="Your effort" title="History" right={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+    <AppScreen eyebrow="Your effort" title="History" left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
       {sessions.length ? sessions.map((session) => {
         const row = <View style={styles.row}>
           <View style={styles.copy}>

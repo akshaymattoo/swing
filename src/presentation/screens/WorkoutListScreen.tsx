@@ -41,7 +41,7 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
   };
 
   return (
-    <AppScreen title={title} eyebrow={eyebrow} right={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+    <AppScreen title={title} eyebrow={eyebrow} left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>

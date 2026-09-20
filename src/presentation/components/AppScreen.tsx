@@ -7,15 +7,17 @@ import { spacing } from '../../theme/spacing';
 type Props = PropsWithChildren<{
   title?: string;
   eyebrow?: string;
+  left?: ReactNode;
   right?: ReactNode;
   scroll?: boolean;
 }>;
 
-export function AppScreen({ children, title, eyebrow, right, scroll = true }: Props) {
+export function AppScreen({ children, title, eyebrow, left, right, scroll = true }: Props) {
   const content = (
     <View style={styles.content}>
-      {(title || eyebrow || right) && (
+      {(title || eyebrow || left || right) && (
         <View style={styles.header}>
+          {left}
           <View style={styles.headerText}>
             {eyebrow ? <Text style={styles.eyebrow}>{eyebrow}</Text> : null}
             {title ? <Text style={styles.title}>{title}</Text> : null}

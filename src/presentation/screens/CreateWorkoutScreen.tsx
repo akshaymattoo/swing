@@ -54,7 +54,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
 
   return (
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <AppScreen eyebrow="New workout" title="Make it yours." right={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+      <AppScreen eyebrow="New workout" title="Make it yours." left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
         <FieldLabel>Name and emoji</FieldLabel>
         <View style={styles.nameRow}>
           <TextInput
