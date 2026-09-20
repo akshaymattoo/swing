@@ -7,7 +7,7 @@ import {
   nextExercise,
   pauseTimer,
   remainingMs,
-  roundBellCue,
+  workoutBellCue,
   resumeTimer,
   type WorkoutSnapshot
 } from '../src/domain/session';
@@ -59,17 +59,20 @@ async function timerTests() {
   equal(resumed.intervalEndsAt, 35_000, 'resume creates a new absolute end timestamp');
 
   const firstWork = advanceTimer(snapshot, initial, 20_000);
-  equal(roundBellCue(snapshot, initial, firstWork), 'round-start', 'bell rings when the first round starts');
+  equal(workoutBellCue(initial, firstWork), 'work-start', 'bell rings when the workout starts');
 
   const roundEnd = advanceTimer(snapshot, firstWork, 50_000);
-  equal(roundBellCue(snapshot, firstWork, roundEnd), null, 'bell does not ring after a non-final movement');
+  equal(workoutBellCue(firstWork, roundEnd), 'rest-start', 'bell rings when a breathe interval starts');
+
+  const nextMovement = advanceTimer(snapshot, roundEnd, 60_000);
+  equal(workoutBellCue(roundEnd, nextMovement), 'work-start', 'bell rings when the next movement starts');
 
   const finalMovement = advanceTimer(snapshot, initial, 60_000);
   const completedRound = advanceTimer(snapshot, finalMovement, 90_000);
-  equal(roundBellCue(snapshot, finalMovement, completedRound), 'round-complete', 'bell rings when a round finishes');
+  equal(workoutBellCue(finalMovement, completedRound), 'rest-start', 'bell rings when a round finishes and rest starts');
 
   const nextRound = advanceTimer(snapshot, completedRound, 100_000);
-  equal(roundBellCue(snapshot, completedRound, nextRound), 'round-start', 'bell rings when the next round starts');
+  equal(workoutBellCue(completedRound, nextRound), 'work-start', 'bell rings when the next round starts');
 
   const afterBackground = advanceTimer(snapshot, initial, 115_000);
   equal(afterBackground.roundIndex, 1, 'background catch-up reaches the correct round');
@@ -79,6 +82,8 @@ async function timerTests() {
 
   const complete = advanceTimer(snapshot, initial, 170_000);
   equal(complete.phase, 'complete', 'timer completes after every interval');
+  const finalWork = advanceTimer(snapshot, initial, 140_000);
+  equal(workoutBellCue(finalWork, complete), 'workout-complete', 'bell rings when the workout finishes');
   equal(workoutDurationSeconds(workout), 170, 'duration includes the one-time preparation period');
   equal(nextExercise(snapshot, { ...initial, phase: 'rest' })?.name, 'Push-ups', 'rest previews the next movement');
 
@@ -89,7 +94,7 @@ async function timerTests() {
   const secondMovement = advanceTimer(noDelaySnapshot, immediateWork, 30_000);
   equal(secondMovement.exerciseIndex, 1, 'zero-second rest advances directly to the next movement');
   const immediateNextRound = advanceTimer(noDelaySnapshot, secondMovement, 60_000);
-  equal(roundBellCue(noDelaySnapshot, secondMovement, immediateNextRound), 'round-complete', 'zero-second rest keeps a round boundary bell');
+  equal(workoutBellCue(secondMovement, immediateNextRound), 'work-start', 'zero-second rest still rings for the next round');
 }
 
 async function serviceTests() {

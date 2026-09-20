@@ -9,7 +9,7 @@ import type { WorkoutSession } from './src/domain/session';
 import type { WorkoutTemplate } from './src/domain/workout';
 import { colors } from './src/theme/colors';
 import { spacing } from './src/theme/spacing';
-import { bellSoundUri } from './src/presentation/audio/bell';
+import { bellSound } from './src/presentation/audio/bell';
 import { BottomNav } from './src/presentation/components/BottomNav';
 import { CompletionScreen } from './src/presentation/screens/CompletionScreen';
 import { CreateWorkoutScreen } from './src/presentation/screens/CreateWorkoutScreen';
@@ -27,7 +27,7 @@ export default function App() {
   const [route, setRoute] = useState<Route>('home');
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutTemplate | null>(null);
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
-  const bellPlayer = useAudioPlayer(bellSoundUri, {
+  const bellPlayer = useAudioPlayer(bellSound, {
     downloadFirst: true,
     keepAudioSessionActive: true,
     updateInterval: 100
@@ -38,6 +38,7 @@ export default function App() {
   const playLoadedBell = useCallback(async () => {
     try {
       bellPlayer.volume = 1;
+      bellPlayer.pause();
       await bellPlayer.seekTo(0);
       bellPlayer.play();
     } catch (error) {

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, AppState, StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
-import { currentExercise, nextExercise, remainingMs, roundBellCue, type WorkoutSession } from '../../domain/session';
+import { currentExercise, nextExercise, remainingMs, workoutBellCue, type WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
@@ -29,7 +29,7 @@ export function RunnerScreen({ container, initialSession, onBell, onComplete, on
       const previousTimer = session.timerState;
       const updated = await container.sessions.refresh(session, time);
       const transitionWasCurrent = previousTimer.intervalEndsAt !== null && time - previousTimer.intervalEndsAt < 1_500;
-      if (transitionWasCurrent && roundBellCue(session.workoutSnapshot, previousTimer, updated.timerState)) onBell();
+      if (transitionWasCurrent && workoutBellCue(previousTimer, updated.timerState)) onBell();
       setSession(updated);
       setNow(time);
       if (updated.status === 'completed') onComplete(updated);
@@ -67,7 +67,7 @@ export function RunnerScreen({ container, initialSession, onBell, onComplete, on
 
   const skip = async () => {
     const updated = await container.sessions.skip(session);
-    if (roundBellCue(session.workoutSnapshot, session.timerState, updated.timerState)) onBell();
+    if (workoutBellCue(session.timerState, updated.timerState)) onBell();
     setSession(updated);
     setNow(Date.now());
     if (updated.status === 'completed') onComplete(updated);

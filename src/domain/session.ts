@@ -86,19 +86,17 @@ function nextInterval(workout: WorkoutSnapshot, state: TimerState, startsAt: num
   };
 }
 
-export type RoundBellCue = 'round-start' | 'round-complete' | null;
+export type WorkoutBellCue = 'work-start' | 'rest-start' | 'workout-complete' | null;
 
-export function roundBellCue(workout: WorkoutSnapshot, previous: TimerState, next: TimerState): RoundBellCue {
-  if (previous.phase === 'prepare' && next.phase === 'work') return 'round-start';
+export function workoutBellCue(previous: TimerState, next: TimerState): WorkoutBellCue {
+  const intervalChanged = previous.phase !== next.phase
+    || previous.roundIndex !== next.roundIndex
+    || previous.exerciseIndex !== next.exerciseIndex;
+  if (!intervalChanged) return null;
 
-  const finalExercise = previous.exerciseIndex === workout.exercises.length - 1;
-  const advancedToNextRound = next.phase === 'work' && next.roundIndex > previous.roundIndex;
-  if (previous.phase === 'work' && finalExercise && (next.phase === 'rest' || next.phase === 'complete' || advancedToNextRound)) {
-    return 'round-complete';
-  }
-  if (previous.phase === 'rest' && finalExercise && next.phase === 'work' && next.roundIndex > previous.roundIndex) {
-    return 'round-start';
-  }
+  if (next.phase === 'work') return 'work-start';
+  if (next.phase === 'rest') return 'rest-start';
+  if (next.phase === 'complete') return 'workout-complete';
   return null;
 }
 
