@@ -7,12 +7,11 @@ import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { ActionButton } from '../components/Buttons';
-import { WorkoutCard } from '../components/WorkoutCard';
+import { FeaturedWorkoutCard } from '../components/FeaturedWorkoutCard';
 
 type Props = {
   container: AppContainer;
-  onOpenWorkout: (workout: WorkoutTemplate) => void;
+  onStartWorkout: (workout: WorkoutTemplate) => void;
   onCreate: () => void;
   onVault: () => void;
   onSaved: () => void;
@@ -21,15 +20,23 @@ type Props = {
 };
 
 export function HomeScreen(props: Props) {
-  const [quickStart, setQuickStart] = useState<WorkoutTemplate | null>(null);
+  const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
   const [active, setActive] = useState<WorkoutSession | null>(null);
 
   useEffect(() => {
     Promise.all([props.container.workouts.listVault(), props.container.sessions.getActiveSession()]).then(([vault, session]) => {
-      setQuickStart(vault.find((workout) => workout.id === 'vault-kettlebell-1') ?? vault[0] ?? null);
+      const preferredIndex = vault.findIndex((workout) => workout.id === 'vault-kettlebell-1');
+      setWorkouts(vault);
+      setFeaturedIndex(preferredIndex >= 0 ? preferredIndex : 0);
       setActive(session);
     });
   }, [props.container]);
+
+  const quickStart = workouts[featuredIndex] ?? null;
+  const refreshWorkout = () => {
+    if (workouts.length > 1) setFeaturedIndex((current) => (current + 1) % workouts.length);
+  };
 
   return (
     <AppScreen eyebrow="Swing" title={'What are we\ndoing today?'}>
@@ -45,27 +52,33 @@ export function HomeScreen(props: Props) {
 
       {quickStart ? (
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>QUICK START</Text>
-          <WorkoutCard workout={quickStart} featured onPress={() => props.onOpenWorkout(quickStart)} />
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionLabel}>QUICK START</Text>
+            <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8}>
+              <Text style={styles.refresh}>↻ Refresh</Text>
+            </Pressable>
+          </View>
+          <FeaturedWorkoutCard workout={quickStart} onStart={() => props.onStartWorkout(quickStart)} />
         </View>
       ) : null}
 
-      <View style={styles.actions}>
+      <View style={styles.actionGrid}>
         <Pressable style={styles.actionTile} onPress={props.onCreate}>
           <Text style={styles.actionIcon}>＋</Text>
           <Text style={styles.actionTitle}>Create workout</Text>
-          <Text style={styles.actionCopy}>Make your own in under a minute.</Text>
         </Pressable>
         <Pressable style={styles.actionTile} onPress={props.onVault}>
           <Text style={styles.actionIcon}>◆</Text>
           <Text style={styles.actionTitle}>Open The Vault</Text>
-          <Text style={styles.actionCopy}>Twelve workouts, ready to go.</Text>
         </Pressable>
-      </View>
-
-      <View style={styles.secondaryActions}>
-        <ActionButton variant="secondary" onPress={props.onSaved} style={styles.secondaryButton}>Saved</ActionButton>
-        <ActionButton variant="secondary" onPress={props.onHistory} style={styles.secondaryButton}>History</ActionButton>
+        <Pressable style={styles.actionTile} onPress={props.onSaved}>
+          <Text style={styles.actionIcon}>♥</Text>
+          <Text style={styles.actionTitle}>Saved workouts</Text>
+        </Pressable>
+        <Pressable style={styles.actionTile} onPress={props.onHistory}>
+          <Text style={styles.actionIcon}>↺</Text>
+          <Text style={styles.actionTitle}>History</Text>
+        </Pressable>
       </View>
     </AppScreen>
   );
@@ -73,16 +86,15 @@ export function HomeScreen(props: Props) {
 
 const styles = StyleSheet.create({
   section: { gap: spacing.sm },
+  sectionHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
+  refresh: { color: colors.work, fontSize: 14, fontWeight: '800' },
   resume: { backgroundColor: colors.surfaceRaised, borderRadius: radii.md, padding: spacing.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   resumeKicker: { color: colors.work, fontSize: 11, fontWeight: '800', textTransform: 'uppercase' },
   resumeTitle: { color: colors.text, fontSize: 18, fontWeight: '900', marginTop: spacing.xs },
   resumeAction: { color: colors.primary, fontSize: 15, fontWeight: '800' },
-  actions: { flexDirection: 'row', gap: spacing.md },
-  actionTile: { flex: 1, minHeight: 150, backgroundColor: colors.surface, borderRadius: radii.lg, borderWidth: 1, borderColor: colors.border, padding: spacing.lg },
+  actionGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
+  actionTile: { width: '48%', flexGrow: 1, minHeight: 118, backgroundColor: colors.surface, borderRadius: radii.lg, borderWidth: 1, borderColor: colors.border, padding: spacing.lg, justifyContent: 'space-between' },
   actionIcon: { color: colors.primary, fontSize: 28, fontWeight: '700' },
-  actionTitle: { color: colors.text, fontSize: 18, fontWeight: '900', marginTop: spacing.md },
-  actionCopy: { color: colors.textMuted, fontSize: 13, lineHeight: 18, marginTop: spacing.xs },
-  secondaryActions: { flexDirection: 'row', gap: spacing.md },
-  secondaryButton: { flex: 1 }
+  actionTitle: { color: colors.text, fontSize: 16, lineHeight: 20, fontWeight: '900', marginTop: spacing.md }
 });
