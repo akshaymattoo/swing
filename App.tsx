@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { setAudioModeAsync, useAudioPlayer } from 'expo-audio';
+import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 
 import { createAppContainer, type AppContainer } from './src/application/appContainer';
 import { appConfig } from './src/config/appConfig';
@@ -27,14 +27,45 @@ export default function App() {
   const [route, setRoute] = useState<Route>('home');
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutTemplate | null>(null);
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
-  const bellPlayer = useAudioPlayer(bellSoundUri);
+  const bellPlayer = useAudioPlayer(bellSoundUri, {
+    downloadFirst: true,
+    keepAudioSessionActive: true,
+    updateInterval: 100
+  });
+  const bellStatus = useAudioPlayerStatus(bellPlayer);
+  const pendingBell = useRef(false);
 
-  const playBell = useCallback(() => {
-    void bellPlayer.seekTo(0).then(() => bellPlayer.play()).catch(() => undefined);
+  const playLoadedBell = useCallback(async () => {
+    try {
+      bellPlayer.volume = 1;
+      await bellPlayer.seekTo(0);
+      bellPlayer.play();
+    } catch (error) {
+      console.warn('Swing could not play the workout bell.', error);
+    }
   }, [bellPlayer]);
 
+  const playBell = useCallback(() => {
+    if (!bellStatus.isLoaded) {
+      pendingBell.current = true;
+      return;
+    }
+    pendingBell.current = false;
+    void playLoadedBell();
+  }, [bellStatus.isLoaded, playLoadedBell]);
+
   useEffect(() => {
-    void setAudioModeAsync({ playsInSilentMode: true });
+    if (bellStatus.isLoaded && pendingBell.current) {
+      pendingBell.current = false;
+      void playLoadedBell();
+    }
+  }, [bellStatus.isLoaded, playLoadedBell]);
+
+  useEffect(() => {
+    void setAudioModeAsync({
+      playsInSilentMode: true,
+      interruptionMode: 'doNotMix'
+    }).catch((error) => console.warn('Swing could not configure workout audio.', error));
   }, []);
 
   const initialize = useCallback(async () => {
