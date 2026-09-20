@@ -75,17 +75,17 @@ Workout names should have personality rather than being purely descriptive.
 
 Examples of the tone:
 
-- 🔥 Gabbar Grind
-- 😈 Mogambo Crusher
-- 🔔 Bellraiser
-- 💀 Swing & Regret
-- 👻 Burpee Bhoot
-- 💣 Kettlebell Kaand
-- 🌶️ Mirchi Massacre
+- 🕷️ Spidey Bite 20
+- 😈 Mogambo Muscle Torture
+- ⚔️ Baahubali Bell Brawl
+- 🤠 Gabbar's Swing Tax
+- 🏍️ Dhoom Dumbbell Dhamaka
+- 💚 Hulk Smash & Dash
+- 👽 Jadoo's Band Baaja
 
 The useful metadata — equipment, duration, intensity, rounds — should explain the workout underneath the name.
 
-Avoid building official commercial branding around protected entertainment characters/IP. User-created names may be user-generated content, but seeded Swing workouts should favor original names.
+The current creative direction uses playful, pop-culture-inspired names. They should feel like affectionate workout nicknames and must not imply official celebrity, studio, or character endorsement.
 
 ## Workout library / discovery seed
 

@@ -12,6 +12,7 @@ import {
 } from '../src/domain/session';
 import type { WorkoutTemplate } from '../src/domain/workout';
 import { workoutDurationSeconds } from '../src/domain/workout';
+import { seedVault } from '../src/infrastructure/database/seedWorkouts';
 import { MemorySessionRepository, MemoryWorkoutRepository } from '../src/infrastructure/memory/MemoryRepositories';
 
 function assert(condition: unknown, message: string): asserts condition {
@@ -105,10 +106,33 @@ async function serviceTests() {
   equal((await workouts.getById(created.id))?.name, 'Fresh Start', 'created workout is stored through repository port');
 }
 
+async function vaultSeedTests() {
+  const oldVaultWorkout: WorkoutTemplate = {
+    ...workout,
+    id: 'vault-bodyweight-1',
+    name: 'Quickfire Circuit',
+    isVault: true,
+    isSaved: true,
+    updatedAt: new Date(0).toISOString()
+  };
+  const workouts = new MemoryWorkoutRepository([oldVaultWorkout]);
+
+  await seedVault(workouts);
+  const spidey = await workouts.getById('vault-bodyweight-1');
+  equal(spidey?.name, 'Spidey Bite 20', 'existing installs receive refreshed Vault names');
+  equal(spidey?.isSaved, true, 'Vault refresh preserves the saved state');
+  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1190, 'Spidey Bite is approximately twenty minutes');
+  equal((await workouts.listVault()).length, 12, 'Vault contains twelve curated workouts');
+
+  await seedVault(workouts);
+  equal((await workouts.listVault()).length, 12, 'Vault refresh is idempotent');
+}
+
 async function run() {
   const tests: Array<[string, () => Promise<void>]> = [
     ['absolute timestamp timer', timerTests],
-    ['application services', serviceTests]
+    ['application services', serviceTests],
+    ['Vault content refresh', vaultSeedTests]
   ];
   for (const [name, test] of tests) {
     await test();
