@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, AppState, StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
-import { currentExercise, nextExercise, remainingMs, type WorkoutSession } from '../../domain/session';
+import { currentExercise, nextExercise, remainingMs, roundBellCue, type WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
@@ -12,11 +12,12 @@ import { formatCountdown } from '../formatters';
 type Props = {
   container: AppContainer;
   initialSession: WorkoutSession;
+  onBell: () => void;
   onComplete: (session: WorkoutSession) => void;
   onEnd: () => void;
 };
 
-export function RunnerScreen({ container, initialSession, onComplete, onEnd }: Props) {
+export function RunnerScreen({ container, initialSession, onBell, onComplete, onEnd }: Props) {
   const [session, setSession] = useState(initialSession);
   const [now, setNow] = useState(Date.now());
   const transitioning = useRef(false);
@@ -25,14 +26,17 @@ export function RunnerScreen({ container, initialSession, onComplete, onEnd }: P
     if (transitioning.current) return;
     transitioning.current = true;
     try {
+      const previousTimer = session.timerState;
       const updated = await container.sessions.refresh(session, time);
+      const transitionWasCurrent = previousTimer.intervalEndsAt !== null && time - previousTimer.intervalEndsAt < 1_500;
+      if (transitionWasCurrent && roundBellCue(session.workoutSnapshot, previousTimer, updated.timerState)) onBell();
       setSession(updated);
       setNow(time);
       if (updated.status === 'completed') onComplete(updated);
     } finally {
       transitioning.current = false;
     }
-  }, [container, onComplete, session]);
+  }, [container, onBell, onComplete, session]);
 
   useEffect(() => {
     const interval = setInterval(() => setNow(Date.now()), 250);
@@ -52,7 +56,8 @@ export function RunnerScreen({ container, initialSession, onComplete, onEnd }: P
   const paused = session.timerState.pausedRemainingMs !== null;
   const exercise = currentExercise(session.workoutSnapshot, session.timerState);
   const upcoming = nextExercise(session.workoutSnapshot, session.timerState);
-  const phaseColor = paused ? colors.paused : session.timerState.phase === 'rest' ? colors.rest : colors.work;
+  const preparing = session.timerState.phase === 'prepare';
+  const phaseColor = paused ? colors.paused : preparing ? colors.primary : session.timerState.phase === 'rest' ? colors.rest : colors.work;
 
   const togglePause = async () => {
     const updated = paused ? await container.sessions.resume(session) : await container.sessions.pause(session);
@@ -62,6 +67,7 @@ export function RunnerScreen({ container, initialSession, onComplete, onEnd }: P
 
   const skip = async () => {
     const updated = await container.sessions.skip(session);
+    if (roundBellCue(session.workoutSnapshot, session.timerState, updated.timerState)) onBell();
     setSession(updated);
     setNow(Date.now());
     if (updated.status === 'completed') onComplete(updated);
@@ -77,11 +83,11 @@ export function RunnerScreen({ container, initialSession, onComplete, onEnd }: P
   return (
     <AppScreen scroll={false}>
       <View style={styles.runner}>
-        <Text style={[styles.phase, { color: phaseColor }]}>{paused ? 'PAUSED' : session.timerState.phase.toUpperCase()}</Text>
-        <Text style={styles.round}>Round {session.timerState.roundIndex + 1} of {session.workoutSnapshot.rounds}</Text>
+        <Text style={[styles.phase, { color: phaseColor }]}>{paused ? 'PAUSED' : preparing ? 'GET READY' : session.timerState.phase.toUpperCase()}</Text>
+        <Text style={styles.round}>{preparing ? 'Workout starts in' : `Round ${session.timerState.roundIndex + 1} of ${session.workoutSnapshot.rounds}`}</Text>
         <Text style={[styles.timer, { color: phaseColor }]}>{formatCountdown(remaining)}</Text>
-        <Text style={styles.exercise}>{session.timerState.phase === 'rest' ? 'Breathe.' : exercise?.name}</Text>
-        <Text style={styles.next}>{upcoming ? `Next: ${upcoming.name}` : 'Last interval — finish strong'}</Text>
+        <Text style={styles.exercise}>{preparing ? `First up: ${exercise?.name}` : session.timerState.phase === 'rest' ? 'Breathe.' : exercise?.name}</Text>
+        <Text style={styles.next}>{preparing ? 'Get your space and equipment ready.' : upcoming ? `Next: ${upcoming.name}` : 'Last interval — finish strong'}</Text>
 
         <View style={styles.controls}>
           <ActionButton onPress={togglePause}>{paused ? 'Resume' : 'Pause'}</ActionButton>

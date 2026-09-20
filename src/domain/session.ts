@@ -1,7 +1,8 @@
 import type { WorkoutTemplate } from './workout';
 
 export type SessionStatus = 'active' | 'completed' | 'abandoned';
-export type TimerPhase = 'work' | 'rest' | 'complete';
+export type TimerPhase = 'prepare' | 'work' | 'rest' | 'complete';
+export const STARTUP_SECONDS = 20;
 
 export type WorkoutSnapshot = Pick<
   WorkoutTemplate,
@@ -30,8 +31,8 @@ export function createTimerState(workout: WorkoutSnapshot, now: number): TimerSt
   return {
     roundIndex: 0,
     exerciseIndex: 0,
-    phase: 'work',
-    intervalEndsAt: now + workout.workSeconds * 1000,
+    phase: 'prepare',
+    intervalEndsAt: now + STARTUP_SECONDS * 1000,
     pausedRemainingMs: null
   };
 }
@@ -53,6 +54,15 @@ export function resumeTimer(state: TimerState, now: number): TimerState {
 }
 
 function nextInterval(workout: WorkoutSnapshot, state: TimerState, startsAt: number): TimerState {
+  if (state.phase === 'prepare') {
+    return {
+      ...state,
+      phase: 'work',
+      intervalEndsAt: startsAt + workout.workSeconds * 1000,
+      pausedRemainingMs: null
+    };
+  }
+
   if (state.phase === 'work') {
     const finalExercise = state.exerciseIndex === workout.exercises.length - 1;
     const finalRound = state.roundIndex === workout.rounds - 1;
@@ -75,6 +85,21 @@ function nextInterval(workout: WorkoutSnapshot, state: TimerState, startsAt: num
     intervalEndsAt: startsAt + workout.workSeconds * 1000,
     pausedRemainingMs: null
   };
+}
+
+export type RoundBellCue = 'round-start' | 'round-complete' | null;
+
+export function roundBellCue(workout: WorkoutSnapshot, previous: TimerState, next: TimerState): RoundBellCue {
+  if (previous.phase === 'prepare' && next.phase === 'work') return 'round-start';
+
+  const finalExercise = previous.exerciseIndex === workout.exercises.length - 1;
+  if (previous.phase === 'work' && finalExercise && (next.phase === 'rest' || next.phase === 'complete')) {
+    return 'round-complete';
+  }
+  if (previous.phase === 'rest' && finalExercise && next.phase === 'work' && next.roundIndex > previous.roundIndex) {
+    return 'round-start';
+  }
+  return null;
 }
 
 export function advanceTimer(workout: WorkoutSnapshot, state: TimerState, now: number): TimerState {

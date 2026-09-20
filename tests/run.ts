@@ -6,6 +6,7 @@ import {
   nextExercise,
   pauseTimer,
   remainingMs,
+  roundBellCue,
   resumeTimer,
   type WorkoutSnapshot
 } from '../src/domain/session';
@@ -44,22 +45,36 @@ const workout: WorkoutTemplate = {
 async function timerTests() {
   const snapshot: WorkoutSnapshot = workout;
   const initial = createTimerState(snapshot, 0);
-  equal(remainingMs(initial, 5_000), 25_000, 'remaining time uses the absolute end timestamp');
+  equal(initial.phase, 'prepare', 'workouts start with a preparation phase');
+  equal(remainingMs(initial, 5_000), 15_000, 'preparation time uses the absolute end timestamp');
 
   const paused = pauseTimer(initial, 5_000);
-  equal(paused.pausedRemainingMs, 25_000, 'pause captures exact remaining time');
-  equal(remainingMs(paused, 20_000), 25_000, 'paused time does not drift');
+  equal(paused.pausedRemainingMs, 15_000, 'pause captures exact remaining time');
+  equal(remainingMs(paused, 20_000), 15_000, 'paused time does not drift');
 
   const resumed = resumeTimer(paused, 20_000);
-  equal(resumed.intervalEndsAt, 45_000, 'resume creates a new absolute end timestamp');
+  equal(resumed.intervalEndsAt, 35_000, 'resume creates a new absolute end timestamp');
 
-  const afterBackground = advanceTimer(snapshot, initial, 95_000);
+  const firstWork = advanceTimer(snapshot, initial, 20_000);
+  equal(roundBellCue(snapshot, initial, firstWork), 'round-start', 'bell rings when the first round starts');
+
+  const roundEnd = advanceTimer(snapshot, firstWork, 50_000);
+  equal(roundBellCue(snapshot, firstWork, roundEnd), null, 'bell does not ring after a non-final movement');
+
+  const finalMovement = advanceTimer(snapshot, initial, 60_000);
+  const completedRound = advanceTimer(snapshot, finalMovement, 90_000);
+  equal(roundBellCue(snapshot, finalMovement, completedRound), 'round-complete', 'bell rings when a round finishes');
+
+  const nextRound = advanceTimer(snapshot, completedRound, 100_000);
+  equal(roundBellCue(snapshot, completedRound, nextRound), 'round-start', 'bell rings when the next round starts');
+
+  const afterBackground = advanceTimer(snapshot, initial, 115_000);
   equal(afterBackground.roundIndex, 1, 'background catch-up reaches the correct round');
   equal(afterBackground.exerciseIndex, 0, 'background catch-up reaches the correct exercise');
   equal(afterBackground.phase, 'work', 'background catch-up reaches the correct phase');
-  equal(remainingMs(afterBackground, 95_000), 15_000, 'background catch-up preserves interval remainder');
+  equal(remainingMs(afterBackground, 115_000), 15_000, 'background catch-up preserves interval remainder');
 
-  const complete = advanceTimer(snapshot, initial, 150_000);
+  const complete = advanceTimer(snapshot, initial, 170_000);
   equal(complete.phase, 'complete', 'timer completes after every interval');
   equal(workoutDurationSeconds(workout), 150, 'duration matches timer sequence');
   equal(nextExercise(snapshot, { ...initial, phase: 'rest' })?.name, 'Push-ups', 'rest previews the next movement');
@@ -75,7 +90,7 @@ async function serviceTests() {
   equal(session.status, 'active', 'starting a workout creates an active session');
   equal((await sessions.getActive())?.id, session.id, 'active session is persisted');
 
-  const completed = await sessionService.refresh(session, 150_000);
+  const completed = await sessionService.refresh(session, 170_000);
   equal(completed.status, 'completed', 'refresh completes a fully elapsed workout');
   assert(completed.endedAt !== null, 'completed session stores an end time');
 

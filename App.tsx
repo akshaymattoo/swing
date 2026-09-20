@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { setAudioModeAsync, useAudioPlayer } from 'expo-audio';
 
 import { createAppContainer, type AppContainer } from './src/application/appContainer';
 import { appConfig } from './src/config/appConfig';
@@ -8,6 +9,7 @@ import type { WorkoutSession } from './src/domain/session';
 import type { WorkoutTemplate } from './src/domain/workout';
 import { colors } from './src/theme/colors';
 import { spacing } from './src/theme/spacing';
+import { bellSoundUri } from './src/presentation/audio/bell';
 import { BottomNav } from './src/presentation/components/BottomNav';
 import { CompletionScreen } from './src/presentation/screens/CompletionScreen';
 import { CreateWorkoutScreen } from './src/presentation/screens/CreateWorkoutScreen';
@@ -25,6 +27,15 @@ export default function App() {
   const [route, setRoute] = useState<Route>('home');
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutTemplate | null>(null);
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
+  const bellPlayer = useAudioPlayer(bellSoundUri);
+
+  const playBell = useCallback(() => {
+    void bellPlayer.seekTo(0).then(() => bellPlayer.play()).catch(() => undefined);
+  }, [bellPlayer]);
+
+  useEffect(() => {
+    void setAudioModeAsync({ playsInSilentMode: true });
+  }, []);
 
   const initialize = useCallback(async () => {
     setInitializationError(null);
@@ -90,7 +101,7 @@ export default function App() {
       Alert.alert('Saved', `${saved.name} is now in your workouts.`);
     }} />;
   } else if (route === 'runner' && activeSession) {
-    screen = <RunnerScreen container={container} initialSession={activeSession} onComplete={(session) => { setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
+    screen = <RunnerScreen container={container} initialSession={activeSession} onBell={playBell} onComplete={(session) => { setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
   } else if (route === 'complete' && activeSession) {
     screen = <CompletionScreen session={activeSession} onDone={() => { setActiveSession(null); setRoute('home'); }} onRepeat={async () => {
       const workoutId = activeSession.workoutTemplateId;
