@@ -57,7 +57,13 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
       <AppScreen eyebrow="New workout" title="Make it yours." right={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
         <FieldLabel>Name and emoji</FieldLabel>
         <View style={styles.nameRow}>
-          <TextInput value={emoji} onChangeText={setEmoji} maxLength={2} style={[styles.input, styles.emojiInput]} accessibilityLabel="Workout emoji" />
+          <TextInput
+            value={emoji}
+            onChangeText={setEmoji}
+            selectTextOnFocus
+            style={[styles.input, styles.emojiInput]}
+            accessibilityLabel="Workout emoji"
+          />
           <TextInput value={name} onChangeText={setName} placeholder="Friday Fire" placeholderTextColor={colors.textMuted} style={[styles.input, styles.nameInput]} accessibilityLabel="Workout name" />
         </View>
 
