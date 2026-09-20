@@ -34,7 +34,7 @@ The core test suite compiles separately and validates the timer's absolute-times
 
 ## Change the colors
 
-All app colors are defined in `src/theme/colors.ts`. Change the exported `colors` value there to replace the teal/orange palette across the app and native app configuration.
+All app colors are defined in `src/theme/palette.json`. Edit that single file to replace the teal/orange palette across the app and native app configuration.
 
 ## Persistence
 

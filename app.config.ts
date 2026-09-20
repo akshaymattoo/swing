@@ -1,6 +1,6 @@
 import type { ExpoConfig } from 'expo/config';
 
-import { colors } from './src/theme/colors';
+import palette from './src/theme/palette.json';
 
 const config: ExpoConfig = {
   name: 'Swing',
@@ -15,7 +15,7 @@ const config: ExpoConfig = {
   android: {
     package: 'com.akshaymattoo.swing',
     adaptiveIcon: {
-      backgroundColor: colors.text
+      backgroundColor: palette.text
     }
   },
   plugins: ['expo-sqlite']

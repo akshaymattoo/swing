@@ -8,6 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "config:check": "expo config --type public > /dev/null",
     "typecheck": "tsc --noEmit",
     "test": "npm run test:core",
     "test:core": "tsc -p tsconfig.test.json && node .test-dist/tests/run.js"
