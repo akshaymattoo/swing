@@ -32,6 +32,20 @@ export function ActionButton({ children, onPress, disabled, variant = 'primary',
   );
 }
 
+export function BackButton({ onPress }: { onPress: () => void }) {
+  return (
+    <Pressable
+      accessibilityLabel="Back"
+      accessibilityRole="button"
+      hitSlop={8}
+      onPress={onPress}
+      style={({ pressed }) => [styles.back, pressed && styles.backPressed]}
+    >
+      <Text style={styles.backArrow}>←</Text>
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   base: { minHeight: 52, borderRadius: radii.md, paddingHorizontal: spacing.lg, alignItems: 'center', justifyContent: 'center' },
   primary: { backgroundColor: colors.primary },
@@ -42,5 +56,17 @@ const styles = StyleSheet.create({
   disabled: { opacity: 0.45 },
   label: { color: colors.onPrimary, fontSize: 16, fontWeight: '800' },
   secondaryLabel: { color: colors.text },
-  dangerLabel: { color: colors.danger }
+  dangerLabel: { color: colors.danger },
+  back: {
+    width: 44,
+    height: 44,
+    borderRadius: radii.pill,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border
+  },
+  backPressed: { backgroundColor: colors.surfaceRaised, transform: [{ scale: 0.96 }] },
+  backArrow: { color: colors.text, fontSize: 24, lineHeight: 27, fontWeight: '700' }
 });

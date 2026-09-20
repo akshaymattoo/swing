@@ -6,7 +6,7 @@ import type { WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { ActionButton } from '../components/Buttons';
+import { BackButton } from '../components/Buttons';
 import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { formatSessionDate } from '../formatters';
 
@@ -38,7 +38,7 @@ export function HistoryScreen({ container, onBack }: Props) {
   };
 
   return (
-    <AppScreen eyebrow="Your effort" title="History" left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+    <AppScreen eyebrow="Your effort" title="History" left={<BackButton onPress={onBack} />}>
       {sessions.length ? sessions.map((session) => {
         const row = <View style={styles.row}>
           <View style={styles.copy}>

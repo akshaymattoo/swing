@@ -5,7 +5,7 @@ import { equipmentLabel, intensityLabel, workoutDurationSeconds } from '../../do
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { ActionButton } from '../components/Buttons';
+import { ActionButton, BackButton } from '../components/Buttons';
 import { formatDuration } from '../formatters';
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 
 export function WorkoutDetailScreen({ workout, onBack, onStart, onSave }: Props) {
   return (
-    <AppScreen eyebrow={workout.isVault ? 'The Vault' : 'Saved workout'} title={`${workout.emoji ?? ''} ${workout.name}`.trim()} left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+    <AppScreen eyebrow={workout.isVault ? 'The Vault' : 'Saved workout'} title={`${workout.emoji ?? ''} ${workout.name}`.trim()} left={<BackButton onPress={onBack} />}>
       <Text style={styles.summary}>
         {equipmentLabel(workout.equipment)} · {intensityLabel(workout.intensity)} · {formatDuration(workoutDurationSeconds(workout))}
       </Text>

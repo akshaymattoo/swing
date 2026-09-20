@@ -6,7 +6,7 @@ import { DEFAULT_STARTUP_SECONDS, equipmentOptions, intensityOptions, type Equip
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { ActionButton } from '../components/Buttons';
+import { ActionButton, BackButton } from '../components/Buttons';
 import { formatDuration } from '../formatters';
 
 type Props = {
@@ -56,7 +56,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
 
   return (
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <AppScreen eyebrow="New workout" title="Make it yours." left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+      <AppScreen eyebrow="New workout" title="Make it yours." left={<BackButton onPress={onBack} />}>
         <FieldLabel>Name and emoji</FieldLabel>
         <View style={styles.nameRow}>
           <TextInput

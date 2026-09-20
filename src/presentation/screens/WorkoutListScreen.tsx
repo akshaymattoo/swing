@@ -5,7 +5,7 @@ import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { ActionButton } from '../components/Buttons';
+import { ActionButton, BackButton } from '../components/Buttons';
 import { FeaturedWorkoutCard } from '../components/FeaturedWorkoutCard';
 import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { WorkoutCard } from '../components/WorkoutCard';
@@ -79,7 +79,7 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
   };
 
   return (
-    <AppScreen title={title} eyebrow={eyebrow} left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
+    <AppScreen title={title} eyebrow={eyebrow} left={<BackButton onPress={onBack} />}>
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>
