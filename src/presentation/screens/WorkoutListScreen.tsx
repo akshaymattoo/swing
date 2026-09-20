@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
@@ -7,6 +7,7 @@ import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton } from '../components/Buttons';
 import { FeaturedWorkoutCard } from '../components/FeaturedWorkoutCard';
+import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { WorkoutCard } from '../components/WorkoutCard';
 
 type Props = {
@@ -19,9 +20,10 @@ type Props = {
   onCreate?: () => void;
   showFeatured?: boolean;
   onStartWorkout?: (workout: WorkoutTemplate) => void;
+  onDeleteWorkout?: (workout: WorkoutTemplate) => Promise<void>;
 };
 
-export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout }: Props) {
+export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
   const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
   const [featuredIndex, setFeaturedIndex] = useState(0);
 
@@ -40,6 +42,42 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
     if (workouts.length > 1) setFeaturedIndex((current) => (current + 1) % workouts.length);
   };
 
+  const confirmDelete = (workout: WorkoutTemplate) => {
+    Alert.alert(
+      'Delete saved workout?',
+      `${workout.name} will be removed from Saved workouts. Your completed history will stay intact.`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            if (!onDeleteWorkout) return;
+            try {
+              await onDeleteWorkout(workout);
+              setWorkouts((current) => current.filter((item) => item.id !== workout.id));
+            } catch {
+              Alert.alert('Could not delete workout', 'Please try again.');
+            }
+          }
+        }
+      ]
+    );
+  };
+
+  const renderWorkout = (workout: WorkoutTemplate) => {
+    const card = <WorkoutCard workout={workout} onPress={() => onOpenWorkout(workout)} />;
+    return onDeleteWorkout ? (
+      <SwipeToDeleteRow
+        key={workout.id}
+        accessibilityLabel={`Delete ${workout.name} from saved workouts`}
+        onDelete={() => confirmDelete(workout)}
+      >
+        {card}
+      </SwipeToDeleteRow>
+    ) : <View key={workout.id}>{card}</View>;
+  };
+
   return (
     <AppScreen title={title} eyebrow={eyebrow} left={<ActionButton variant="ghost" onPress={onBack}>Back</ActionButton>}>
       {featuredWorkout && onStartWorkout ? (
@@ -52,13 +90,9 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
           </View>
           <FeaturedWorkoutCard workout={featuredWorkout} onStart={() => onStartWorkout(featuredWorkout)} />
           <Text style={styles.sectionLabel}>MORE FROM THE VAULT</Text>
-          {remainingWorkouts.map((workout) => (
-            <WorkoutCard key={workout.id} workout={workout} onPress={() => onOpenWorkout(workout)} />
-          ))}
+          {remainingWorkouts.map(renderWorkout)}
         </>
-      ) : workouts.length ? workouts.map((workout) => (
-          <WorkoutCard key={workout.id} workout={workout} onPress={() => onOpenWorkout(workout)} />
-        )) : (
+      ) : workouts.length ? workouts.map(renderWorkout) : (
         <View style={styles.empty}>
           <Text style={styles.emptyTitle}>Nothing here yet.</Text>
           <Text style={styles.emptyCopy}>{emptyMessage}</Text>

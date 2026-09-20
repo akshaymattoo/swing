@@ -116,6 +116,19 @@ async function serviceTests() {
   equal(created.startupSeconds, 5, 'workout creation stores its one-time start delay');
   equal(created.restSeconds, 0, 'workout creation allows zero-second rests');
   equal((await workouts.getById(created.id))?.name, 'Fresh Start', 'created workout is stored through repository port');
+
+  await workoutService.deleteSavedWorkout(created.id);
+  equal(await workouts.getById(created.id), null, 'deleting a custom saved workout removes its template');
+
+  const savedVaultWorkout: WorkoutTemplate = {
+    ...workout,
+    id: 'vault-saved',
+    isVault: true,
+    isSaved: true
+  };
+  await workouts.save(savedVaultWorkout);
+  await workoutService.deleteSavedWorkout(savedVaultWorkout.id);
+  equal((await workouts.getById(savedVaultWorkout.id))?.isSaved, false, 'deleting a saved Vault workout only removes its saved status');
 }
 
 async function vaultSeedTests() {

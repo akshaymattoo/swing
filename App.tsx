@@ -120,7 +120,7 @@ export default function App() {
   } else if (route === 'vault') {
     screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
-    screen = <WorkoutListScreen eyebrow="Your collection" title="Saved workouts" emptyMessage="Create a workout or save one from The Vault." load={loadSaved} onOpenWorkout={openWorkout} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
+    screen = <WorkoutListScreen eyebrow="Your collection" title="Saved workouts" emptyMessage="Create a workout or save one from The Vault." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
   } else if (route === 'history') {
     screen = <HistoryScreen container={container} onBack={() => setRoute('home')} />;
   } else if (route === 'create') {

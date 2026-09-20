@@ -8,6 +8,7 @@ export interface WorkoutRepository {
   getById(id: string): Promise<WorkoutTemplate | null>;
   save(workout: WorkoutTemplate): Promise<void>;
   setSaved(id: string, saved: boolean): Promise<void>;
+  deleteById(id: string): Promise<void>;
 }
 
 export interface SessionRepository {

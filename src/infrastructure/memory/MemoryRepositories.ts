@@ -31,6 +31,11 @@ export class MemoryWorkoutRepository implements WorkoutRepository {
     const workout = this.records.find((record) => record.id === id);
     if (workout) workout.isSaved = saved;
   }
+
+  async deleteById(id: string) {
+    const index = this.records.findIndex((workout) => workout.id === id);
+    if (index >= 0) this.records.splice(index, 1);
+  }
 }
 
 export class MemorySessionRepository implements SessionRepository {

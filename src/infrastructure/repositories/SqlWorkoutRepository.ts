@@ -89,6 +89,10 @@ export class SqlWorkoutRepository implements WorkoutRepository {
     );
   }
 
+  async deleteById(id: string) {
+    await this.database.run('DELETE FROM workout_templates WHERE id = ?', [id]);
+  }
+
   private async listWhere(where: string) {
     const rows = await this.database.all<WorkoutRow>(
       `SELECT * FROM workout_templates WHERE ${where} ORDER BY is_vault DESC, updated_at DESC, name ASC`

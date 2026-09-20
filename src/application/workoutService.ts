@@ -61,6 +61,16 @@ export class WorkoutService {
     return { ...source, isSaved: true };
   }
 
+  async deleteSavedWorkout(id: string) {
+    const workout = await this.workouts.getById(id);
+    if (!workout) return;
+    if (workout.isVault) {
+      await this.workouts.setSaved(id, false);
+      return;
+    }
+    await this.workouts.deleteById(id);
+  }
+
   private validateDraft(draft: WorkoutDraft) {
     if (!draft.name.trim()) throw new Error('Give your workout a name');
     if (draft.rounds < 1 || draft.rounds > 20) throw new Error('Rounds must be between 1 and 20');
