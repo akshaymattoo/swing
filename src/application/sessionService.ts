@@ -24,6 +24,13 @@ export class SessionService {
     return this.sessions.getActive();
   }
 
+  async deleteHistoryEntry(id: string) {
+    const session = await this.sessions.getById(id);
+    if (!session) return;
+    if (session.status === 'active') throw new Error('An active workout cannot be deleted');
+    await this.sessions.deleteById(id);
+  }
+
   async startWorkout(workoutId: string, now = Date.now()) {
     const workout = await this.workouts.getById(workoutId);
     if (!workout) throw new Error('Workout not found');

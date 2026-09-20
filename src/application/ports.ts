@@ -15,6 +15,7 @@ export interface SessionRepository {
   getActive(): Promise<WorkoutSession | null>;
   getById(id: string): Promise<WorkoutSession | null>;
   save(session: WorkoutSession): Promise<void>;
+  deleteById(id: string): Promise<void>;
 }
 
 export type AppRepositories = {

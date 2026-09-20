@@ -58,6 +58,10 @@ export class SqlSessionRepository implements SessionRepository {
     );
   }
 
+  async deleteById(id: string) {
+    await this.database.run('DELETE FROM workout_sessions WHERE id = ?', [id]);
+  }
+
   private map(row: SessionRow): WorkoutSession {
     return {
       id: row.id,

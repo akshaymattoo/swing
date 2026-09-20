@@ -55,4 +55,9 @@ export class MemorySessionRepository implements SessionRepository {
     if (index >= 0) this.records[index] = session;
     else this.records.push(session);
   }
+
+  async deleteById(id: string) {
+    const index = this.records.findIndex((session) => session.id === id);
+    if (index >= 0) this.records.splice(index, 1);
+  }
 }
