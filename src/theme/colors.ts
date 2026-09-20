@@ -4,7 +4,6 @@ export type SwingColors = {
   background: string;
   surface: string;
   surfaceRaised: string;
-  featuredMuted: string;
   primary: string;
   primaryPressed: string;
   onPrimary: string;
