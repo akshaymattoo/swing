@@ -37,13 +37,13 @@ export function WorkoutCard({ workout, onPress, featured = false }: Props) {
 
 const styles = StyleSheet.create({
   card: { backgroundColor: colors.surface, borderRadius: radii.lg, padding: spacing.lg, borderWidth: 1, borderColor: colors.border, gap: spacing.xs },
-  featured: { backgroundColor: colors.surfaceRaised, borderColor: colors.surfaceRaised, padding: spacing.xl },
+  featured: { backgroundColor: colors.featuredSurface, borderColor: colors.featuredSurface, padding: spacing.xl },
   pressed: { opacity: 0.78 },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   kicker: { color: colors.work, fontSize: 12, fontWeight: '800', textTransform: 'uppercase', letterSpacing: 0.8 },
   title: { color: colors.text, fontSize: 23, fontWeight: '900', marginTop: spacing.xs },
   meta: { color: colors.textMuted, fontSize: 14, lineHeight: 20 },
   saved: { color: colors.primary, fontSize: 18 },
-  featuredText: { color: colors.text },
-  featuredMuted: { color: colors.textMuted }
+  featuredText: { color: colors.onFeatured },
+  featuredMuted: { color: colors.featuredMuted }
 });

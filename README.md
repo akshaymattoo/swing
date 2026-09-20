@@ -34,7 +34,7 @@ The core test suite compiles separately and validates the timer's absolute-times
 
 ## Change the colors
 
-All app colors are defined in `src/theme/palette.json`. Edit that single file to replace the teal/orange palette across the app and native app configuration.
+Six complete color schemes are defined in `src/theme/colors.ts`. Change the final `colors` export to one of `tealOrangeColors`, `orangeRedColors`, `electricLimeColors`, `purpleCoralColors`, `cobaltYellowColors`, or `hotPinkNavyColors`; Expo Fast Refresh will update the running app. `src/theme/palette.json` holds the default teal/orange values used by Expo's native app configuration.
 
 ## Persistence
 
