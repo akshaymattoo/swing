@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
@@ -19,22 +19,25 @@ const tabs: Array<{ id: Tab; icon: string; label: string }> = [
 
 export function BottomNav({ active, onSelect }: Props) {
   return (
-    <View style={styles.nav}>
-      {tabs.map((tab) => {
-        const selected = tab.id === active;
-        return (
-          <Pressable key={tab.id} onPress={() => onSelect(tab.id)} style={[styles.item, selected && styles.selected]}>
-            <Text style={[styles.icon, selected && styles.selectedText]}>{tab.icon}</Text>
-            <Text style={[styles.label, selected && styles.selectedText]}>{tab.label}</Text>
-          </Pressable>
-        );
-      })}
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.nav}>
+        {tabs.map((tab) => {
+          const selected = tab.id === active;
+          return (
+            <Pressable key={tab.id} onPress={() => onSelect(tab.id)} style={[styles.item, selected && styles.selected]}>
+              <Text style={[styles.icon, selected && styles.selectedText]}>{tab.icon}</Text>
+              <Text style={[styles.label, selected && styles.selectedText]}>{tab.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  nav: { flexDirection: 'row', backgroundColor: colors.surface, borderTopWidth: 1, borderColor: colors.border, paddingHorizontal: spacing.sm, paddingVertical: spacing.sm },
+  safeArea: { backgroundColor: colors.surface },
+  nav: { flexDirection: 'row', backgroundColor: colors.surface, borderTopWidth: 1, borderColor: colors.border, paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
   item: { flex: 1, alignItems: 'center', paddingVertical: spacing.sm, borderRadius: radii.md },
   selected: { backgroundColor: colors.surfaceRaised },
   icon: { color: colors.textMuted, fontSize: 19, fontWeight: '800' },
