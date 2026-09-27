@@ -3,6 +3,7 @@ import { Animated, PanResponder, Pressable, StyleSheet, Text, View } from 'react
 
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
+import { clampSwipePosition, swipeDeleteTarget } from './swipeToDelete';
 
 const ACTION_WIDTH = 96;
 
@@ -14,8 +15,10 @@ type Props = PropsWithChildren<{
 export function SwipeToDeleteRow({ accessibilityLabel, children, onDelete }: Props) {
   const translateX = useRef(new Animated.Value(0)).current;
   const gestureStart = useRef(0);
+  const currentPosition = useRef(0);
 
   const settle = (value: number) => {
+    currentPosition.current = value;
     Animated.spring(translateX, {
       toValue: value,
       useNativeDriver: true,
@@ -24,21 +27,30 @@ export function SwipeToDeleteRow({ accessibilityLabel, children, onDelete }: Pro
     }).start();
   };
 
+  const shouldHandleSwipe = (_: unknown, gesture: { dx: number; dy: number }) => (
+    Math.abs(gesture.dx) > 8 && Math.abs(gesture.dx) > Math.abs(gesture.dy)
+  );
+
   const panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: (_, gesture) => (
-      Math.abs(gesture.dx) > 8 && Math.abs(gesture.dx) > Math.abs(gesture.dy)
-    ),
+    onMoveShouldSetPanResponder: shouldHandleSwipe,
+    onMoveShouldSetPanResponderCapture: shouldHandleSwipe,
     onPanResponderGrant: () => {
-      translateX.stopAnimation((value) => { gestureStart.current = value; });
+      translateX.stopAnimation((value) => {
+        gestureStart.current = value;
+        currentPosition.current = value;
+      });
     },
     onPanResponderMove: (_, gesture) => {
-      translateX.setValue(Math.max(-ACTION_WIDTH, Math.min(0, gestureStart.current + gesture.dx)));
+      const position = clampSwipePosition(gestureStart.current + gesture.dx, ACTION_WIDTH);
+      currentPosition.current = position;
+      translateX.setValue(position);
     },
     onPanResponderRelease: (_, gesture) => {
-      const position = Math.max(-ACTION_WIDTH, Math.min(0, gestureStart.current + gesture.dx));
-      settle(position < -ACTION_WIDTH / 2 || gesture.vx < -0.35 ? -ACTION_WIDTH : 0);
+      const position = clampSwipePosition(gestureStart.current + gesture.dx, ACTION_WIDTH);
+      settle(swipeDeleteTarget(position, gesture.vx, ACTION_WIDTH));
     },
-    onPanResponderTerminate: () => settle(0)
+    onPanResponderTerminationRequest: () => false,
+    onPanResponderTerminate: () => settle(swipeDeleteTarget(currentPosition.current, 0, ACTION_WIDTH))
   });
 
   return (

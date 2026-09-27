@@ -15,6 +15,7 @@ import type { WorkoutTemplate } from '../src/domain/workout';
 import { workoutDurationSeconds } from '../src/domain/workout';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
 import { MemorySessionRepository, MemoryWorkoutRepository } from '../src/infrastructure/memory/MemoryRepositories';
+import { swipeDeleteTarget } from '../src/presentation/components/swipeToDelete';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -198,12 +199,20 @@ async function dailyWorkoutTests() {
   equal(reordered[0]?.id, 'vault-a', 'daily rotation order is stable regardless of database update order');
 }
 
+async function swipeToDeleteTests() {
+  equal(swipeDeleteTarget(-60, 0, 96), -96, 'a row more than halfway open stays open');
+  equal(swipeDeleteTarget(-38, 0, 96), -96, 'a deliberate partial swipe exposes the delete action');
+  equal(swipeDeleteTarget(-12, 0, 96), 0, 'a small accidental movement closes the row');
+  equal(swipeDeleteTarget(-15, -0.5, 96), -96, 'a quick left flick exposes the delete action');
+}
+
 async function run() {
   const tests: Array<[string, () => Promise<void>]> = [
     ['absolute timestamp timer', timerTests],
     ['application services', serviceTests],
     ['Vault content refresh', vaultSeedTests],
-    ['daily workout selection', dailyWorkoutTests]
+    ['daily workout selection', dailyWorkoutTests],
+    ['swipe-to-delete settling', swipeToDeleteTests]
   ];
   for (const [name, test] of tests) {
     await test();
