@@ -19,7 +19,7 @@ import { RunnerScreen } from './src/presentation/screens/RunnerScreen';
 import { WorkoutDetailScreen } from './src/presentation/screens/WorkoutDetailScreen';
 import { WorkoutListScreen } from './src/presentation/screens/WorkoutListScreen';
 
-type Route = 'home' | 'vault' | 'saved' | 'create' | 'detail' | 'runner' | 'complete' | 'history';
+type Route = 'home' | 'vault' | 'saved' | 'create' | 'edit' | 'detail' | 'runner' | 'complete' | 'history';
 
 export default function App() {
   const [container, setContainer] = useState<AppContainer | null>(null);
@@ -126,8 +126,10 @@ export default function App() {
     screen = <HistoryScreen container={container} onBack={() => setRoute('home')} />;
   } else if (route === 'create') {
     screen = <CreateWorkoutScreen container={container} onBack={() => setRoute('home')} onCreated={(workout) => { setSelectedWorkout(workout); setRoute('detail'); }} />;
+  } else if (route === 'edit' && selectedWorkout) {
+    screen = <CreateWorkoutScreen container={container} initialWorkout={selectedWorkout} onBack={() => setRoute('detail')} onCreated={(workout) => { setSelectedWorkout(workout); setRoute('detail'); }} />;
   } else if (route === 'detail' && selectedWorkout) {
-    screen = <WorkoutDetailScreen workout={selectedWorkout} onBack={() => setRoute(selectedWorkout.isVault ? 'vault' : 'saved')} onStart={() => void startWorkout(selectedWorkout)} onSave={async () => {
+    screen = <WorkoutDetailScreen workout={selectedWorkout} onBack={() => setRoute(selectedWorkout.isVault ? 'vault' : 'saved')} onStart={() => void startWorkout(selectedWorkout)} onEdit={() => setRoute('edit')} onSave={async () => {
       const saved = await container.workouts.copyToSaved(selectedWorkout.id);
       setSelectedWorkout(saved);
       Alert.alert('Saved', `${saved.name} is now in your workouts.`);

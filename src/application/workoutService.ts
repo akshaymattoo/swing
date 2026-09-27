@@ -53,6 +53,33 @@ export class WorkoutService {
     return workout;
   }
 
+  async updateWorkout(id: string, draft: WorkoutDraft) {
+    this.validateDraft(draft);
+    const existing = await this.workouts.getById(id);
+    if (!existing) throw new Error('Workout not found');
+    if (existing.isVault) throw new Error('Vault workouts cannot be changed directly. Edit a copy instead.');
+
+    const workout: WorkoutTemplate = {
+      ...existing,
+      name: draft.name.trim(),
+      emoji: draft.emoji?.trim() || null,
+      equipment: draft.equipment,
+      intensity: draft.intensity,
+      rounds: draft.rounds,
+      startupSeconds: draft.startupSeconds,
+      workSeconds: draft.workSeconds,
+      restSeconds: draft.restSeconds,
+      exercises: draft.exercises.map((name, position) => ({
+        id: createId('exercise'),
+        name: name.trim(),
+        position
+      })),
+      updatedAt: new Date().toISOString()
+    };
+    await this.workouts.save(workout);
+    return workout;
+  }
+
   async copyToSaved(id: string) {
     const source = await this.workouts.getById(id);
     if (!source) throw new Error('Workout not found');

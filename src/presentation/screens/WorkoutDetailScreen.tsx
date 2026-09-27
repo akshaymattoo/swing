@@ -13,9 +13,10 @@ type Props = {
   onBack: () => void;
   onStart: () => void;
   onSave: () => void;
+  onEdit: () => void;
 };
 
-export function WorkoutDetailScreen({ workout, onBack, onStart, onSave }: Props) {
+export function WorkoutDetailScreen({ workout, onBack, onStart, onSave, onEdit }: Props) {
   return (
     <AppScreen eyebrow={workout.isVault ? 'The Vault' : 'Saved workout'} title={`${workout.emoji ?? ''} ${workout.name}`.trim()} left={<BackButton onPress={onBack} />}>
       <Text style={styles.summary}>
@@ -41,6 +42,7 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onSave }: Props)
 
       <ActionButton onPress={onStart}>Start workout</ActionButton>
       {!workout.isSaved ? <ActionButton variant="secondary" onPress={onSave}>Save to My Workouts</ActionButton> : null}
+      {workout.isSaved ? <ActionButton variant="secondary" onPress={onEdit}>{workout.isVault ? 'Edit a copy' : 'Edit workout'}</ActionButton> : null}
     </AppScreen>
   );
 }

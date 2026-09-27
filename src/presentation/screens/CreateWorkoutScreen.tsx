@@ -29,22 +29,25 @@ type Props = {
   container: AppContainer;
   onBack: () => void;
   onCreated: (workout: WorkoutTemplate) => void;
+  initialWorkout?: WorkoutTemplate;
 };
 
 const workOptions = [5, 10, 20, 30, 45, 60];
 const startupOptions = [0, 5, 10, 20, 30, 45, 60];
 const restOptions = [0, 5, 10, 15, 20, 30, 45, 60];
 
-export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
-  const [name, setName] = useState("");
-  const [emoji, setEmoji] = useState("🔥");
-  const [equipment, setEquipment] = useState<Equipment>("bodyweight");
-  const [intensity, setIntensity] = useState<Intensity>("spicy");
-  const [rounds, setRounds] = useState(4);
-  const [startupSeconds, setStartupSeconds] = useState(DEFAULT_STARTUP_SECONDS);
-  const [workSeconds, setWorkSeconds] = useState(40);
-  const [restSeconds, setRestSeconds] = useState(20);
-  const [movements, setMovements] = useState(["", "", ""]);
+export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorkout }: Props) {
+  const isEditing = Boolean(initialWorkout);
+  const isEditingCopy = Boolean(initialWorkout?.isVault);
+  const [name, setName] = useState(initialWorkout?.name ?? "");
+  const [emoji, setEmoji] = useState(initialWorkout?.emoji ?? "🔥");
+  const [equipment, setEquipment] = useState<Equipment>(initialWorkout?.equipment ?? "bodyweight");
+  const [intensity, setIntensity] = useState<Intensity>(initialWorkout?.intensity ?? "spicy");
+  const [rounds, setRounds] = useState(initialWorkout?.rounds ?? 4);
+  const [startupSeconds, setStartupSeconds] = useState(initialWorkout?.startupSeconds ?? DEFAULT_STARTUP_SECONDS);
+  const [workSeconds, setWorkSeconds] = useState(initialWorkout?.workSeconds ?? 40);
+  const [restSeconds, setRestSeconds] = useState(initialWorkout?.restSeconds ?? 20);
+  const [movements, setMovements] = useState(initialWorkout?.exercises.map((exercise) => exercise.name) ?? ["", "", ""]);
   const [saving, setSaving] = useState(false);
 
   const filledMovements = movements.filter((movement) => movement.trim());
@@ -78,7 +81,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
   const save = async () => {
     setSaving(true);
     try {
-      const workout = await container.workouts.createWorkout({
+      const draft = {
         name,
         emoji,
         equipment,
@@ -88,7 +91,11 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
         workSeconds,
         restSeconds,
         exercises: filledMovements,
-      });
+        sourceTemplateId: isEditingCopy ? initialWorkout?.id : initialWorkout?.sourceTemplateId,
+      };
+      const workout = initialWorkout && !initialWorkout.isVault
+        ? await container.workouts.updateWorkout(initialWorkout.id, draft)
+        : await container.workouts.createWorkout(draft);
       onCreated(workout);
     } catch (error) {
       Alert.alert(
@@ -106,7 +113,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <AppScreen
-        eyebrow="New workout"
+        eyebrow={isEditingCopy ? "Edit a copy" : isEditing ? "Edit workout" : "New workout"}
         title="Make it yours."
         left={<BackButton onPress={onBack} />}
       >
@@ -233,7 +240,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated }: Props) {
           </Text>
         </View>
         <ActionButton disabled={saving} onPress={save}>
-          {saving ? "Saving…" : "Save workout"}
+          {saving ? "Saving…" : isEditingCopy ? "Save as new workout" : isEditing ? "Save changes" : "Save workout"}
         </ActionButton>
       </AppScreen>
     </KeyboardAvoidingView>

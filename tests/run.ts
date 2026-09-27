@@ -123,6 +123,18 @@ async function serviceTests() {
   equal(created.restSeconds, 0, 'workout creation allows zero-second rests');
   equal((await workouts.getById(created.id))?.name, 'Fresh Start', 'created workout is stored through repository port');
 
+  const customSession = await sessionService.startWorkout(created.id, 200_000);
+  const updated = await workoutService.updateWorkout(created.id, {
+    name: 'Fresh Start Remix', emoji: '💫', equipment: 'dumbbells', intensity: 'hot',
+    rounds: 5, startupSeconds: 10, workSeconds: 45, restSeconds: 15, exercises: ['Thrusters', 'Lunges', 'Rows']
+  });
+  equal(updated.id, created.id, 'editing a custom workout preserves its identity');
+  equal(updated.name, 'Fresh Start Remix', 'editing a custom workout stores the new name');
+  equal(updated.exercises.length, 3, 'editing a custom workout replaces its movements');
+  equal(customSession.workoutSnapshot.name, 'Fresh Start', 'editing a workout does not rewrite an existing session snapshot');
+
+  await sessionService.end(customSession, 201_000);
+
   await workoutService.deleteSavedWorkout(created.id);
   equal(await workouts.getById(created.id), null, 'deleting a custom saved workout removes its template');
 
@@ -133,6 +145,16 @@ async function serviceTests() {
     isSaved: true
   };
   await workouts.save(savedVaultWorkout);
+  let rejectedVaultEdit = false;
+  try {
+    await workoutService.updateWorkout(savedVaultWorkout.id, {
+      name: 'Changed Vault Workout', emoji: '⚠️', equipment: 'bodyweight', intensity: 'mild',
+      rounds: 1, startupSeconds: 0, workSeconds: 5, restSeconds: 0, exercises: ['Squats']
+    });
+  } catch {
+    rejectedVaultEdit = true;
+  }
+  assert(rejectedVaultEdit, 'Vault workouts must be copied instead of edited directly');
   await workoutService.deleteSavedWorkout(savedVaultWorkout.id);
   equal((await workouts.getById(savedVaultWorkout.id))?.isSaved, false, 'deleting a saved Vault workout only removes its saved status');
 }
