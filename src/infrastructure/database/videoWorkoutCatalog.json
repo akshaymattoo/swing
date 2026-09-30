@@ -23,7 +23,7 @@
     "focus": "full body, HIIT, kettlebell",
     "publishedText": "3mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-K042zCe0WBo",
@@ -49,7 +49,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GAyr4Fd4ufQ",
@@ -101,7 +101,7 @@
     "focus": "mobility, morning routine, bodyweight",
     "publishedText": "7mo ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-NB5cLXRMELM",
@@ -153,7 +153,7 @@
     "focus": "morning routine, mobility, bodyweight",
     "publishedText": "10mo ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-rPZmf2XAQII",
@@ -829,7 +829,7 @@
     "focus": "abs, HIIT, kettlebell",
     "publishedText": "5y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-U0MJCSqF4x0",
@@ -946,7 +946,7 @@
     "focus": "abs, yoga",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-S-8u27z1_iA",
@@ -985,7 +985,7 @@
     "focus": "mobility",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-7W6os2-MJlc",
@@ -1063,7 +1063,7 @@
     "focus": "mobility",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-T8j6688Ijpw",
@@ -1180,7 +1180,7 @@
     "focus": "talk/training advice; —",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ILiq7e5QbKc",
@@ -3182,7 +3182,7 @@
     "focus": "upper body, calisthenics, bodyweight",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-d7zblqeSRWk",
@@ -3260,7 +3260,7 @@
     "focus": "legs, athletic",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-itDsdUrG6gI",
@@ -3286,7 +3286,7 @@
     "focus": "mobility, recovery",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-C0FIVKOzePE",
@@ -3416,7 +3416,7 @@
     "focus": "full body, fat loss, muscle building",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-j1gJlux6hUo",
@@ -3468,7 +3468,7 @@
     "focus": "warm-up, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ftjlK4lHSVU",
@@ -3663,7 +3663,7 @@
     "focus": "legs, muscle building",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ncWIO9_fQo0",
@@ -3715,7 +3715,7 @@
     "focus": "full body, muscle building, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-vGiEszoHqsw",
@@ -3923,7 +3923,7 @@
     "focus": "warm-up, upper body",
     "publishedText": "2 years ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jzDaINKjcto",
@@ -4768,7 +4768,7 @@
     "focus": "full body, HIIT, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-4WeZypHCVO4",
@@ -4807,7 +4807,7 @@
     "focus": "full body, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-y5oT3sibMuY",
@@ -5288,7 +5288,7 @@
     "focus": "warm up, full body",
     "publishedText": "4 weeks ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ApiYWyoUhP8",
@@ -5847,7 +5847,7 @@
     "focus": "warm up, full body",
     "publishedText": "8 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-HkkCAnVX7yQ",

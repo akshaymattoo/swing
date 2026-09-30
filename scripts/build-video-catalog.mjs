@@ -113,7 +113,7 @@ const videos = records
       focus: record.focus.trim(),
       publishedText: record.published.trim(),
       contentKind: kind,
-      wodEligible: ['follow_along', 'mobility'].includes(kind) && seconds >= 300
+      wodEligible: ['follow_along', 'mobility'].includes(kind) && seconds > 9 * 60
     };
   })
   .filter((video) => {

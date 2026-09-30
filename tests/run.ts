@@ -259,6 +259,7 @@ async function videoCatalogTests() {
   assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
   assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell', 'dumbbells', 'bands'].includes(video.equipment)), 'equipment names are normalized');
   assert(videoCatalog.filter((video) => video.wodEligible).length > 0, 'the catalog contains eligible daily workouts');
+  assert(videoCatalog.filter((video) => video.wodEligible).every((video) => video.durationSeconds > 9 * 60), 'daily workouts are strictly longer than nine minutes');
 }
 
 async function run() {

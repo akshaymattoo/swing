@@ -54,7 +54,7 @@ The session snapshot protects history when a workout template changes later.
 
 `VideoWorkoutOfDayService` first returns an existing assignment for the local date. For a new day it selects from active, eligible videos by lowest display count and then oldest display date. As a result, every eligible video is shown before one repeats. A date-based hash provides a stable tie-break without coupling the service to SQLite.
 
-The checked-in catalog is generated from the source CSV. Regular videos are retained, Shorts are excluded, equipment and durations are normalized, and only likely follow-along or mobility sessions of at least five minutes are marked eligible. Catalog seeding is versioned in `app_metadata`, so the full import only runs when the bundled catalog changes.
+The checked-in catalog is generated from the source CSV. Regular videos are retained, Shorts are excluded, equipment and durations are normalized, and only likely follow-along or mobility sessions longer than nine minutes are marked eligible. Catalog seeding is versioned in `app_metadata`, so the full import only runs when the bundled catalog changes.
 
 ## Timer correctness
 
