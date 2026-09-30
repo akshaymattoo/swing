@@ -1,6 +1,6 @@
 import type { DatabaseClient } from './DatabaseClient';
 
-const DATABASE_VERSION = 2;
+const DATABASE_VERSION = 3;
 
 export async function migrateDatabase(database: DatabaseClient) {
   const version = await database.first<{ user_version: number }>('PRAGMA user_version');
@@ -61,6 +61,43 @@ export async function migrateDatabase(database: DatabaseClient) {
     }
     if (currentVersion === 1) {
       await transaction.exec('ALTER TABLE workout_templates ADD COLUMN startup_seconds INTEGER NOT NULL DEFAULT 20;');
+    }
+    if (currentVersion < 3) {
+      await transaction.exec(`
+        CREATE TABLE IF NOT EXISTS workout_videos (
+          id TEXT PRIMARY KEY NOT NULL,
+          youtube_video_id TEXT NOT NULL UNIQUE,
+          title TEXT NOT NULL,
+          channel_name TEXT NOT NULL,
+          youtube_url TEXT NOT NULL,
+          duration_seconds INTEGER NOT NULL,
+          equipment TEXT NOT NULL,
+          focus TEXT NOT NULL,
+          published_text TEXT NOT NULL,
+          content_kind TEXT NOT NULL,
+          wod_eligible INTEGER NOT NULL DEFAULT 0,
+          is_active INTEGER NOT NULL DEFAULT 1,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS daily_workout_assignments (
+          local_date TEXT PRIMARY KEY NOT NULL,
+          workout_video_id TEXT NOT NULL,
+          selected_at TEXT NOT NULL,
+          FOREIGN KEY (workout_video_id) REFERENCES workout_videos(id) ON DELETE RESTRICT
+        );
+
+        CREATE TABLE IF NOT EXISTS app_metadata (
+          key TEXT PRIMARY KEY NOT NULL,
+          value TEXT NOT NULL
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_workout_videos_eligible
+          ON workout_videos(wod_eligible, is_active, equipment);
+        CREATE INDEX IF NOT EXISTS idx_daily_workout_video
+          ON daily_workout_assignments(workout_video_id, local_date DESC);
+      `);
     }
     await transaction.exec(`PRAGMA user_version = ${DATABASE_VERSION};`);
   });

@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
-import { dailyWorkoutIndex, orderWorkoutsForDailyRotation } from '../../application/dailyWorkout';
 import type { WorkoutSession } from '../../domain/session';
-import type { WorkoutTemplate } from '../../domain/workout';
+import type { VideoWorkout } from '../../domain/videoWorkout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
-import { FeaturedWorkoutCard } from '../components/FeaturedWorkoutCard';
+import { VideoWorkoutCard } from '../components/VideoWorkoutCard';
 
 type Props = {
   container: AppContainer;
-  onStartWorkout: (workout: WorkoutTemplate) => void;
   onCreate: () => void;
   onVault: () => void;
   onSaved: () => void;
@@ -21,39 +19,38 @@ type Props = {
 };
 
 export function HomeScreen(props: Props) {
-  const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [dailyWorkout, setDailyWorkout] = useState<VideoWorkout | null>(null);
   const [active, setActive] = useState<WorkoutSession | null>(null);
 
   useEffect(() => {
-    Promise.all([props.container.workouts.listVault(), props.container.sessions.getActiveSession()]).then(([vault, session]) => {
-      const dailyRotation = orderWorkoutsForDailyRotation(vault);
-      setWorkouts(dailyRotation);
-      setFeaturedIndex(dailyWorkoutIndex(new Date(), dailyRotation.length));
+    Promise.all([props.container.videoWorkoutOfDay.getForDate(), props.container.sessions.getActiveSession()]).then(([video, session]) => {
+      setDailyWorkout(video);
       setActive(session);
     });
   }, [props.container]);
 
   useEffect(() => {
-    if (workouts.length === 0) return;
-
     let midnightTimer: ReturnType<typeof setTimeout>;
     const scheduleNextDay = () => {
       const now = new Date();
       const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
       midnightTimer = setTimeout(() => {
-        setFeaturedIndex(dailyWorkoutIndex(new Date(), workouts.length));
+        props.container.videoWorkoutOfDay.getForDate().then(setDailyWorkout);
         scheduleNextDay();
       }, nextDay.getTime() - now.getTime() + 100);
     };
 
     scheduleNextDay();
     return () => clearTimeout(midnightTimer);
-  }, [workouts.length]);
+  }, [props.container]);
 
-  const quickStart = workouts[featuredIndex] ?? null;
-  const refreshWorkout = () => {
-    if (workouts.length > 1) setFeaturedIndex((current) => (current + 1) % workouts.length);
+  const openDailyWorkout = async () => {
+    if (!dailyWorkout) return;
+    try {
+      await Linking.openURL(dailyWorkout.youtubeUrl);
+    } catch {
+      Alert.alert('Could not open YouTube', 'Please check your connection and try again.');
+    }
   };
 
   return (
@@ -68,15 +65,10 @@ export function HomeScreen(props: Props) {
         </Pressable>
       ) : null}
 
-      {quickStart ? (
+      {dailyWorkout ? (
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionLabel}>WORKOUT OF THE DAY</Text>
-            <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8}>
-              <Text style={styles.refresh}>↻ Refresh</Text>
-            </Pressable>
-          </View>
-          <FeaturedWorkoutCard workout={quickStart} onStart={() => props.onStartWorkout(quickStart)} />
+          <Text style={styles.sectionLabel}>WORKOUT OF THE DAY</Text>
+          <VideoWorkoutCard workout={dailyWorkout} onOpen={() => void openDailyWorkout()} />
         </View>
       ) : null}
 
@@ -104,9 +96,7 @@ export function HomeScreen(props: Props) {
 
 const styles = StyleSheet.create({
   section: { gap: spacing.sm },
-  sectionHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refresh: { color: colors.work, fontSize: 14, fontWeight: '800' },
   resume: { backgroundColor: colors.surfaceRaised, borderRadius: radii.md, padding: spacing.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   resumeKicker: { color: colors.work, fontSize: 11, fontWeight: '800', textTransform: 'uppercase' },
   resumeTitle: { color: colors.text, fontSize: 18, fontWeight: '900', marginTop: spacing.xs },

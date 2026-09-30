@@ -12,7 +12,7 @@ Repository interfaces
 SQLite repositories → generic database client → Expo SQLite
 ```
 
-Dependencies only point inward. Screens do not know which database is in use, and application services depend only on `WorkoutRepository` and `SessionRepository`.
+Dependencies only point inward. Screens do not know which database is in use, and application services depend only on repository interfaces.
 
 ## Composition root
 
@@ -27,7 +27,9 @@ export function supabasePersistence(config: SupabaseConfig): PersistenceConfig {
       const client = createClient(config.url, config.anonKey);
       return {
         workouts: new SupabaseWorkoutRepository(client),
-        sessions: new SupabaseSessionRepository(client)
+        sessions: new SupabaseSessionRepository(client),
+        videoWorkouts: new SupabaseVideoWorkoutRepository(client),
+        dailyVideoWorkouts: new SupabaseDailyVideoWorkoutRepository(client)
       };
     }
   };
@@ -41,10 +43,18 @@ Only the configured adapter changes. Screens, services, and domain timer logic r
 - `workout_templates` stores the reusable workout definition.
 - `workout_exercises` stores ordered movements belonging to a template.
 - `workout_sessions` stores each workout attempt, including an immutable workout snapshot and recoverable timer state.
+- `workout_videos` stores normalized full-length YouTube catalog entries and their daily-rotation eligibility.
+- `daily_workout_assignments` stores one selected video per local calendar day.
 - `source_template_id` is ready for future copied/remixed workout lineage.
 - String IDs make future client-generated records and cloud synchronization straightforward.
 
 The session snapshot protects history when a workout template changes later.
+
+## Workout of the Day
+
+`VideoWorkoutOfDayService` first returns an existing assignment for the local date. For a new day it selects from active, eligible videos by lowest display count and then oldest display date. As a result, every eligible video is shown before one repeats. A date-based hash provides a stable tie-break without coupling the service to SQLite.
+
+The checked-in catalog is generated from the source CSV. Regular videos are retained, Shorts are excluded, equipment and durations are normalized, and only likely follow-along or mobility sessions of at least five minutes are marked eligible. Catalog seeding is versioned in `app_metadata`, so the full import only runs when the bundled catalog changes.
 
 ## Timer correctness
 
@@ -57,6 +67,7 @@ When the app returns from the background, `advanceTimer` walks through every int
 V1 intentionally omits accounts and social features. The existing model supports later additions without replacing its core:
 
 - Add `owner_user_id` to templates and sessions.
+- Add `owner_user_id` to daily assignments and make `(owner_user_id, local_date)` unique.
 - Sync the same string IDs to Postgres.
 - Use `source_template_id` for workout remixes.
 - Add publishing and visibility fields to templates.

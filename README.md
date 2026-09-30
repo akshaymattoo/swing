@@ -10,6 +10,7 @@ Swing is a fast, low-friction workout runner for people who want to stop plannin
 - Saved workouts and reusable workout templates.
 - Accurate timestamp-based workout runner with pause, resume, skip, and end.
 - Workout completion history.
+- A full-length YouTube video catalog with a persistent, non-repeating Workout of the Day.
 - Expo SQLite persistence behind repository interfaces that can later be implemented with Supabase/Postgres.
 
 ## Run locally
@@ -30,7 +31,17 @@ npm run typecheck
 npm test
 ```
 
-The core test suite compiles separately and validates the timer's absolute-timestamp behavior, background catch-up, pause/resume, duration calculation, and service/repository boundaries.
+The core test suite compiles separately and validates the timer, service/repository boundaries, saved history, and Workout of the Day rotation.
+
+## Refresh the video catalog
+
+The app ships with a generated catalog containing regular YouTube videos only. Shorts are excluded. To rebuild it from an updated CSV:
+
+```bash
+npm run catalog:build -- /absolute/path/to/workout_catalog.csv
+```
+
+The importer normalizes equipment and duration values, removes duplicate video IDs, classifies content, and marks likely follow-along workouts for daily rotation. Review the generated `wodEligible` values when the source catalog changes.
 
 ## Change the colors
 
@@ -38,6 +49,6 @@ Six complete color schemes are defined in `src/theme/colors.ts`. Change the fina
 
 ## Persistence
 
-`src/config/appConfig.ts` is the composition root. The UI and application services receive repository interfaces rather than importing SQLite. To move to Supabase, implement `WorkoutRepository` and `SessionRepository`, return them from a new `PersistenceConfig`, and replace the configured persistence adapter.
+`src/config/appConfig.ts` is the composition root. The UI and application services receive repository interfaces rather than importing SQLite. To move to Supabase, implement the workout, session, video catalog, and daily-assignment repositories, return them from a new `PersistenceConfig`, and replace the configured persistence adapter.
 
 See `docs/ARCHITECTURE.md` for details.

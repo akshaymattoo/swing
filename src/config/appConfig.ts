@@ -2,7 +2,9 @@ import type { AppRepositories } from '../application/ports';
 import { ExpoSQLiteClient } from '../infrastructure/database/ExpoSQLiteClient';
 import { migrateDatabase } from '../infrastructure/database/migrations';
 import { seedVault } from '../infrastructure/database/seedWorkouts';
+import { seedVideoWorkouts } from '../infrastructure/database/seedVideoWorkouts';
 import { SqlSessionRepository } from '../infrastructure/repositories/SqlSessionRepository';
+import { SqlDailyVideoWorkoutRepository, SqlVideoWorkoutRepository } from '../infrastructure/repositories/SqlVideoWorkoutRepositories';
 import { SqlWorkoutRepository } from '../infrastructure/repositories/SqlWorkoutRepository';
 
 export type PersistenceConfig = {
@@ -20,8 +22,11 @@ export function sqlitePersistence(databaseName: string): PersistenceConfig {
       await migrateDatabase(database);
       const workouts = new SqlWorkoutRepository(database);
       const sessions = new SqlSessionRepository(database);
+      const videoWorkouts = new SqlVideoWorkoutRepository(database);
+      const dailyVideoWorkouts = new SqlDailyVideoWorkoutRepository(database);
       await seedVault(workouts);
-      return { workouts, sessions };
+      await seedVideoWorkouts(database, videoWorkouts);
+      return { workouts, sessions, videoWorkouts, dailyVideoWorkouts };
     }
   };
 }

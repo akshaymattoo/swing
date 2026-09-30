@@ -1,5 +1,6 @@
 import { SessionService } from '../src/application/sessionService';
 import { WorkoutService } from '../src/application/workoutService';
+import { VideoWorkoutOfDayService } from '../src/application/videoWorkoutOfDayService';
 import { dailyWorkoutIndex, orderWorkoutsForDailyRotation } from '../src/application/dailyWorkout';
 import {
   advanceTimer,
@@ -12,10 +13,17 @@ import {
   type WorkoutSnapshot
 } from '../src/domain/session';
 import type { WorkoutTemplate } from '../src/domain/workout';
+import type { VideoWorkout } from '../src/domain/videoWorkout';
 import { workoutDurationSeconds } from '../src/domain/workout';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
-import { MemorySessionRepository, MemoryWorkoutRepository } from '../src/infrastructure/memory/MemoryRepositories';
+import {
+  MemoryDailyVideoWorkoutRepository,
+  MemorySessionRepository,
+  MemoryVideoWorkoutRepository,
+  MemoryWorkoutRepository
+} from '../src/infrastructure/memory/MemoryRepositories';
 import { swipeDeleteTarget } from '../src/presentation/components/swipeToDelete';
+import videoCatalog from '../src/infrastructure/database/videoWorkoutCatalog.json';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -206,13 +214,62 @@ async function swipeToDeleteTests() {
   equal(swipeDeleteTarget(-15, -0.5, 96), -96, 'a quick left flick exposes the delete action');
 }
 
+async function videoWorkoutOfDayTests() {
+  const base: VideoWorkout = {
+    id: 'video-a',
+    youtubeVideoId: 'a',
+    title: 'Workout A',
+    channelName: 'Channel',
+    youtubeUrl: 'https://www.youtube.com/watch?v=a',
+    durationSeconds: 1200,
+    equipment: 'kettlebell',
+    focus: 'full body',
+    publishedText: '1 month ago',
+    contentKind: 'follow_along',
+    wodEligible: true,
+    isActive: true,
+    createdAt: new Date(0).toISOString(),
+    updatedAt: new Date(0).toISOString()
+  };
+  const videos = new MemoryVideoWorkoutRepository([
+    base,
+    { ...base, id: 'video-b', youtubeVideoId: 'b', title: 'Workout B' },
+    { ...base, id: 'video-ineligible', youtubeVideoId: 'c', title: 'Tutorial', wodEligible: false }
+  ]);
+  const assignments = new MemoryDailyVideoWorkoutRepository();
+  const service = new VideoWorkoutOfDayService(videos, assignments);
+
+  const firstDay = new Date(2026, 8, 29, 8);
+  const first = await service.getForDate(firstDay);
+  const repeated = await service.getForDate(new Date(2026, 8, 29, 20));
+  equal(repeated?.id, first?.id, 'the same local day always returns its saved video assignment');
+
+  const second = await service.getForDate(new Date(2026, 8, 30, 8));
+  assert(second?.id !== first?.id, 'an unseen video is selected before repeating one');
+  assert(second?.wodEligible, 'ineligible catalog videos never enter the daily rotation');
+
+  const third = await service.getForDate(new Date(2026, 9, 1, 8));
+  equal(third?.id, first?.id, 'after exhausting the catalog the least recently shown video rotates back in');
+  equal((await assignments.listAll()).length, 3, 'one durable assignment is stored per local calendar day');
+}
+
+async function videoCatalogTests() {
+  equal(videoCatalog.length, 601, 'the generated catalog includes every regular video from the source CSV');
+  equal(new Set(videoCatalog.map((video) => video.youtubeVideoId)).size, videoCatalog.length, 'YouTube video IDs are unique');
+  assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
+  assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell', 'dumbbells', 'bands'].includes(video.equipment)), 'equipment names are normalized');
+  assert(videoCatalog.filter((video) => video.wodEligible).length > 0, 'the catalog contains eligible daily workouts');
+}
+
 async function run() {
   const tests: Array<[string, () => Promise<void>]> = [
     ['absolute timestamp timer', timerTests],
     ['application services', serviceTests],
     ['Vault content refresh', vaultSeedTests],
     ['daily workout selection', dailyWorkoutTests],
-    ['swipe-to-delete settling', swipeToDeleteTests]
+    ['swipe-to-delete settling', swipeToDeleteTests],
+    ['video workout of the day', videoWorkoutOfDayTests],
+    ['generated video catalog', videoCatalogTests]
   ];
   for (const [name, test] of tests) {
     await test();

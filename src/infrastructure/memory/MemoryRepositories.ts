@@ -1,5 +1,6 @@
-import type { SessionRepository, WorkoutRepository } from '../../application/ports';
+import type { DailyVideoWorkoutRepository, SessionRepository, VideoWorkoutRepository, WorkoutRepository } from '../../application/ports';
 import type { WorkoutSession } from '../../domain/session';
+import type { DailyVideoWorkoutAssignment, VideoWorkout } from '../../domain/videoWorkout';
 import type { WorkoutTemplate } from '../../domain/workout';
 
 export class MemoryWorkoutRepository implements WorkoutRepository {
@@ -64,5 +65,41 @@ export class MemorySessionRepository implements SessionRepository {
   async deleteById(id: string) {
     const index = this.records.findIndex((session) => session.id === id);
     if (index >= 0) this.records.splice(index, 1);
+  }
+}
+
+export class MemoryVideoWorkoutRepository implements VideoWorkoutRepository {
+  constructor(private readonly records: VideoWorkout[] = []) {}
+
+  async listEligible() {
+    return this.records.filter((video) => video.isActive && video.wodEligible);
+  }
+
+  async getById(id: string) {
+    return this.records.find((video) => video.id === id) ?? null;
+  }
+
+  async save(video: VideoWorkout) {
+    const index = this.records.findIndex((record) => record.id === video.id);
+    if (index >= 0) this.records[index] = video;
+    else this.records.push(video);
+  }
+}
+
+export class MemoryDailyVideoWorkoutRepository implements DailyVideoWorkoutRepository {
+  constructor(private readonly records: DailyVideoWorkoutAssignment[] = []) {}
+
+  async getByDate(localDate: string) {
+    return this.records.find((assignment) => assignment.localDate === localDate) ?? null;
+  }
+
+  async listAll() {
+    return [...this.records];
+  }
+
+  async save(assignment: DailyVideoWorkoutAssignment) {
+    const index = this.records.findIndex((record) => record.localDate === assignment.localDate);
+    if (index >= 0) this.records[index] = assignment;
+    else this.records.push(assignment);
   }
 }

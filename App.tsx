@@ -117,7 +117,7 @@ export default function App() {
 
   let screen;
   if (route === 'home') {
-    screen = <HomeScreen container={container} onStartWorkout={(workout) => void startWorkout(workout)} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onHistory={() => setRoute('history')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
+    screen = <HomeScreen container={container} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onHistory={() => setRoute('history')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
   } else if (route === 'vault') {
     screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
@@ -144,7 +144,7 @@ export default function App() {
       if (workout) await startWorkout(workout);
     }} />;
   } else {
-    screen = <HomeScreen container={container} onStartWorkout={(workout) => void startWorkout(workout)} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onHistory={() => setRoute('history')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
+    screen = <HomeScreen container={container} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onHistory={() => setRoute('history')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
   }
 
   return (
