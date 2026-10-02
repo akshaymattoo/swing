@@ -41,7 +41,7 @@ The app ships with a generated catalog containing regular YouTube videos only. S
 npm run catalog:build -- /absolute/path/to/workout_catalog.csv
 ```
 
-The importer normalizes equipment and duration values, removes duplicate video IDs, classifies content, and marks likely follow-along workouts for daily rotation. Review the generated `wodEligible` values when the source catalog changes.
+The importer normalizes equipment and duration values, removes duplicate video IDs, and classifies content. Only IDs in `scripts/approved-video-workout-ids.json` are marked for daily rotation; the importer fails if an approved video disappears or falls outside the 20–35 minute window.
 
 ## Change the colors
 

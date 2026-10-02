@@ -24,6 +24,7 @@ import {
 } from '../src/infrastructure/memory/MemoryRepositories';
 import { swipeDeleteTarget } from '../src/presentation/components/swipeToDelete';
 import videoCatalog from '../src/infrastructure/database/videoWorkoutCatalog.json';
+import approvedVideoIds from '../scripts/approved-video-workout-ids.json';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -258,8 +259,12 @@ async function videoCatalogTests() {
   equal(new Set(videoCatalog.map((video) => video.youtubeVideoId)).size, videoCatalog.length, 'YouTube video IDs are unique');
   assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
   assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell', 'dumbbells', 'bands'].includes(video.equipment)), 'equipment names are normalized');
-  assert(videoCatalog.filter((video) => video.wodEligible).length > 0, 'the catalog contains eligible daily workouts');
-  assert(videoCatalog.filter((video) => video.wodEligible).every((video) => video.durationSeconds > 9 * 60), 'daily workouts are strictly longer than nine minutes');
+  const eligible = videoCatalog.filter((video) => video.wodEligible);
+  equal(eligible.length, 50, 'the daily rotation contains exactly the approved MVP shortlist');
+  equal(new Set(approvedVideoIds).size, 50, 'the approval whitelist contains fifty unique videos');
+  assert(eligible.every((video) => approvedVideoIds.includes(video.youtubeVideoId)), 'only manually approved videos enter the rotation');
+  assert(approvedVideoIds.every((id) => eligible.some((video) => video.youtubeVideoId === id)), 'every approved video enters the rotation');
+  assert(eligible.every((video) => video.durationSeconds >= 20 * 60 && video.durationSeconds <= 35 * 60), 'approved daily workouts are between twenty and thirty-five minutes');
 }
 
 async function run() {

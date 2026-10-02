@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const inputPath = process.argv[2];
 const outputPath = process.argv[3] ?? 'src/infrastructure/database/videoWorkoutCatalog.json';
+const approvedIds = new Set(JSON.parse(await fs.readFile(new URL('./approved-video-workout-ids.json', import.meta.url), 'utf8')));
 
 if (!inputPath) {
   throw new Error('Usage: node scripts/build-video-catalog.mjs <workout_catalog.csv> [output.json]');
@@ -113,7 +114,7 @@ const videos = records
       focus: record.focus.trim(),
       publishedText: record.published.trim(),
       contentKind: kind,
-      wodEligible: ['follow_along', 'mobility'].includes(kind) && seconds > 9 * 60
+      wodEligible: approvedIds.has(youtubeId)
     };
   })
   .filter((video) => {
@@ -121,6 +122,19 @@ const videos = records
     seen.add(video.youtubeVideoId);
     return true;
   });
+
+const catalogIds = new Set(videos.map((video) => video.youtubeVideoId));
+const missingApprovals = [...approvedIds].filter((id) => !catalogIds.has(id));
+if (missingApprovals.length) {
+  throw new Error(`Approved videos missing from the source catalog: ${missingApprovals.join(', ')}`);
+}
+
+const invalidDurations = videos.filter(
+  (video) => video.wodEligible && (video.durationSeconds < 20 * 60 || video.durationSeconds > 35 * 60)
+);
+if (invalidDurations.length) {
+  throw new Error(`Approved videos outside the 20–35 minute window: ${invalidDurations.map((video) => video.youtubeVideoId).join(', ')}`);
+}
 
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await fs.writeFile(outputPath, `${JSON.stringify(videos, null, 2)}\n`);

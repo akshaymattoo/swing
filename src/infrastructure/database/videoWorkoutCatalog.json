@@ -10,7 +10,7 @@
     "focus": "full body, HIIT, kettlebell",
     "publishedText": "11d ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-eUrYcHQcf4o",
@@ -62,7 +62,7 @@
     "focus": "mobility, stretching, bodyweight",
     "publishedText": "5mo ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_uZiAGXES0M",
@@ -88,7 +88,7 @@
     "focus": "conditioning, HIIT, kettlebell",
     "publishedText": "6mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-gsnDOsLG0cU",
@@ -296,7 +296,7 @@
     "focus": "shoulder rehab, mobility, kettlebell",
     "publishedText": "2y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-k3v0SKIKCkA",
@@ -413,7 +413,7 @@
     "focus": "posture, mobility, kettlebell",
     "publishedText": "3y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VjIj3EYFbbA",
@@ -647,7 +647,7 @@
     "focus": "yoga, mobility, mental health",
     "publishedText": "4y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-P2zirl44fHg",
@@ -712,7 +712,7 @@
     "focus": "full body, yoga",
     "publishedText": "4y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-DZkl3FrXudo",
@@ -725,7 +725,7 @@
     "focus": "pain relief, yoga",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-aYtgF-5IrH4",
@@ -751,7 +751,7 @@
     "focus": "yoga, mobility",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-uItfLNgG-64",
@@ -790,7 +790,7 @@
     "focus": "yoga, mobility",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-OHDGgsYlXVM",
@@ -803,7 +803,7 @@
     "focus": "mobility, full body",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WM3rX1U8bUU",
@@ -855,7 +855,7 @@
     "focus": "upper body, yoga, bodyweight",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-7rN82eBJRPs",
@@ -881,7 +881,7 @@
     "focus": "yoga, recovery",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-QVaJV3-v4Fc",
@@ -907,7 +907,7 @@
     "focus": "mobility, yoga",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-F2LeFbQUttk",
@@ -920,7 +920,7 @@
     "focus": "yoga, flexibility",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-oTRGJIJ5xXc",
@@ -959,7 +959,7 @@
     "focus": "abs, mobility, yoga",
     "publishedText": "5y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VQI5udon8_I",
@@ -972,7 +972,7 @@
     "focus": "yoga, hips",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-NghhN9i4gPA",
@@ -998,7 +998,7 @@
     "focus": "yoga, mobility",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-K6B06F6Rj10",
@@ -1011,7 +1011,7 @@
     "focus": "yoga",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-szgSjqToi6c",
@@ -1024,7 +1024,7 @@
     "focus": "mobility, stretching",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-w-yKVCtWwmY",
@@ -1037,7 +1037,7 @@
     "focus": "hips, yoga",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Z8J7e74y2CQ",
@@ -1050,7 +1050,7 @@
     "focus": "mobility, stretching",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-haaUDAFzK7I",
@@ -1076,7 +1076,7 @@
     "focus": "yoga, mobility",
     "publishedText": "6y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-71QGXmGlT5E",
@@ -1089,7 +1089,7 @@
     "focus": "full body, AMRAP; kettlebell",
     "publishedText": "2 weeks ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Kqvro34vHQg",
@@ -1128,7 +1128,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WYsqVnAh9JM",
@@ -1141,7 +1141,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-N5B3eJaafss",
@@ -1154,7 +1154,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-88iz9iJg3AI",
@@ -1206,7 +1206,7 @@
     "focus": "full body, conditioning, AMRAP; kettlebell",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-mh17NBoUQOY",
@@ -1258,7 +1258,7 @@
     "focus": "full body, EMOM; kettlebell",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JQwC5AWvkOo",
@@ -1271,7 +1271,7 @@
     "focus": "full body, complex; kettlebell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-T4cKnf704JE",
@@ -1284,7 +1284,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-tlQ7ZFyMVrQ",
@@ -1310,7 +1310,7 @@
     "focus": "full body, combos, fat burn; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZKib2fTmK20",
@@ -1323,7 +1323,7 @@
     "focus": "full body, EMOM; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-D9opLq-Bum4",
@@ -1336,7 +1336,7 @@
     "focus": "full body, fat burn; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-trYCf-wd_BA",
@@ -1349,7 +1349,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-k0Lph1Z7AMA",
@@ -1362,7 +1362,7 @@
     "focus": "cardio, abs/core; kettlebell (single)",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fD1K7QuZQ8Q",
@@ -1375,7 +1375,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZB56-0sF79E",
@@ -1401,7 +1401,7 @@
     "focus": "cardio, abs/core; kettlebell",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WeK3hpTcLX8",
@@ -1414,7 +1414,7 @@
     "focus": "legs, push, EMOM; bodyweight",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-j8TWlRnuczs",
@@ -1427,7 +1427,7 @@
     "focus": "full body, combos, EMOM; kettlebell",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-nCWPyabRZh0",
@@ -1440,7 +1440,7 @@
     "focus": "cardio, strength; kettlebell, bike, medicine ball",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-exZbcBon32c",
@@ -1453,7 +1453,7 @@
     "focus": "upper body, strength, fat burn, EMOM; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AS3PCJLzLGA",
@@ -1479,7 +1479,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZVPyj_yF91A",
@@ -1492,7 +1492,7 @@
     "focus": "full body, combos; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-KfxL4pu96_A",
@@ -1505,7 +1505,7 @@
     "focus": "full body, EMOM; kettlebell (single)",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2_r3KiBa_Eo",
@@ -1518,7 +1518,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-f6Osm0LwpMY",
@@ -1531,7 +1531,7 @@
     "focus": "full body, EMOM; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9DqStnh809A",
@@ -1544,7 +1544,7 @@
     "focus": "full body, deck of cards; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-lNWJZ0KKGsw",
@@ -1622,7 +1622,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-YZYvsyBoicQ",
@@ -1648,7 +1648,7 @@
     "focus": "cardio, complex; kettlebell (single)",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_d6CNdTVNbY",
@@ -1661,7 +1661,7 @@
     "focus": "cardio; kettlebell (single)",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-z507hyljRUI",
@@ -1674,7 +1674,7 @@
     "focus": "strength; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-iEVIDNFY2p4",
@@ -1687,7 +1687,7 @@
     "focus": "strength, muscle; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9EbzbtcqqRs",
@@ -1700,7 +1700,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-TNpIY6KuKZs",
@@ -1752,7 +1752,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-w4gMWHVBlYU",
@@ -1778,7 +1778,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-J5eLVyBnJVc",
@@ -1791,7 +1791,7 @@
     "focus": "full body, EMOM; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-u2GdpkpNoZw",
@@ -1804,7 +1804,7 @@
     "focus": "complex, combos; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-BpoEJbaKISE",
@@ -1817,7 +1817,7 @@
     "focus": "full body, fat burn; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-zWxfUbNxHRs",
@@ -1830,7 +1830,7 @@
     "focus": "cardio, strength, complex, intervals; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GKvfRfEzpOg",
@@ -1843,7 +1843,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-atWHg-i1AUo",
@@ -1856,7 +1856,7 @@
     "focus": "full body, bodyweight; kettlebell, bodyweight",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZPCtwZWNpp4",
@@ -1869,7 +1869,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-w0JIXCc3Lno",
@@ -1882,7 +1882,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-y-u3vid4rOU",
@@ -1947,7 +1947,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-nVb08fcwRZg",
@@ -1960,7 +1960,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-qpDiJvHz4nA",
@@ -1973,7 +1973,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-YCNERxba7XU",
@@ -1986,7 +1986,7 @@
     "focus": "legs/lower body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--Q1lIzhT_kY",
@@ -2038,7 +2038,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-s36VifsmpoM",
@@ -2051,7 +2051,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-3mpW3QPaJJ4",
@@ -2064,7 +2064,7 @@
     "focus": "full body, ladders; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_jTRhgd8nNY",
@@ -2077,7 +2077,7 @@
     "focus": "full body, intervals; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-yk80ZcdqKwY",
@@ -2090,7 +2090,7 @@
     "focus": "full body, fat burn; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-gu6P-VNpLGU",
@@ -2116,7 +2116,7 @@
     "focus": "AMRAP; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-XVNEr8n-2bs",
@@ -2129,7 +2129,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-mgGNj2EFmQ0",
@@ -2142,7 +2142,7 @@
     "focus": "muscle, supersets; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9fIARoN-2Ow",
@@ -2155,7 +2155,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-sDs6YGb_lF4",
@@ -2168,7 +2168,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-03SStuTux3c",
@@ -2181,7 +2181,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2Anw9h0xU3w",
@@ -2194,7 +2194,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WXzqlHmJmPo",
@@ -2207,7 +2207,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-s_zdTAkszhw",
@@ -2220,7 +2220,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-8zBG-eTAVvI",
@@ -2246,7 +2246,7 @@
     "focus": "HIIT; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-CyKt28eGSYE",
@@ -2259,7 +2259,7 @@
     "focus": "HIIT; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-gBSc-EgHlQc",
@@ -2272,7 +2272,7 @@
     "focus": "full body, fat burn; kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-NncBCEvVFxA",
@@ -2285,7 +2285,7 @@
     "focus": "full body, cardio; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-aTRBs_X119A",
@@ -2298,7 +2298,7 @@
     "focus": "full body, chipper; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-dA6xBLAENXY",
@@ -2311,7 +2311,7 @@
     "focus": "HIIT; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JayvrrXJPlQ",
@@ -2324,7 +2324,7 @@
     "focus": "ladders, for time; double kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-qg7z_BG4FC8",
@@ -2337,7 +2337,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EFAQrx0um5k",
@@ -2350,7 +2350,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ahdzk8Smn-E",
@@ -2376,7 +2376,7 @@
     "focus": "full body; kettlebell",
     "publishedText": "3 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-8DtxS8uAwBA",
@@ -2402,7 +2402,7 @@
     "focus": "mobility, beginner; kettlebell",
     "publishedText": "2 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jeRYegot0iU",
@@ -2415,7 +2415,7 @@
     "focus": "full body, strength, conditioning; kettlebell",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EzEDp_OK9pg",
@@ -2428,7 +2428,7 @@
     "focus": "full body, interview; kettlebell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-QsP5eapiX4c",
@@ -2454,7 +2454,7 @@
     "focus": "full body, weekly program; kettlebell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-8mVIk1xHmCk",
@@ -2480,7 +2480,7 @@
     "focus": "full body, beginner; kettlebell",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-eyV0Pp0NgCM",
@@ -2610,7 +2610,7 @@
     "focus": "mobility, functional fitness, interview; kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-XjvOTaim8Ac",
@@ -2753,7 +2753,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-bhm87hY_kJA",
@@ -2766,7 +2766,7 @@
     "focus": "mobility, bodyweight",
     "publishedText": "7 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-mxgqypWxyEw",
@@ -2792,7 +2792,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-zgNuknf1Mss",
@@ -2818,7 +2818,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-qUN9ERPe9Hg",
@@ -2870,7 +2870,7 @@
     "focus": "legs, kettlebell",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-froKdalYEaA",
@@ -2909,7 +2909,7 @@
     "focus": "mobility",
     "publishedText": "9 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-x_i9WSgKbTg",
@@ -3065,7 +3065,7 @@
     "focus": "full body, conditioning",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-4XYeqP998H8",
@@ -3156,7 +3156,7 @@
     "focus": "mobility",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ExuJgRMuuG8",
@@ -3208,7 +3208,7 @@
     "focus": "full body, muscle building, power",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-eixeUuTQqQg",
@@ -3234,7 +3234,7 @@
     "focus": "HIIT, core, cardio",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-xrpoQgkMZaQ",
@@ -3247,7 +3247,7 @@
     "focus": "legs, muscle building",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-xE-xWNtjdzI",
@@ -3273,7 +3273,7 @@
     "focus": "full body",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-sbfeCAScV9g",
@@ -3325,7 +3325,7 @@
     "focus": "core, kettlebell",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Jv0Fl11dSWo",
@@ -3351,7 +3351,7 @@
     "focus": "full body, EMOM, conditioning",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-clCMY3ci67U",
@@ -3390,7 +3390,7 @@
     "focus": "daily routine, mobility",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AJGIYUhnBPc",
@@ -3429,7 +3429,7 @@
     "focus": "full body, at-home",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-PuNXJdSTvPA",
@@ -3442,7 +3442,7 @@
     "focus": "full body, AMRAP, kettlebell, bodyweight",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-eRyAo_f8itU",
@@ -3455,7 +3455,7 @@
     "focus": "EMOM, fat loss, conditioning",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-kuIMyN99b5c",
@@ -3507,7 +3507,7 @@
     "focus": "upper body, EMOM",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-CUZRUJfLxFs",
@@ -3585,7 +3585,7 @@
     "focus": "abs, Tabata, HIIT",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-UrRJ76GBibE",
@@ -3598,7 +3598,7 @@
     "focus": "EMOM, fat loss, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-IMWIj3W6CKs",
@@ -3611,7 +3611,7 @@
     "focus": "mobility, core",
     "publishedText": "2 years ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-F7ionrDuzyQ",
@@ -3624,7 +3624,7 @@
     "focus": "full body, muscle building, conditioning",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-6ylJupF-U9Y",
@@ -3754,7 +3754,7 @@
     "focus": "legs, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JuD-7n9qQjU",
@@ -3767,7 +3767,7 @@
     "focus": "full body, kettlebell, bodyweight",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-S6arhnLsykM",
@@ -3780,7 +3780,7 @@
     "focus": "upper body, muscle building",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Sro3_irZjKg",
@@ -3793,7 +3793,7 @@
     "focus": "legs, muscle building",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-36yduztuGwE",
@@ -3806,7 +3806,7 @@
     "focus": "core, mobility",
     "publishedText": "2 years ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-NyvhQObbRPs",
@@ -3819,7 +3819,7 @@
     "focus": "full body, muscle building",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GVbo-CblDlQ",
@@ -3832,7 +3832,7 @@
     "focus": "core, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-rpNXqN7dZuE",
@@ -3962,7 +3962,7 @@
     "focus": "legs, muscle building, kettlebell",
     "publishedText": "2 years ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-N1gI1FuOxJg",
@@ -3988,7 +3988,7 @@
     "focus": "full body, morning routine, kettlebell",
     "publishedText": "2w ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-8mRJi6KiVSA",
@@ -4092,7 +4092,7 @@
     "focus": "upper body, arms, shoulders, kettlebell",
     "publishedText": "2mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-QcAYRsO-lr0",
@@ -4105,7 +4105,7 @@
     "focus": "full body, double kettlebell",
     "publishedText": "3mo ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-74A14jg0hLc",
@@ -4118,7 +4118,7 @@
     "focus": "full body, muscle, kettlebell",
     "publishedText": "3mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-CBv-znGHLAE",
@@ -4157,7 +4157,7 @@
     "focus": "upper body, kettlebell",
     "publishedText": "4mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-55daX2zZE6A",
@@ -4170,7 +4170,7 @@
     "focus": "app review, kettlebell",
     "publishedText": "4mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-tuadAsJESUw",
@@ -4183,7 +4183,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "4mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fc9QcWt76jY",
@@ -4196,7 +4196,7 @@
     "focus": "full body, beginners, kettlebell",
     "publishedText": "4mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Ypyv4F4xinE",
@@ -4209,7 +4209,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-skddXinR_Os",
@@ -4222,7 +4222,7 @@
     "focus": "HIIT, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ex6qJDzSxjA",
@@ -4235,7 +4235,7 @@
     "focus": "legs, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Te7gusNLGG0",
@@ -4248,7 +4248,7 @@
     "focus": "upper body, shoulders, arms, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ecvLEAnwa6o",
@@ -4261,7 +4261,7 @@
     "focus": "full body, beginners, kettlebell",
     "publishedText": "5mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AsX42CN-3Zw",
@@ -4287,7 +4287,7 @@
     "focus": "upper body, kettlebell",
     "publishedText": "9mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-t5eH4t-kx30",
@@ -4300,7 +4300,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "9mo ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-l289rz-5C1U",
@@ -4313,7 +4313,7 @@
     "focus": "full body, fat burn, kettlebell",
     "publishedText": "9mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-C6440zXVqxE",
@@ -4326,7 +4326,7 @@
     "focus": "HIIT, double kettlebell",
     "publishedText": "9mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-639WOVGrB00",
@@ -4339,7 +4339,7 @@
     "focus": "upper body, core, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_3gItTyoH_c",
@@ -4352,7 +4352,7 @@
     "focus": "legs, fat burn, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-TMFZgUKTmFw",
@@ -4365,7 +4365,7 @@
     "focus": "full body, beginners, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_9SzxrY4qMU",
@@ -4378,7 +4378,7 @@
     "focus": "shoulders, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VmTtJCWiG9M",
@@ -4404,7 +4404,7 @@
     "focus": "full body, strength, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-67414_kI90o",
@@ -4417,7 +4417,7 @@
     "focus": "full body, interval, kettlebell",
     "publishedText": "10mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Gz4u5S6hCJ4",
@@ -4443,7 +4443,7 @@
     "focus": "upper body, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2wAqIuEJeEE",
@@ -4456,7 +4456,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-15DcyAAuxZY",
@@ -4469,7 +4469,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-s_zeRFD0PjQ",
@@ -4482,7 +4482,7 @@
     "focus": "legs, HIIT, fat burn, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EHKQGr4tmZc",
@@ -4495,7 +4495,7 @@
     "focus": "full body, strength, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jpoV57Au_GI",
@@ -4508,7 +4508,7 @@
     "focus": "upper body, muscle, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-oYAvu48Tyf0",
@@ -4521,7 +4521,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "11mo ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EVvk1k4oC6s",
@@ -4534,7 +4534,7 @@
     "focus": "HIIT, endurance, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-FcZZNfY1ze8",
@@ -4547,7 +4547,7 @@
     "focus": "full body, HIIT, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-r7Cai4mKylY",
@@ -4560,7 +4560,7 @@
     "focus": "full body, muscle, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-itUHtsOyW7w",
@@ -4573,7 +4573,7 @@
     "focus": "abs, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-y7P5GqTevug",
@@ -4586,7 +4586,7 @@
     "focus": "abs, core, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-yFhZiZvkits",
@@ -4599,7 +4599,7 @@
     "focus": "full body, interval, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-qwXj6NYxR6c",
@@ -4612,7 +4612,7 @@
     "focus": "full body, interval, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-NjTcN468d4o",
@@ -4638,7 +4638,7 @@
     "focus": "full body, beginners, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-wLtlY8WKDIE",
@@ -4651,7 +4651,7 @@
     "focus": "full body, HIIT, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-FAxOewvZqcc",
@@ -4664,7 +4664,7 @@
     "focus": "full body, muscle, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jnJzNbtuR2Y",
@@ -4677,7 +4677,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-X05bgBBo9bY",
@@ -4690,7 +4690,7 @@
     "focus": "upper body, core, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-r8GZgBDoT3c",
@@ -4703,7 +4703,7 @@
     "focus": "full body, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-487rBGHcLTw",
@@ -4716,7 +4716,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-g7qZVAKtkU4",
@@ -4755,7 +4755,7 @@
     "focus": "full body, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-BYUd_yBUIro",
@@ -4833,7 +4833,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--8nQlIFKP0k",
@@ -4859,7 +4859,7 @@
     "focus": "full body, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-DP0WsooYZrg",
@@ -4872,7 +4872,7 @@
     "focus": "full body, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-gGGqczK_2ag",
@@ -4885,7 +4885,7 @@
     "focus": "legs, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-pKOlcNhOfjQ",
@@ -4898,7 +4898,7 @@
     "focus": "abs, core, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ABaTlcLokrs",
@@ -4911,7 +4911,7 @@
     "focus": "core, biceps, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-eD1KXYnJ_4k",
@@ -4924,7 +4924,7 @@
     "focus": "full body, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fEt7I_nwS3E",
@@ -4937,7 +4937,7 @@
     "focus": "full body, muscle, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--kNs1BvwR18",
@@ -4950,7 +4950,7 @@
     "focus": "full body, EMOM, fat burn, muscle, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_FjAmtDWfEc",
@@ -4976,7 +4976,7 @@
     "focus": "full body, beginners, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EtJeLriz1_g",
@@ -4989,7 +4989,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-MW0AKoYhBu4",
@@ -5002,7 +5002,7 @@
     "focus": "full body, EMOM, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-E7V6o3a0Cso",
@@ -5015,7 +5015,7 @@
     "focus": "HIIT, fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-h5_aQOzSLWg",
@@ -5028,7 +5028,7 @@
     "focus": "full body, strength, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Kin2i1UAXhA",
@@ -5041,7 +5041,7 @@
     "focus": "full body, strength, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Tt_F7wBDLBU",
@@ -5054,7 +5054,7 @@
     "focus": "core, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-cvEDfLHmJcg",
@@ -5080,7 +5080,7 @@
     "focus": "full body, HIIT, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Y5kZhmZ_ffA",
@@ -5093,7 +5093,7 @@
     "focus": "full body, beginners, toning, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-qsD6htNzBNE",
@@ -5106,7 +5106,7 @@
     "focus": "back, biceps, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AgsNpm8pcko",
@@ -5119,7 +5119,7 @@
     "focus": "swing technique, beginners, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-CwFRexFph90",
@@ -5132,7 +5132,7 @@
     "focus": "full body, EMOM, strength, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GA5OsOo64Lw",
@@ -5145,7 +5145,7 @@
     "focus": "arms, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-4U207ZJ1qaE",
@@ -5158,7 +5158,7 @@
     "focus": "fat burn, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--ELitjgwhj4",
@@ -5171,7 +5171,7 @@
     "focus": "beginners, toning, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-LunxhG26y4Y",
@@ -5184,7 +5184,7 @@
     "focus": "shoulders, toning, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-kDwAdwC47f0",
@@ -5197,7 +5197,7 @@
     "focus": "legs, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-URJXyYReiyg",
@@ -5210,7 +5210,7 @@
     "focus": "full body, strength, kettlebell",
     "publishedText": "1y ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Cs0IhlJCuk0",
@@ -5223,7 +5223,7 @@
     "focus": "HIIT, full body, no equipment",
     "publishedText": "1 day ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZMSi8VeTGZU",
@@ -5249,7 +5249,7 @@
     "focus": "HIIT, tabata, full body",
     "publishedText": "12 days ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-p4MJlNbjPLw",
@@ -5262,7 +5262,7 @@
     "focus": "full body, strength",
     "publishedText": "2 weeks ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-IUQpPzAs-c8",
@@ -5301,7 +5301,7 @@
     "focus": "legs, strength, no equipment",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WM0gdj0hfUA",
@@ -5314,7 +5314,7 @@
     "focus": "full body, calisthenics, no equipment",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-G1RVPkcGuao",
@@ -5327,7 +5327,7 @@
     "focus": "full body, calisthenics, no equipment",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-cM6DB0S7Dso",
@@ -5418,7 +5418,7 @@
     "focus": "HIIT, full body, no equipment",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Rug3mkCLoo8",
@@ -5431,7 +5431,7 @@
     "focus": "full body, calisthenics, no equipment",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AqJbHRhYlgo",
@@ -5444,7 +5444,7 @@
     "focus": "full body, calisthenics, no equipment",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ZHLFDnFDt8I",
@@ -5457,7 +5457,7 @@
     "focus": "full body, strength, dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fDaLgyp4a7A",
@@ -5535,7 +5535,7 @@
     "focus": "full body, strength, dumbbell, dance music",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-oFP5buFFvBo",
@@ -5561,7 +5561,7 @@
     "focus": "full body, no equipment, celebration",
     "publishedText": "5 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Vie37fgQgg4",
@@ -5600,7 +5600,7 @@
     "focus": "HIIT, tabata, no equipment",
     "publishedText": "5 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-30gbUZAIQLQ",
@@ -5665,7 +5665,7 @@
     "focus": "HIIT, cardio, no equipment, music",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-S1GKOQIIjbs",
@@ -5743,7 +5743,7 @@
     "focus": "full body, HIIT, beginner, standing",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-bbHoGxckbyk",
@@ -5769,7 +5769,7 @@
     "focus": "mobility, stretch, recovery",
     "publishedText": "8 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jexpqjUGhUw",
@@ -5795,7 +5795,7 @@
     "focus": "challenge, HIIT",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-RVVE7Jpmq-E",
@@ -5808,7 +5808,7 @@
     "focus": "yoga, mobility, strength",
     "publishedText": "8 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-wt2eAw4hBzU",
@@ -5834,7 +5834,7 @@
     "focus": "HIIT, tabata, no equipment",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-imqNy1Iq1YM",
@@ -5886,7 +5886,7 @@
     "focus": "HIIT, tabata, no equipment, music",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--qHK9hOaD2E",
@@ -5899,7 +5899,7 @@
     "focus": "pilates, low impact, no equipment",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jDflawOlIU0",
@@ -5912,7 +5912,7 @@
     "focus": "abs, core, no equipment",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fDLFyKXL7M8",
@@ -5938,7 +5938,7 @@
     "focus": "abs, core, live",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-fYui_sqilSY",
@@ -5951,7 +5951,7 @@
     "focus": "pilates, low impact, no equipment",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_ELc8XArK-8",
@@ -5964,7 +5964,7 @@
     "focus": "pilates, low impact, no equipment, live",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-dS-uud0SJjU",
@@ -5977,7 +5977,7 @@
     "focus": "full body, no equipment",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Jjkd3qK54WI",
@@ -5990,7 +5990,7 @@
     "focus": "glutes, live",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-TS4PvvsfAY8",
@@ -6003,7 +6003,7 @@
     "focus": "pilates, low impact, full body, no equipment",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-LVuW4Kk7f2I",
@@ -6016,7 +6016,7 @@
     "focus": "pilates, low impact, live",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-CzrDRNcE45Y",
@@ -6029,7 +6029,7 @@
     "focus": "arms, upper body, standing, dumbbell",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-acQ2F-smuhc",
@@ -6042,7 +6042,7 @@
     "focus": "pilates, low impact, no equipment",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-vK7O93Ujd8k",
@@ -6055,7 +6055,7 @@
     "focus": "full body, beginner, no equipment",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-lH0p5oQvTDY",
@@ -6081,7 +6081,7 @@
     "focus": "HIIT, full body, no equipment, music",
     "publishedText": "11 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-5L4GyE4J5h8",
@@ -6107,7 +6107,7 @@
     "focus": "HIIT, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-ToE4mjc8nPQ",
@@ -6120,7 +6120,7 @@
     "focus": "abs, core, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-xOfrC7Gxdcs",
@@ -6133,7 +6133,7 @@
     "focus": "HIIT, low impact, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-52dmCYJY0-o",
@@ -6159,7 +6159,7 @@
     "focus": "legs, tabata, HIIT",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-EfYbelxNKfQ",
@@ -6172,7 +6172,7 @@
     "focus": "HIIT, full body",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-8jfwT8mjvX4",
@@ -6185,7 +6185,7 @@
     "focus": "yoga, mobility",
     "publishedText": "1 year ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-lLvnySSeo38",
@@ -6198,7 +6198,7 @@
     "focus": "HIIT, tabata",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9z1d9g_rnQg",
@@ -6211,7 +6211,7 @@
     "focus": "abs, core, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-tJhPtfnZIg0",
@@ -6237,7 +6237,7 @@
     "focus": "upper body, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Ug5GUkwRRiQ",
@@ -6250,7 +6250,7 @@
     "focus": "legs, strength",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-bNViKEErW2c",
@@ -6263,7 +6263,7 @@
     "focus": "HIIT, abs",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-hzah2-d5cI0",
@@ -6276,7 +6276,7 @@
     "focus": "abs, core, glutes, live",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-AC1IyT4FB-8",
@@ -6328,7 +6328,7 @@
     "focus": "upper body, strength, live",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-1w9qQKl4VWY",
@@ -6341,7 +6341,7 @@
     "focus": "HIIT, tabata, full body, no equipment, music",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-V0TtDmsbwYc",
@@ -6367,7 +6367,7 @@
     "focus": "abs, core, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2fDRdWo9eZQ",
@@ -6380,7 +6380,7 @@
     "focus": "pilates, full body, live",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-c1JJr6OTUlE",
@@ -6393,7 +6393,7 @@
     "focus": "pilates, strength, full body, dumbbell, resistance band",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-BjwvWBbWHh8",
@@ -6419,7 +6419,7 @@
     "focus": "HIIT, full body, no equipment",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-uMXOG2N2Yeg",
@@ -6458,7 +6458,7 @@
     "focus": "HIIT, full body, no equipment, music",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GCrwvk73Hgw",
@@ -6510,7 +6510,7 @@
     "focus": "HIIT, full body, no equipment, music",
     "publishedText": "1 year ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-U7zbNz4hhqY",
@@ -6523,7 +6523,7 @@
     "focus": "full body, strength & conditioning | dumbbell",
     "publishedText": "17 hours ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--tiS9nZsUG0",
@@ -6549,7 +6549,7 @@
     "focus": "full body, strength | kettlebell",
     "publishedText": "13 days ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-xv4IXh5heZQ",
@@ -6562,7 +6562,7 @@
     "focus": "full body, strength & conditioning | dumbbell",
     "publishedText": "2 weeks ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JN7UEd-yO68",
@@ -6575,7 +6575,7 @@
     "focus": "full body, hybrid, strength & conditioning | dumbbell",
     "publishedText": "3 weeks ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-32srVzgDIuY",
@@ -6588,7 +6588,7 @@
     "focus": "full body, strength & conditioning | kettlebell",
     "publishedText": "4 weeks ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-wIu8LkQpoj4",
@@ -6601,7 +6601,7 @@
     "focus": "full body, boxing, cardio | bodyweight",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-27lu9Y22Ia4",
@@ -6614,7 +6614,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VRF9V6fg5nc",
@@ -6627,7 +6627,7 @@
     "focus": "pilates, lower body, core | bodyweight",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-a-TIzSnms9k",
@@ -6640,7 +6640,7 @@
     "focus": "full body, AMRAP, strength | dumbbell",
     "publishedText": "1 month ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9SRJW61vQGs",
@@ -6653,7 +6653,7 @@
     "focus": "yoga, mobility, recovery | bodyweight",
     "publishedText": "2 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-3u9cp-Fkrmo",
@@ -6666,7 +6666,7 @@
     "focus": "full body, pilates, strength | bodyweight",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-SJOWH0HfbUw",
@@ -6679,7 +6679,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-lVlOWzdiX8o",
@@ -6692,7 +6692,7 @@
     "focus": "full body, HIIT, calisthenics | bodyweight",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-cfuRNy01kLQ",
@@ -6705,7 +6705,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "2 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_kLWcTWE05Y",
@@ -6731,7 +6731,7 @@
     "focus": "full body, tabata, HIIT | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-SQnWerpmkyQ",
@@ -6744,7 +6744,7 @@
     "focus": "pilates, cardio | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VlOlR7fo5HQ",
@@ -6757,7 +6757,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-A2Ju3QD_3FA",
@@ -6770,7 +6770,7 @@
     "focus": "full body, calisthenics, cardio | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-D49D_WHruHg",
@@ -6783,7 +6783,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-O_Ql5XqiiVA",
@@ -6796,7 +6796,7 @@
     "focus": "lower body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-HMW_JWFKvfg",
@@ -6809,7 +6809,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-j9jG4kPnVi0",
@@ -6822,7 +6822,7 @@
     "focus": "full body, strength, low impact | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-GjkoZbXW_Co",
@@ -6835,7 +6835,7 @@
     "focus": "pilates, core, mobility | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2JxdRCHP-lc",
@@ -6848,7 +6848,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-H-YJdvCUTfc",
@@ -6861,7 +6861,7 @@
     "focus": "full body, calisthenics | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-3JAZOfkZjnc",
@@ -6874,7 +6874,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-9FeahTJ7KQM",
@@ -6887,7 +6887,7 @@
     "focus": "lower body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-t6ank29EthI",
@@ -6900,7 +6900,7 @@
     "focus": "pilates, cardio | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-zk5bsKiujsE",
@@ -6913,7 +6913,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--gjkQpishM0",
@@ -6926,7 +6926,7 @@
     "focus": "full body, calisthenics, cardio | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-4qt5Bpdc05o",
@@ -6939,7 +6939,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-hb9MxM_E1x0",
@@ -6952,7 +6952,7 @@
     "focus": "lower body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-jOgPZx5FGZM",
@@ -6965,7 +6965,7 @@
     "focus": "full body, cardio, HIIT | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-S91QgljYwUI",
@@ -6991,7 +6991,7 @@
     "focus": "pilates, core, mobility | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-FtyzcIbsK4M",
@@ -7004,7 +7004,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Milh1YeGcxI",
@@ -7017,7 +7017,7 @@
     "focus": "full body, calisthenics | bodyweight",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JL7yxuIu7JI",
@@ -7030,7 +7030,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-WXIPFBK0l5k",
@@ -7043,7 +7043,7 @@
     "focus": "lower body, strength | dumbbell",
     "publishedText": "3 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-aXmLboGjSfk",
@@ -7069,7 +7069,7 @@
     "focus": "full body, cardio, HIIT | dumbbell (light)",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VSh9irsk-xw",
@@ -7082,7 +7082,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-51NVfZn2sw8",
@@ -7095,7 +7095,7 @@
     "focus": "lower body, glutes, strength | dumbbell",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-wO0At4e4REM",
@@ -7108,7 +7108,7 @@
     "focus": "full body, hybrid, strength | dumbbell",
     "publishedText": "4 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Q7mxYIxLTo4",
@@ -7121,7 +7121,7 @@
     "focus": "mobility, activation | bodyweight",
     "publishedText": "5 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-kTToZ5FJ3nI",
@@ -7147,7 +7147,7 @@
     "focus": "mobility, full body, strength | dumbbell",
     "publishedText": "5 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-HbFXaP-w80s",
@@ -7186,7 +7186,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "5 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Ox5bC42RAOA",
@@ -7212,7 +7212,7 @@
     "focus": "full body, isometric, strength | bodyweight",
     "publishedText": "5 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-sBL_GLE0i5Y",
@@ -7225,7 +7225,7 @@
     "focus": "full body, pilates, strength | dumbbell",
     "publishedText": "5 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-2QgnFFjQAwU",
@@ -7238,7 +7238,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-VqAYpBA0usg",
@@ -7251,7 +7251,7 @@
     "focus": "pilates, HIIT | dumbbell (light)",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-uWSos7-cgKo",
@@ -7264,7 +7264,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-a81QxKOYLzo",
@@ -7277,7 +7277,7 @@
     "focus": "full body, AMRAP, HIIT | bodyweight",
     "publishedText": "6 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-tJX_COgvZkg",
@@ -7290,7 +7290,7 @@
     "focus": "pilates, calisthenics | bodyweight",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-bln2bS4bdjA",
@@ -7303,7 +7303,7 @@
     "focus": "lower body, glutes | dumbbell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-_Hub42PDNkg",
@@ -7329,7 +7329,7 @@
     "focus": "full body, hybrid, strength | dumbbell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-JCoeGac2tBw",
@@ -7342,7 +7342,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-QhiehNmY-h8",
@@ -7355,7 +7355,7 @@
     "focus": "full body, strength | kettlebell",
     "publishedText": "7 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-YaIVWbvt_P0",
@@ -7381,7 +7381,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-RlBAF17lml0",
@@ -7394,7 +7394,7 @@
     "focus": "pilates, mobility | bodyweight",
     "publishedText": "8 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-YrTwWRlw5pU",
@@ -7407,7 +7407,7 @@
     "focus": "full body, strength & conditioning | dumbbell",
     "publishedText": "8 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-vgrVHrcaGpg",
@@ -7420,7 +7420,7 @@
     "focus": "full body, cardio | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-UCbuP7AIBM4",
@@ -7433,7 +7433,7 @@
     "focus": "full body, strength & conditioning | dumbbell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-18TSVMuJmqo",
@@ -7446,7 +7446,7 @@
     "focus": "full body, strength & conditioning | dumbbell",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-uoFW3W9tHtk",
@@ -7459,7 +7459,7 @@
     "focus": "full body, tabata, HIIT | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-wSSbzujd70o",
@@ -7472,7 +7472,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-1kE5u_17-ws",
@@ -7485,7 +7485,7 @@
     "focus": "mobility, core | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-cNlelU7Jvjg",
@@ -7537,7 +7537,7 @@
     "focus": "upper body, strength | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-rr1WdowCaps",
@@ -7563,7 +7563,7 @@
     "focus": "full body, isometric | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-oN5wOpmuUvs",
@@ -7589,7 +7589,7 @@
     "focus": "full body, tabata, HIIT | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Wu2Agzaj6oI",
@@ -7602,7 +7602,7 @@
     "focus": "upper body, strength | bodyweight",
     "publishedText": "9 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube--7Y25yKDBdU",
@@ -7628,7 +7628,7 @@
     "focus": "pilates | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-sUsZThTnMXM",
@@ -7667,7 +7667,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-DHCpJwoxsP8",
@@ -7680,7 +7680,7 @@
     "focus": "upper body, strength | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-j-y8rAAVFK8",
@@ -7693,7 +7693,7 @@
     "focus": "mobility | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "mobility",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-yFov6heBAA8",
@@ -7732,7 +7732,7 @@
     "focus": "full body, tabata, HIIT | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-V8KZ_y-2aeU",
@@ -7745,7 +7745,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-hC79FHhkPdc",
@@ -7758,7 +7758,7 @@
     "focus": "upper body, strength | dumbbell",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-vVfmQZJvrEs",
@@ -7771,7 +7771,7 @@
     "focus": "full body, HIIT | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-t1DI8fRgwAc",
@@ -7784,7 +7784,7 @@
     "focus": "pilates | bodyweight",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-F0RHhTN2vcw",
@@ -7797,7 +7797,7 @@
     "focus": "full body, strength | dumbbell",
     "publishedText": "10 months ago",
     "contentKind": "follow_along",
-    "wodEligible": true
+    "wodEligible": false
   },
   {
     "id": "youtube-Vq8D_IALEX8",
