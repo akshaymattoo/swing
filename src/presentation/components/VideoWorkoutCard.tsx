@@ -26,7 +26,7 @@ export function VideoWorkoutCard({ workout, onOpen }: Props) {
       <Text style={styles.title} numberOfLines={3}>{workout.title}</Text>
       <Text style={styles.channel} numberOfLines={1}>{workout.channelName}</Text>
       <Text style={styles.focus} numberOfLines={2}>{workout.focus}</Text>
-      <ActionButton onPress={onOpen} style={styles.button}>Watch and work out</ActionButton>
+      <ActionButton onPress={onOpen} style={styles.button}>Workout of the day →</ActionButton>
     </View>
   );
 }

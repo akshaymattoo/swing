@@ -67,7 +67,6 @@ export function HomeScreen(props: Props) {
 
       {dailyWorkout ? (
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>WORKOUT OF THE DAY</Text>
           <VideoWorkoutCard workout={dailyWorkout} onOpen={() => void openDailyWorkout()} />
         </View>
       ) : null}
@@ -96,7 +95,6 @@ export function HomeScreen(props: Props) {
 
 const styles = StyleSheet.create({
   section: { gap: spacing.sm },
-  sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
   resume: { backgroundColor: colors.surfaceRaised, borderRadius: radii.md, padding: spacing.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   resumeKicker: { color: colors.work, fontSize: 11, fontWeight: '800', textTransform: 'uppercase' },
   resumeTitle: { color: colors.text, fontSize: 18, fontWeight: '900', marginTop: spacing.xs },
