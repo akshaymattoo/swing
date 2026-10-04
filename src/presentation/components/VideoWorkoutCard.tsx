@@ -15,11 +15,16 @@ type Props = {
 export function VideoWorkoutCard({ workout, onOpen }: Props) {
   return (
     <View style={styles.card}>
-      <Text style={styles.kicker}>
-        {equipmentLabel(workout.equipment)} · {formatDuration(workout.durationSeconds)}
-      </Text>
-      <Text style={styles.title}>{workout.title}</Text>
-      <Text style={styles.channel}>{workout.channelName}</Text>
+      <View style={styles.metadata}>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text>
+        </View>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{formatDuration(workout.durationSeconds)}</Text>
+        </View>
+      </View>
+      <Text style={styles.title} numberOfLines={3}>{workout.title}</Text>
+      <Text style={styles.channel} numberOfLines={1}>{workout.channelName}</Text>
       <Text style={styles.focus} numberOfLines={2}>{workout.focus}</Text>
       <ActionButton onPress={onOpen} style={styles.button}>Watch and work out</ActionButton>
     </View>
@@ -30,10 +35,17 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.featuredSurface,
     borderRadius: radii.lg,
-    padding: spacing.xl,
-    gap: spacing.xs
+    padding: spacing.lg,
+    gap: spacing.sm
   },
-  kicker: {
+  metadata: { flexDirection: 'row', gap: spacing.sm, flexWrap: 'wrap' },
+  badge: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm
+  },
+  badgeText: {
     color: colors.onFeatured,
     fontSize: 12,
     fontWeight: '800',
@@ -42,12 +54,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.onFeatured,
-    fontSize: 25,
-    lineHeight: 30,
-    fontWeight: '900',
+    fontSize: 20,
+    lineHeight: 25,
+    fontWeight: '800',
     marginTop: spacing.xs
   },
-  channel: { color: colors.featuredMuted, fontSize: 14, fontWeight: '800', marginTop: spacing.xs },
-  focus: { color: colors.featuredMuted, fontSize: 13, lineHeight: 19 },
-  button: { marginTop: spacing.md }
+  channel: { color: colors.featuredMuted, fontSize: 13, fontWeight: '700' },
+  focus: { color: colors.featuredMuted, fontSize: 12, lineHeight: 17 },
+  button: { marginTop: spacing.sm }
 });
