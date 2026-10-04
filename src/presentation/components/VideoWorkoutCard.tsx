@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View, type ImageSourcePropType } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { experienceConfig } from '../../config/experienceConfig';
 import type { VideoWorkout } from '../../domain/videoWorkout';
-import { equipmentEmoji, equipmentLabel, type Equipment } from '../../domain/workout';
+import { equipmentEmoji, equipmentLabel } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
+import { equipmentArtwork } from '../equipmentArtwork';
 import { formatDuration, formatVideoFocus } from '../formatters';
 import { ActionButton } from './Buttons';
 
@@ -20,13 +21,6 @@ export function VideoWorkoutCard({ workout, onOpen }: Props) {
 
   return <EditorialVideoWorkoutCard workout={workout} onOpen={onOpen} />;
 }
-
-const equipmentArtwork: Record<Equipment, ImageSourcePropType> = {
-  kettlebell: require('../../../assets/equipment/kettlebell.png'),
-  dumbbells: require('../../../assets/equipment/dumbbells.png'),
-  bands: require('../../../assets/equipment/bands.png'),
-  bodyweight: require('../../../assets/equipment/bodyweight.png')
-};
 
 function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
   return (

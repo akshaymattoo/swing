@@ -83,13 +83,14 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>
-            <Text style={styles.sectionLabel}>FEATURED WORKOUT</Text>
-            <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8}>
-              <Text style={styles.refresh}>↻ Refresh</Text>
+            <Text style={styles.sectionLabel}>TRY THIS ONE</Text>
+            <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
+              <Text style={styles.refreshIcon}>↻</Text>
+              <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
           </View>
           <FeaturedWorkoutCard workout={featuredWorkout} onStart={() => onStartWorkout(featuredWorkout)} />
-          <Text style={styles.sectionLabel}>MORE FROM THE VAULT</Text>
+          <Text style={styles.sectionLabel}>MORE WORKOUTS</Text>
           {remainingWorkouts.map(renderWorkout)}
         </>
       ) : workouts.length ? workouts.map(renderWorkout) : (
@@ -106,7 +107,10 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
 const styles = StyleSheet.create({
   featuredHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refresh: { color: colors.work, fontSize: 14, fontWeight: '800' },
+  refreshButton: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 999, borderWidth: 1, flexDirection: 'row', gap: 5, paddingHorizontal: spacing.md, paddingVertical: 7 },
+  refreshPressed: { opacity: 0.68 },
+  refreshIcon: { color: colors.primary, fontSize: 17, fontWeight: '900', lineHeight: 17 },
+  refresh: { color: colors.work, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 80, gap: spacing.md },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
   emptyCopy: { color: colors.textMuted, fontSize: 15, textAlign: 'center', lineHeight: 22 }

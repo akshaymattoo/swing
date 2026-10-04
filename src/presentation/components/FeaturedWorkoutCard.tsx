@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import type { WorkoutTemplate } from '../../domain/workout';
 import { equipmentLabel, intensityLabel, workoutDurationSeconds } from '../../domain/workout';
-import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
+import { equipmentArtwork } from '../equipmentArtwork';
 import { ActionButton } from './Buttons';
 import { formatDuration } from '../formatters';
 
@@ -15,15 +15,29 @@ type Props = {
 export function FeaturedWorkoutCard({ workout, onStart }: Props) {
   return (
     <View style={styles.card}>
-      <Text style={styles.kicker}>
-        {equipmentLabel(workout.equipment)} · {formatDuration(workoutDurationSeconds(workout))}
-      </Text>
-      <Text style={styles.title}>
-        {workout.emoji ? `${workout.emoji} ` : ''}{workout.name}
-      </Text>
-      <Text style={styles.meta}>
-        {intensityLabel(workout.intensity)} · {workout.rounds} rounds · {workout.exercises.length} movements
-      </Text>
+      <View pointerEvents="none" style={styles.sunDisc} />
+      <View style={styles.badges}>
+        <View style={[styles.badge, styles.equipmentBadge]}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
+        <View style={[styles.badge, styles.durationBadge]}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
+      </View>
+
+      <View style={styles.showcase}>
+        <View style={styles.metrics}>
+          <View style={styles.metric}>
+            <Text style={styles.metricValue}>{workout.rounds}</Text>
+            <Text style={styles.metricLabel}>Rounds</Text>
+          </View>
+          <View style={styles.metric}>
+            <Text style={styles.metricValue}>{workout.exercises.length}</Text>
+            <Text style={styles.metricLabel}>Movements</Text>
+          </View>
+        </View>
+        <Image accessibilityIgnoresInvertColors resizeMode="contain" source={equipmentArtwork[workout.equipment]} style={styles.artwork} />
+      </View>
+
+      <Text style={styles.nameLabel}>WORKOUT</Text>
+      <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
+      <Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text>
       <ActionButton onPress={onStart} style={styles.startButton}>Start workout</ActionButton>
     </View>
   );
@@ -31,29 +45,61 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.featuredSurface,
+    backgroundColor: '#FFC83D',
+    borderColor: '#153936',
     borderRadius: radii.lg,
-    padding: spacing.xl,
-    gap: spacing.xs
+    borderWidth: 3,
+    gap: spacing.sm,
+    overflow: 'hidden',
+    padding: spacing.lg
   },
-  kicker: {
-    color: colors.onFeatured,
-    fontSize: 12,
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: 0.8
-  },
-  title: {
-    color: colors.onFeatured,
-    fontSize: 27,
-    lineHeight: 32,
+  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
+  badge: { borderColor: '#153936', borderRadius: radii.pill, borderWidth: 2, paddingHorizontal: spacing.md, paddingVertical: 7 },
+  equipmentBadge: { backgroundColor: '#79D6CF' },
+  durationBadge: { backgroundColor: '#FFF7E3' },
+  badgeText: {
+    color: '#153936',
+    fontSize: 11,
     fontWeight: '900',
-    marginTop: spacing.xs
+    letterSpacing: 0.8,
+    textTransform: 'uppercase',
   },
-  meta: {
-    color: colors.featuredMuted,
-    fontSize: 14,
-    lineHeight: 20
+  showcase: { alignItems: 'center', flexDirection: 'row', minHeight: 112, zIndex: 1 },
+  metrics: { flex: 1, flexDirection: 'row', gap: spacing.sm },
+  metric: {
+    alignItems: 'center',
+    backgroundColor: '#FFF7E3',
+    borderColor: '#153936',
+    borderRadius: radii.md,
+    borderWidth: 2,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 78,
+    paddingHorizontal: spacing.xs
   },
-  startButton: { marginTop: spacing.md }
+  metricValue: { color: '#153936', fontSize: 30, fontWeight: '900', lineHeight: 34 },
+  metricLabel: { color: '#315B56', fontSize: 10, fontWeight: '900', letterSpacing: 0.5, textTransform: 'uppercase' },
+  artwork: { height: 116, marginRight: -12, width: 116 },
+  nameLabel: { color: '#55706D', fontSize: 10, fontWeight: '900', letterSpacing: 1.2, zIndex: 1 },
+  title: {
+    color: '#153936',
+    fontSize: 18,
+    fontWeight: '900',
+    lineHeight: 23,
+    zIndex: 1
+  },
+  intensity: { color: '#315B56', fontSize: 13, fontWeight: '800', zIndex: 1 },
+  startButton: { borderColor: '#153936', borderWidth: 2, marginTop: spacing.xs, zIndex: 1 },
+  sunDisc: {
+    backgroundColor: '#FF963D',
+    borderColor: '#153936',
+    borderRadius: 100,
+    borderWidth: 2,
+    height: 170,
+    opacity: 0.68,
+    position: 'absolute',
+    right: -60,
+    top: 42,
+    width: 170
+  }
 });
