@@ -4,7 +4,7 @@ import type { VideoWorkout } from '../../domain/videoWorkout';
 import { equipmentEmoji, equipmentLabel } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
-import { formatDuration } from '../formatters';
+import { formatDuration, formatVideoFocus } from '../formatters';
 import { ActionButton } from './Buttons';
 
 type Props = {
@@ -23,9 +23,8 @@ export function VideoWorkoutCard({ workout, onOpen }: Props) {
           <Text style={styles.badgeText}>{formatDuration(workout.durationSeconds)}</Text>
         </View>
       </View>
-      <Text style={styles.title} numberOfLines={3}>{workout.title}</Text>
-      <Text style={styles.channel} numberOfLines={1}>{workout.channelName}</Text>
-      <Text style={styles.focus} numberOfLines={2}>{workout.focus}</Text>
+      <Text style={styles.channel} numberOfLines={2}>{workout.channelName}</Text>
+      <Text style={styles.focus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
       <ActionButton onPress={onOpen} style={styles.button}>
         {equipmentEmoji(workout.equipment)} Workout of the day →
       </ActionButton>
@@ -54,14 +53,13 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.8
   },
-  title: {
+  channel: {
     color: colors.onFeatured,
     fontSize: 20,
     lineHeight: 25,
-    fontWeight: '800',
+    fontWeight: '900',
     marginTop: spacing.xs
   },
-  channel: { color: colors.featuredMuted, fontSize: 13, fontWeight: '700' },
-  focus: { color: colors.featuredMuted, fontSize: 12, lineHeight: 17 },
+  focus: { color: colors.featuredMuted, fontSize: 14, lineHeight: 20 },
   button: { marginTop: spacing.sm }
 });

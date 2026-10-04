@@ -23,6 +23,7 @@ import {
   MemoryWorkoutRepository
 } from '../src/infrastructure/memory/MemoryRepositories';
 import { swipeDeleteTarget } from '../src/presentation/components/swipeToDelete';
+import { formatVideoFocus } from '../src/presentation/formatters';
 import videoCatalog from '../src/infrastructure/database/videoWorkoutCatalog.json';
 import approvedVideoIds from '../scripts/approved-video-workout-ids.json';
 
@@ -269,6 +270,7 @@ async function videoCatalogTests() {
   equal(equipmentEmoji('kettlebell'), '🔔', 'kettlebells have a distinct action emoji');
   equal(equipmentEmoji('dumbbells'), '🏋️', 'dumbbells have a distinct action emoji');
   equal(equipmentEmoji('bands'), '〰️', 'bands have a distinct action emoji');
+  equal(formatVideoFocus('full body; EMOM | kettlebell'), 'full body, EMOM, kettlebell', 'video focus uses a compact comma-separated description');
 }
 
 async function run() {

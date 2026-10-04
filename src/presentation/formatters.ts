@@ -15,3 +15,11 @@ export function formatSessionDate(isoDate: string) {
     month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
   });
 }
+
+export function formatVideoFocus(focus: string) {
+  return focus
+    .split(/[,;|]/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(', ');
+}
