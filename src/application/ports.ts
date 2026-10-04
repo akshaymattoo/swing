@@ -15,9 +15,7 @@ export interface WorkoutRepository {
 export interface SessionRepository {
   listRecent(limit?: number): Promise<WorkoutSession[]>;
   getActive(): Promise<WorkoutSession | null>;
-  getById(id: string): Promise<WorkoutSession | null>;
   save(session: WorkoutSession): Promise<void>;
-  deleteById(id: string): Promise<void>;
 }
 
 export interface VideoWorkoutRepository {

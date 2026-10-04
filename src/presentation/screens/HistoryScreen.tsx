@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
 import type { WorkoutSession } from '../../domain/session';
@@ -7,7 +7,6 @@ import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { BackButton } from '../components/Buttons';
-import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { formatSessionDate } from '../formatters';
 
 type Props = { container: AppContainer; onBack: () => void };
@@ -19,28 +18,10 @@ export function HistoryScreen({ container, onBack }: Props) {
     container.sessions.listHistory().then(setSessions);
   }, [container]);
 
-  const confirmDelete = (session: WorkoutSession) => {
-    Alert.alert(
-      'Delete history entry?',
-      `${session.workoutSnapshot.name} will be permanently removed from your history.`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            await container.sessions.deleteHistoryEntry(session.id);
-            setSessions((current) => current.filter((item) => item.id !== session.id));
-          }
-        }
-      ]
-    );
-  };
-
   return (
     <AppScreen eyebrow="Your effort" title="History" left={<BackButton onPress={onBack} />}>
-      {sessions.length ? sessions.map((session) => {
-        const row = <View style={styles.row}>
+      {sessions.length ? sessions.map((session) => (
+        <View key={session.id} style={styles.row}>
           <View style={styles.copy}>
             <Text style={styles.title}>{session.workoutSnapshot.emoji} {session.workoutSnapshot.name}</Text>
             <Text style={styles.date}>{formatSessionDate(session.startedAt)}</Text>
@@ -48,17 +29,8 @@ export function HistoryScreen({ container, onBack }: Props) {
           <Text style={[styles.status, session.status === 'completed' ? styles.complete : styles.abandoned]}>
             {session.status === 'completed' ? 'Done' : session.status === 'active' ? 'Active' : 'Ended'}
           </Text>
-        </View>;
-        return session.status === 'active' ? <View key={session.id}>{row}</View> : (
-          <SwipeToDeleteRow
-            key={session.id}
-            accessibilityLabel={`Delete ${session.workoutSnapshot.name} from history`}
-            onDelete={() => confirmDelete(session)}
-          >
-            {row}
-          </SwipeToDeleteRow>
-        );
-      }) : (
+        </View>
+      )) : (
         <View style={styles.empty}><Text style={styles.emptyTitle}>Your first swing is waiting.</Text><Text style={styles.date}>Completed workouts will appear here.</Text></View>
       )}
     </AppScreen>

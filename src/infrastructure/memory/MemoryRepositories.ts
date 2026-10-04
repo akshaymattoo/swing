@@ -52,20 +52,12 @@ export class MemorySessionRepository implements SessionRepository {
     return this.records.find((session) => session.status === 'active') ?? null;
   }
 
-  async getById(id: string) {
-    return this.records.find((session) => session.id === id) ?? null;
-  }
-
   async save(session: WorkoutSession) {
     const index = this.records.findIndex((record) => record.id === session.id);
     if (index >= 0) this.records[index] = session;
     else this.records.push(session);
   }
 
-  async deleteById(id: string) {
-    const index = this.records.findIndex((session) => session.id === id);
-    if (index >= 0) this.records.splice(index, 1);
-  }
 }
 
 export class MemoryVideoWorkoutRepository implements VideoWorkoutRepository {

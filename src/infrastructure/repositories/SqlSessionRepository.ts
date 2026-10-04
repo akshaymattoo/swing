@@ -30,11 +30,6 @@ export class SqlSessionRepository implements SessionRepository {
     return row ? this.map(row) : null;
   }
 
-  async getById(id: string) {
-    const row = await this.database.first<SessionRow>('SELECT * FROM workout_sessions WHERE id = ?', [id]);
-    return row ? this.map(row) : null;
-  }
-
   async save(session: WorkoutSession) {
     await this.database.run(
       `INSERT INTO workout_sessions (
@@ -56,10 +51,6 @@ export class SqlSessionRepository implements SessionRepository {
         session.endedAt
       ]
     );
-  }
-
-  async deleteById(id: string) {
-    await this.database.run('DELETE FROM workout_sessions WHERE id = ?', [id]);
   }
 
   private map(row: SessionRow): WorkoutSession {

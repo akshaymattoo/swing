@@ -122,8 +122,7 @@ async function serviceTests() {
   equal(completed.status, 'completed', 'refresh completes a fully elapsed workout');
   assert(completed.endedAt !== null, 'completed session stores an end time');
 
-  await sessionService.deleteHistoryEntry(completed.id);
-  equal(await sessions.getById(completed.id), null, 'deleting history removes the persisted session');
+  equal((await sessionService.listHistory()).some((item) => item.id === completed.id), true, 'completed workouts remain in history');
 
   const created = await workoutService.createWorkout({
     name: 'Fresh Start', emoji: '✨', equipment: 'bands', intensity: 'mild',
