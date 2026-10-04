@@ -47,6 +47,10 @@ The importer normalizes equipment and duration values, removes duplicate video I
 
 Six complete color schemes are defined in `src/theme/colors.ts`. Change the final `colors` export to one of `tealOrangeColors`, `orangeRedColors`, `electricLimeColors`, `purpleCoralColors`, `cobaltYellowColors`, or `hotPinkNavyColors`; Expo Fast Refresh will update the running app. `src/theme/palette.json` holds the default teal/orange values used by Expo's native app configuration.
 
+## Change the daily card style
+
+The Workout of the Day uses the playful editorial card by default and automatically changes its illustration for kettlebells, dumbbells, bands, or bodyweight. To restore the quieter mint card, change `dailyWorkoutCardStyle` from `editorial` to `simple` in `src/config/experienceConfig.ts`.
+
 ## Persistence
 
 `src/config/appConfig.ts` is the composition root. The UI and application services receive repository interfaces rather than importing SQLite. To move to Supabase, implement the workout, session, video catalog, and daily-assignment repositories, return them from a new `PersistenceConfig`, and replace the configured persistence adapter.
