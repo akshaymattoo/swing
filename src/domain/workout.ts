@@ -52,3 +52,10 @@ export function intensityLabel(intensity: Intensity) {
 export function equipmentLabel(equipment: Equipment) {
   return equipment.charAt(0).toUpperCase() + equipment.slice(1);
 }
+
+export function equipmentEmoji(equipment: Equipment) {
+  if (equipment === 'bodyweight') return '🤸';
+  if (equipment === 'kettlebell') return '🔔';
+  if (equipment === 'dumbbells') return '🏋️';
+  return '〰️';
+}

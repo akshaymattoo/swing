@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { VideoWorkout } from '../../domain/videoWorkout';
-import { equipmentLabel } from '../../domain/workout';
+import { equipmentEmoji, equipmentLabel } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { formatDuration } from '../formatters';
@@ -26,7 +26,9 @@ export function VideoWorkoutCard({ workout, onOpen }: Props) {
       <Text style={styles.title} numberOfLines={3}>{workout.title}</Text>
       <Text style={styles.channel} numberOfLines={1}>{workout.channelName}</Text>
       <Text style={styles.focus} numberOfLines={2}>{workout.focus}</Text>
-      <ActionButton onPress={onOpen} style={styles.button}>Workout of the day →</ActionButton>
+      <ActionButton onPress={onOpen} style={styles.button}>
+        {equipmentEmoji(workout.equipment)} Workout of the day →
+      </ActionButton>
     </View>
   );
 }

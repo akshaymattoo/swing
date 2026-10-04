@@ -14,7 +14,7 @@ import {
 } from '../src/domain/session';
 import type { WorkoutTemplate } from '../src/domain/workout';
 import type { VideoWorkout } from '../src/domain/videoWorkout';
-import { workoutDurationSeconds } from '../src/domain/workout';
+import { equipmentEmoji, workoutDurationSeconds } from '../src/domain/workout';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
 import {
   MemoryDailyVideoWorkoutRepository,
@@ -265,6 +265,10 @@ async function videoCatalogTests() {
   assert(eligible.every((video) => approvedVideoIds.includes(video.youtubeVideoId)), 'only manually approved videos enter the rotation');
   assert(approvedVideoIds.every((id) => eligible.some((video) => video.youtubeVideoId === id)), 'every approved video enters the rotation');
   assert(eligible.every((video) => video.durationSeconds >= 20 * 60 && video.durationSeconds <= 35 * 60), 'approved daily workouts are between twenty and thirty-five minutes');
+  equal(equipmentEmoji('bodyweight'), '🤸', 'bodyweight has a distinct action emoji');
+  equal(equipmentEmoji('kettlebell'), '🔔', 'kettlebells have a distinct action emoji');
+  equal(equipmentEmoji('dumbbells'), '🏋️', 'dumbbells have a distinct action emoji');
+  equal(equipmentEmoji('bands'), '〰️', 'bands have a distinct action emoji');
 }
 
 async function run() {
