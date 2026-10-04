@@ -97,15 +97,15 @@ export function HomeScreen(props: Props) {
       <View style={styles.actionGrid}>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onCreate}>
           <Text style={styles.actionIcon}>＋</Text>
-          <Text style={styles.actionTitle}>Create</Text>
+          <Text style={styles.actionTitle}>Build</Text>
         </Pressable>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onSaved}>
           <Text style={styles.actionIcon}>♥</Text>
-          <Text style={styles.actionTitle}>Saved</Text>
+          <Text style={styles.actionTitle}>My Workouts</Text>
         </Pressable>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onHistory}>
           <Text style={styles.actionIcon}>↺</Text>
-          <Text style={styles.actionTitle}>History</Text>
+          <Text style={styles.actionTitle}>Progress</Text>
         </Pressable>
       </View>
     </AppScreen>
