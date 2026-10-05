@@ -46,7 +46,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
   const [intensity, setIntensity] = useState<Intensity>(initialWorkout?.intensity ?? "spicy");
   const [rounds, setRounds] = useState(initialWorkout?.rounds ?? 4);
   const [startupSeconds, setStartupSeconds] = useState(initialWorkout?.startupSeconds ?? DEFAULT_STARTUP_SECONDS);
-  const [workSeconds, setWorkSeconds] = useState(initialWorkout?.workSeconds ?? 40);
+  const [workSeconds, setWorkSeconds] = useState(initialWorkout?.workSeconds ?? 45);
   const [restSeconds, setRestSeconds] = useState(initialWorkout?.restSeconds ?? 20);
   const [movements, setMovements] = useState(initialWorkout?.exercises.map((exercise) => exercise.name) ?? ["", "", ""]);
   const [saving, setSaving] = useState(false);
