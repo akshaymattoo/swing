@@ -3,7 +3,7 @@ import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
-import { spacing } from '../../theme/spacing';
+import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton, BackButton } from '../components/Buttons';
 import { EditorialIcon } from '../components/EditorialIcon';
@@ -95,7 +95,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
           <View style={styles.featuredHeader}>
             <Text style={styles.sectionLabel}>TRY THIS ONE</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
-              <EditorialIcon color={colors.text} accent={colors.primary} name="refresh" size={17} />
+              <EditorialIcon color={colors.onPrimary} accent="#FFE7A3" name="refresh" size={18} />
               <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
           </View>
@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
   description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
   featuredHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refreshButton: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 999, borderWidth: 1, flexDirection: 'row', gap: 5, paddingHorizontal: spacing.md, paddingVertical: 7 },
-  refreshPressed: { opacity: 0.68 },
-  refresh: { color: colors.work, fontSize: 13, fontWeight: '900' },
+  refreshButton: { alignItems: 'center', backgroundColor: colors.primary, borderColor: colors.text, borderRadius: radii.sm, borderWidth: 2, flexDirection: 'row', gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: 8 },
+  refreshPressed: { opacity: 0.78, transform: [{ scale: 0.97 }] },
+  refresh: { color: colors.onPrimary, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
   emptyIcon: { alignItems: 'center', backgroundColor: '#FFC83D', borderColor: colors.text, borderRadius: 36, borderWidth: 2, height: 72, justifyContent: 'center', width: 72 },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
