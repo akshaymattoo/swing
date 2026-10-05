@@ -23,6 +23,7 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onEdit }: Props)
         <View style={styles.badges}>
           <View style={styles.badge}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
           <View style={styles.badge}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
+          <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
         </View>
 
         <View style={styles.heroContent}>
@@ -34,7 +35,6 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onEdit }: Props)
             </View>
             <Text style={styles.nameLabel}>WORKOUT</Text>
             <Text style={styles.workoutName}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
-            <Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text>
           </View>
           <View style={styles.visual}>
             <View style={styles.artworkDisc} />
@@ -75,7 +75,9 @@ const styles = StyleSheet.create({
   heroCard: { backgroundColor: colors.featuredSurface, borderColor: '#153936', borderRadius: radii.lg, borderWidth: 2, gap: spacing.md, overflow: 'hidden', padding: spacing.lg },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
   badge: { backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 7 },
-  badgeText: { color: '#153936', fontSize: 10, fontWeight: '900', letterSpacing: 0.7, textTransform: 'uppercase' },
+  intensityBadge: { borderColor: colors.primary },
+  badgeText: { color: '#153936', fontSize: 12, fontWeight: '900', letterSpacing: 0.5, textTransform: 'uppercase' },
+  intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
   heroContent: { alignItems: 'center', flexDirection: 'row', minHeight: 142 },
   heroCopy: { flex: 1, gap: spacing.sm, zIndex: 1 },
   primaryMetrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
   metricDivider: { color: colors.primary, fontSize: 26, fontWeight: '900' },
   nameLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '900', letterSpacing: 1.1, marginTop: spacing.xs },
   workoutName: { color: '#153936', fontSize: 18, fontWeight: '900', lineHeight: 23 },
-  intensity: { color: colors.textMuted, fontSize: 13, fontWeight: '700' },
   visual: { height: 130, marginRight: -12, position: 'relative', width: 112 },
   artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 54, borderWidth: 2, height: 106, position: 'absolute', right: -5, top: 8, width: 106 },
   artwork: { height: 112, position: 'absolute', right: -7, top: 3, width: 112 },

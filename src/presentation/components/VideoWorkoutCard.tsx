@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   durationBadge: { backgroundColor: '#FFFFFF' },
   editorialBadgeText: {
     color: '#153936',
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '900',
     letterSpacing: 0.8,
     textTransform: 'uppercase'

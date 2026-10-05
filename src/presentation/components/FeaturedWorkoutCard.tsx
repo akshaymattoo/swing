@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   intensityBadge: { borderColor: colors.primary },
   badgeText: {
     color: '#153936',
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '900',
     letterSpacing: 0.8,
     textTransform: 'uppercase',
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     zIndex: 1
   },
-  intensityText: { color: '#153936', fontSize: 11, fontWeight: '900' },
+  intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
   startButton: { borderColor: '#153936', borderWidth: 2, marginTop: spacing.xs, zIndex: 1 },
   sunDisc: {
     backgroundColor: '#FFD574',
