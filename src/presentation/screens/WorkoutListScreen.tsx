@@ -95,7 +95,6 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
           <View style={styles.featuredHeader}>
             <Text style={styles.sectionLabel}>TRY THIS WORKOUT</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
-              <EditorialIcon color={colors.primary} accent={colors.primary} name="refresh" size={16} />
               <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
           </View>
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
   description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
   featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, flexDirection: 'row', gap: spacing.xs, paddingHorizontal: spacing.sm, paddingVertical: 6 },
+  refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 6 },
   refreshPressed: { backgroundColor: colors.surfaceRaised, opacity: 0.72 },
   refresh: { color: colors.primary, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
