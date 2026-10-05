@@ -92,9 +92,10 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       ) : null}
       {featuredWorkout && onStartWorkout ? (
         <>
-          <View style={styles.refreshRow}>
+          <View style={styles.featuredHeader}>
+            <Text style={styles.sectionLabel}>TRY THIS WORKOUT</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
-              <EditorialIcon color={colors.primary} accent={colors.primary} name="refresh" size={18} />
+              <EditorialIcon color={colors.primary} accent={colors.primary} name="refresh" size={16} />
               <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
           </View>
@@ -116,11 +117,11 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
 
 const styles = StyleSheet.create({
   description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
-  refreshRow: { alignItems: 'flex-end' },
+  featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderRadius: radii.sm, flexDirection: 'row', gap: spacing.xs, paddingHorizontal: spacing.xs, paddingVertical: spacing.xs },
-  refreshPressed: { opacity: 0.55 },
-  refresh: { color: colors.text, fontSize: 14, fontWeight: '900' },
+  refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, flexDirection: 'row', gap: spacing.xs, paddingHorizontal: spacing.sm, paddingVertical: 6 },
+  refreshPressed: { backgroundColor: colors.surfaceRaised, opacity: 0.72 },
+  refresh: { color: colors.primary, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
   emptyIcon: { alignItems: 'center', backgroundColor: '#FFC83D', borderColor: colors.text, borderRadius: 36, borderWidth: 2, height: 72, justifyContent: 'center', width: 72 },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
