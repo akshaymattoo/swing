@@ -14,7 +14,7 @@ type Props = {
 const tabs: Array<{ id: Tab; label: string; icon: EditorialIconName }> = [
   { id: 'home', label: 'Home', icon: 'home' },
   { id: 'vault', label: 'Vault', icon: 'vault' },
-  { id: 'saved', label: 'Saved', icon: 'workouts' },
+  { id: 'saved', label: 'Library', icon: 'workouts' },
   { id: 'history', label: 'History', icon: 'progress' }
 ];
 
@@ -24,6 +24,7 @@ export function BottomNav({ active, onSelect }: Props) {
       <View style={styles.nav}>
         {tabs.map((tab) => {
           const selected = tab.id === active;
+          const selectedFilledIcon = selected && (tab.id === 'vault' || tab.id === 'saved');
           return (
             <Pressable
               accessibilityLabel={tab.label}
@@ -35,7 +36,12 @@ export function BottomNav({ active, onSelect }: Props) {
               style={({ pressed }) => [styles.item, selected && styles.selected, pressed && styles.pressed]}
             >
               <View style={[styles.iconPlate, selected && styles.selectedIconPlate]}>
-                <EditorialIcon color={selected ? colors.onPrimary : colors.text} accent={selected ? '#FFE7A3' : colors.primary} name={tab.icon} size={23} />
+                <EditorialIcon
+                  color={selectedFilledIcon ? colors.text : selected ? colors.onPrimary : colors.text}
+                  accent={selected ? '#FFC83D' : colors.primary}
+                  name={tab.icon}
+                  size={23}
+                />
               </View>
               <Text style={[styles.label, selected && styles.selectedText]}>{tab.label}</Text>
             </Pressable>
