@@ -13,6 +13,8 @@ import { WorkoutCard } from '../components/WorkoutCard';
 type Props = {
   title: string;
   eyebrow: string;
+  description?: string;
+  emptyTitle?: string;
   emptyMessage: string;
   load: () => Promise<WorkoutTemplate[]>;
   onOpenWorkout: (workout: WorkoutTemplate) => void;
@@ -23,7 +25,7 @@ type Props = {
   onDeleteWorkout?: (workout: WorkoutTemplate) => Promise<void>;
 };
 
-export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
+export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'Nothing here yet.', emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
   const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
   const [featuredIndex, setFeaturedIndex] = useState(0);
 
@@ -80,6 +82,13 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
 
   return (
     <AppScreen title={title} eyebrow={eyebrow} left={<BackButton onPress={onBack} />}>
+      {description ? <Text style={styles.description}>{description}</Text> : null}
+      {onCreate && workouts.length ? (
+        <>
+          <ActionButton onPress={onCreate}>＋ Build a workout</ActionButton>
+          <Text style={styles.sectionLabel}>YOUR WORKOUTS</Text>
+        </>
+      ) : null}
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>
@@ -95,9 +104,10 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
         </>
       ) : workouts.length ? workouts.map(renderWorkout) : (
         <View style={styles.empty}>
-          <Text style={styles.emptyTitle}>Nothing here yet.</Text>
+          <View style={styles.emptyIcon}><Text style={styles.emptyIconText}>＋</Text></View>
+          <Text style={styles.emptyTitle}>{emptyTitle}</Text>
           <Text style={styles.emptyCopy}>{emptyMessage}</Text>
-          {onCreate ? <ActionButton onPress={onCreate}>Create a workout</ActionButton> : null}
+          {onCreate ? <ActionButton onPress={onCreate}>Build a workout</ActionButton> : null}
         </View>
       )}
     </AppScreen>
@@ -105,13 +115,16 @@ export function WorkoutListScreen({ title, eyebrow, emptyMessage, load, onOpenWo
 }
 
 const styles = StyleSheet.create({
+  description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
   featuredHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
   refreshButton: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 999, borderWidth: 1, flexDirection: 'row', gap: 5, paddingHorizontal: spacing.md, paddingVertical: 7 },
   refreshPressed: { opacity: 0.68 },
   refreshIcon: { color: colors.primary, fontSize: 17, fontWeight: '900', lineHeight: 17 },
   refresh: { color: colors.work, fontSize: 13, fontWeight: '900' },
-  empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 80, gap: spacing.md },
+  empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
+  emptyIcon: { alignItems: 'center', backgroundColor: '#FFC83D', borderColor: colors.text, borderRadius: 36, borderWidth: 2, height: 72, justifyContent: 'center', width: 72 },
+  emptyIconText: { color: colors.primary, fontSize: 38, fontWeight: '700', lineHeight: 40 },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
   emptyCopy: { color: colors.textMuted, fontSize: 15, textAlign: 'center', lineHeight: 22 }
 });
