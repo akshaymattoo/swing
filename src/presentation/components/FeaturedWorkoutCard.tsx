@@ -17,7 +17,7 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
     <View style={styles.card}>
       <View pointerEvents="none" style={styles.sunDisc} />
       <View style={styles.badges}>
-        <View style={[styles.badge, styles.equipmentBadge]}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
+        <View style={styles.badge}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
         <View style={[styles.badge, styles.durationBadge]}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
       </View>
 
@@ -45,7 +45,7 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFC83D',
+    backgroundColor: '#FFE7A3',
     borderColor: '#153936',
     borderRadius: radii.lg,
     borderWidth: 3,
@@ -54,8 +54,7 @@ const styles = StyleSheet.create({
     padding: spacing.lg
   },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
-  badge: { borderColor: '#153936', borderRadius: radii.pill, borderWidth: 2, paddingHorizontal: spacing.md, paddingVertical: 7 },
-  equipmentBadge: { backgroundColor: '#79D6CF' },
+  badge: { backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 2, paddingHorizontal: spacing.md, paddingVertical: 7 },
   durationBadge: { backgroundColor: '#FFF7E3' },
   badgeText: {
     color: '#153936',
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
   intensity: { color: '#315B56', fontSize: 13, fontWeight: '800', zIndex: 1 },
   startButton: { borderColor: '#153936', borderWidth: 2, marginTop: spacing.xs, zIndex: 1 },
   sunDisc: {
-    backgroundColor: '#FF963D',
+    backgroundColor: '#FFD574',
     borderColor: '#153936',
     borderRadius: 100,
     borderWidth: 2,

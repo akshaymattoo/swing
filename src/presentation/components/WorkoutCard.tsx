@@ -21,7 +21,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
     >
       <View style={styles.topRow}>
         <View style={styles.badges}>
-          <View style={[styles.badge, styles.equipmentBadge]}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
           <View style={styles.badge}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
         </View>
         {workout.isSaved ? <Text style={styles.saved}>♥</Text> : null}
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   badge: { backgroundColor: '#FFF7E3', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, paddingHorizontal: spacing.sm, paddingVertical: 6 },
-  equipmentBadge: { backgroundColor: '#79D6CF' },
   badgeText: { color: '#153936', fontSize: 10, fontWeight: '900', letterSpacing: 0.6, textTransform: 'uppercase' },
   contentRow: { alignItems: 'center', flexDirection: 'row', minHeight: 112 },
   copy: { flex: 1, gap: spacing.sm, zIndex: 1 },
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
   title: { color: '#153936', fontSize: 16, fontWeight: '900', lineHeight: 20 },
   intensity: { color: colors.textMuted, fontSize: 12, fontWeight: '700', marginTop: spacing.xs },
   visual: { height: 112, marginRight: -8, position: 'relative', width: 104 },
-  artworkDisc: { backgroundColor: '#FFC83D', borderColor: '#153936', borderRadius: 48, borderWidth: 2, height: 92, position: 'absolute', right: -9, top: 2, width: 92 },
+  artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 48, borderWidth: 2, height: 92, position: 'absolute', right: -9, top: 2, width: 92 },
   artwork: { height: 94, position: 'absolute', right: -7, top: 0, width: 94 },
   arrowButton: { alignItems: 'center', backgroundColor: colors.primary, borderColor: '#153936', borderRadius: 17, borderWidth: 2, bottom: 0, height: 34, justifyContent: 'center', position: 'absolute', right: 0, width: 34 },
   arrow: { color: colors.onPrimary, fontSize: 20, fontWeight: '900', lineHeight: 21 },
