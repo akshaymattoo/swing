@@ -149,7 +149,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
           values={intensityOptions}
           selected={intensity}
           onSelect={(value) => setIntensity(value as Intensity)}
-          labels={{ mild: "🌶️ Mild", spicy: "🌶️🌶️ Spicy", hot: "🌶️🌶️🌶️ Hot" }}
+          labels={{ mild: "🌶️", spicy: "🌶️🌶️", hot: "🌶️🌶️🌶️" }}
         />
 
         <FieldLabel>Rounds</FieldLabel>

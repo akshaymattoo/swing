@@ -44,9 +44,9 @@ export function workoutDurationSeconds(workout: Pick<WorkoutTemplate, 'rounds' |
 }
 
 export function intensityLabel(intensity: Intensity) {
-  if (intensity === 'mild') return '🌶️ Mild';
-  if (intensity === 'spicy') return '🌶️🌶️ Spicy';
-  return '🌶️🌶️🌶️ Hot';
+  if (intensity === 'mild') return '🌶️';
+  if (intensity === 'spicy') return '🌶️🌶️';
+  return '🌶️🌶️🌶️';
 }
 
 export function equipmentLabel(equipment: Equipment) {
