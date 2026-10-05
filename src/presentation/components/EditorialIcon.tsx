@@ -25,7 +25,7 @@ export function EditorialIcon({ name, size = 24, color = colors.text, accent = c
 function IconShape({ name, color, accent }: { name: EditorialIconName; color: string; accent: string }) {
   if (name === 'home') return <><View style={[styles.homeRoof, { borderColor: color }]} /><View style={[styles.homeBody, { borderColor: color }]}><View style={[styles.homeDoor, { backgroundColor: accent }]} /></View></>;
   if (name === 'vault') return <><View style={[styles.vault, { backgroundColor: '#FFE7A3', borderColor: color }]}><View style={[styles.vaultCore, { backgroundColor: accent, borderColor: color }]} /></View><View style={[styles.spark, { backgroundColor: color }]} /></>;
-  if (name === 'build') return <><View style={[styles.dumbbellBar, { backgroundColor: color }]} /><View style={[styles.dumbbellLeft, { backgroundColor: accent, borderColor: color }]} /><View style={[styles.dumbbellRight, { backgroundColor: accent, borderColor: color }]} /><View style={[styles.plusVertical, { backgroundColor: color }]} /><View style={[styles.plusHorizontal, { backgroundColor: color }]} /></>;
+  if (name === 'build') return <><View style={[styles.dumbbellBar, { backgroundColor: color }]} /><View style={[styles.dumbbellLeft, { backgroundColor: accent, borderColor: color }]} /><View style={[styles.dumbbellRight, { backgroundColor: accent, borderColor: color }]} /></>;
   if (name === 'workouts') return <><View style={[styles.cardBack, { borderColor: color }]} /><View style={[styles.cardFront, { backgroundColor: '#FFFFFF', borderColor: color }]}><Text style={[styles.cardHeart, { color: accent }]}>♥</Text></View></>;
   if (name === 'progress') return <><View style={[styles.barOne, { backgroundColor: color }]} /><View style={[styles.barTwo, { backgroundColor: color }]} /><View style={[styles.barThree, { backgroundColor: accent }]} /><View style={[styles.progressLine, { backgroundColor: accent }]} /><View style={[styles.progressTip, { borderBottomColor: accent }]} /></>;
   if (name === 'back') return <View style={[styles.chevronBack, { borderColor: color }]} />;
@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
   dumbbellBar: { borderRadius: 2, height: 4, left: 3, position: 'absolute', top: 10, width: 18 },
   dumbbellLeft: { borderRadius: 3, borderWidth: 2, height: 12, left: 1, position: 'absolute', top: 6, width: 6 },
   dumbbellRight: { borderRadius: 3, borderWidth: 2, height: 12, position: 'absolute', right: 1, top: 6, width: 6 },
-  plusVertical: { borderRadius: 1, height: 8, position: 'absolute', right: 2, top: 0, width: 2 },
-  plusHorizontal: { borderRadius: 1, height: 2, position: 'absolute', right: -1, top: 3, width: 8 },
   cardBack: { borderRadius: 4, borderWidth: 2, height: 16, left: 2, position: 'absolute', top: 2, transform: [{ rotate: '-7deg' }], width: 17 },
   cardFront: { alignItems: 'center', borderRadius: 4, borderWidth: 2, height: 17, justifyContent: 'center', left: 5, position: 'absolute', top: 5, width: 17 },
   cardHeart: { fontSize: 11, fontWeight: '900', lineHeight: 12 },
