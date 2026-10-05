@@ -19,6 +19,8 @@ type Props = {
   onResume: (session: WorkoutSession) => void;
 };
 
+const homeFeatureGreen = '#A9D8D2';
+
 export function HomeScreen(props: Props) {
   const [dailyWorkout, setDailyWorkout] = useState<VideoWorkout | null>(null);
   const [active, setActive] = useState<WorkoutSession | null>(null);
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
   resumeAction: { alignItems: 'center', flexDirection: 'row', gap: spacing.xs },
   resumeActionText: { color: colors.primary, fontSize: 15, fontWeight: '800' },
   vaultCard: {
-    backgroundColor: colors.work,
+    backgroundColor: homeFeatureGreen,
     borderColor: '#153936',
     borderRadius: radii.lg,
     borderWidth: 3,
@@ -131,9 +133,9 @@ const styles = StyleSheet.create({
     padding: spacing.lg
   },
   vaultCopy: { maxWidth: '72%', zIndex: 1 },
-  vaultKicker: { color: '#BDE8E2', fontSize: 11, fontWeight: '900', letterSpacing: 1.2 },
-  vaultTitle: { color: '#FFFFFF', fontSize: 25, fontWeight: '900', letterSpacing: -0.5, lineHeight: 30, marginTop: spacing.sm },
-  vaultDescription: { color: '#D4F0EC', fontSize: 14, fontWeight: '600', lineHeight: 19, marginTop: spacing.xs },
+  vaultKicker: { color: '#315B56', fontSize: 11, fontWeight: '900', letterSpacing: 1.2 },
+  vaultTitle: { color: '#153936', fontSize: 25, fontWeight: '900', letterSpacing: -0.5, lineHeight: 30, marginTop: spacing.sm },
+  vaultDescription: { color: '#315B56', fontSize: 14, fontWeight: '700', lineHeight: 19, marginTop: spacing.xs },
   vaultAction: {
     alignItems: 'center',
     alignSelf: 'flex-start',
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
   vaultActionText: { color: colors.onPrimary, fontSize: 13, fontWeight: '900' },
   vaultDecoration: { bottom: 0, position: 'absolute', right: 0, top: 0, width: 128 },
   vaultOrbit: {
-    borderColor: '#79D6CF',
+    borderColor: '#FFFFFF',
     borderRadius: 80,
     borderWidth: 3,
     height: 150,
