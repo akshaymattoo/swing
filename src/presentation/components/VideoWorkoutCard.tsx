@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { experienceConfig } from '../../config/experienceConfig';
 import type { VideoWorkout } from '../../domain/videoWorkout';
-import { equipmentEmoji, equipmentLabel } from '../../domain/workout';
+import { equipmentLabel } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { equipmentArtwork } from '../equipmentArtwork';
@@ -49,7 +49,7 @@ function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
       </View>
 
       <ActionButton onPress={onOpen} style={styles.editorialButton}>
-        {equipmentEmoji(workout.equipment)} Workout of the day →
+        Workout of the day →
       </ActionButton>
     </View>
   );
@@ -80,7 +80,7 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
       <Text style={styles.simpleChannel} numberOfLines={2}>{workout.channelName}</Text>
       <Text style={styles.simpleFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
       <ActionButton onPress={onOpen} style={styles.simpleButton}>
-        {equipmentEmoji(workout.equipment)} Workout of the day →
+        Workout of the day →
       </ActionButton>
     </View>
   );
@@ -88,7 +88,7 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
 
 const styles = StyleSheet.create({
   editorialCard: {
-    backgroundColor: '#FFC83D',
+    backgroundColor: '#FFE7A3',
     borderColor: '#153936',
     borderRadius: radii.lg,
     borderWidth: 3,
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: 7
   },
-  equipmentBadge: { backgroundColor: '#79D6CF' },
-  durationBadge: { backgroundColor: '#FFF7E3' },
+  equipmentBadge: { backgroundColor: '#FFFFFF' },
+  durationBadge: { backgroundColor: '#FFFFFF' },
   editorialBadgeText: {
     color: '#153936',
     fontSize: 11,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   sunDisc: {
-    backgroundColor: '#FF963D',
+    backgroundColor: '#FFD574',
     borderColor: '#153936',
     borderRadius: 110,
     borderWidth: 2,
