@@ -30,6 +30,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
 
       <View style={styles.contentRow}>
         <View style={styles.copy}>
+          <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
           <View style={styles.metrics}>
             <View style={styles.metric}>
               <Text style={styles.metricValue}>{workout.rounds}</Text>
@@ -41,7 +42,6 @@ export function WorkoutCard({ workout, onPress }: Props) {
               <Text style={styles.metricLabel}>Movements</Text>
             </View>
           </View>
-          <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
         </View>
 
         <View style={styles.visual}>

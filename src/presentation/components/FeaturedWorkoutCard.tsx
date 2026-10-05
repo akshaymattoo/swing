@@ -23,6 +23,9 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
         <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
       </View>
 
+      <Text style={styles.nameLabel}>WORKOUT</Text>
+      <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
+
       <View style={styles.showcase}>
         <View style={styles.metrics}>
           <View style={styles.metric}>
@@ -36,9 +39,6 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
         </View>
         <Image accessibilityIgnoresInvertColors resizeMode="contain" source={equipmentArtwork[workout.equipment]} style={styles.artwork} />
       </View>
-
-      <Text style={styles.nameLabel}>WORKOUT</Text>
-      <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
       <ActionButton onPress={onStart} style={styles.startButton}>Start workout</ActionButton>
     </View>
   );
