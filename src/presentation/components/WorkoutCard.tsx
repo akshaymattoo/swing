@@ -41,7 +41,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
             </View>
           </View>
           <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
-          <Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text>
+          <View style={styles.intensityPill}><Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text></View>
         </View>
 
         <View style={styles.visual}>
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
   metricLabel: { color: '#315B56', fontSize: 9, fontWeight: '900', letterSpacing: 0.3, textTransform: 'uppercase' },
   metricDivider: { color: colors.primary, fontSize: 24, fontWeight: '900' },
   title: { color: '#153936', fontSize: 16, fontWeight: '900', lineHeight: 20 },
-  intensity: { color: colors.textMuted, fontSize: 12, fontWeight: '700', marginTop: spacing.xs },
+  intensityPill: { alignSelf: 'flex-start', backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, marginTop: spacing.xs, paddingHorizontal: spacing.sm, paddingVertical: 5 },
+  intensity: { color: '#153936', fontSize: 12, fontWeight: '900' },
   visual: { height: 112, marginRight: -8, position: 'relative', width: 104 },
   artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 48, borderWidth: 2, height: 92, position: 'absolute', right: -9, top: 2, width: 92 },
   artwork: { height: 94, position: 'absolute', right: -7, top: 0, width: 94 },
