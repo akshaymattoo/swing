@@ -15,7 +15,6 @@ type Props = {
   onCreate: () => void;
   onVault: () => void;
   onSaved: () => void;
-  onHistory: () => void;
   onResume: (session: WorkoutSession) => void;
 };
 
@@ -105,10 +104,6 @@ export function HomeScreen(props: Props) {
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onSaved}>
           <View style={styles.actionIconPlate}><EditorialIcon color={colors.text} name="workouts" size={28} /></View>
           <Text style={styles.actionTitle}>My Workouts</Text>
-        </Pressable>
-        <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onHistory}>
-          <View style={styles.actionIconPlate}><EditorialIcon color={colors.text} name="progress" size={28} /></View>
-          <Text style={styles.actionTitle}>Progress</Text>
         </Pressable>
       </View>
     </AppScreen>
