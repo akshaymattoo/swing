@@ -6,7 +6,7 @@ import { equipmentLabel } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { equipmentArtwork } from '../equipmentArtwork';
-import { formatDuration, formatVideoFocus } from '../formatters';
+import { formatChannelName, formatDuration, formatVideoFocus } from '../formatters';
 import { ActionButton } from './Buttons';
 
 type Props = {
@@ -37,7 +37,7 @@ function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
 
       <View style={styles.editorialBody}>
         <View style={styles.editorialCopy}>
-          <Text style={styles.editorialChannel} numberOfLines={3}>{workout.channelName}</Text>
+          <Text style={styles.editorialChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
           <Text style={styles.editorialFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
         </View>
         <Image
@@ -77,7 +77,7 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
           <Text style={styles.simpleBadgeText}>{formatDuration(workout.durationSeconds)}</Text>
         </View>
       </View>
-      <Text style={styles.simpleChannel} numberOfLines={2}>{workout.channelName}</Text>
+      <Text style={styles.simpleChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
       <Text style={styles.simpleFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
       <ActionButton onPress={onOpen} style={styles.simpleButton}>
         Workout of the day →
@@ -128,10 +128,10 @@ const styles = StyleSheet.create({
   editorialCopy: { flex: 1, gap: spacing.sm, paddingRight: spacing.xs },
   editorialChannel: {
     color: '#153936',
-    fontSize: 21,
+    fontSize: 18,
     fontWeight: '900',
     letterSpacing: -0.4,
-    lineHeight: 24
+    lineHeight: 22
   },
   editorialFocus: { color: '#315B56', fontSize: 14, fontWeight: '700', lineHeight: 19 },
   equipmentArtwork: { height: 126, marginRight: -10, width: 126 },

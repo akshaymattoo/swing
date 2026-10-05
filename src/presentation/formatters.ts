@@ -23,3 +23,10 @@ export function formatVideoFocus(focus: string) {
     .filter(Boolean)
     .join(', ');
 }
+
+export function formatChannelName(channelName: string) {
+  return channelName
+    .replace(/\s*\([^)]*\)\s*/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
