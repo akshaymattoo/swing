@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import type { WorkoutTemplate } from '../../domain/workout';
 import { equipmentLabel, intensityLabel, workoutDurationSeconds } from '../../domain/workout';
@@ -6,6 +6,7 @@ import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton, BackButton } from '../components/Buttons';
+import { equipmentArtwork } from '../equipmentArtwork';
 import { formatDuration } from '../formatters';
 
 type Props = {
@@ -18,23 +19,48 @@ type Props = {
 
 export function WorkoutDetailScreen({ workout, onBack, onStart, onSave, onEdit }: Props) {
   return (
-    <AppScreen eyebrow={workout.isVault ? 'The Vault' : 'Saved workout'} title={`${workout.emoji ?? ''} ${workout.name}`.trim()} left={<BackButton onPress={onBack} />}>
-      <Text style={styles.summary}>
-        {equipmentLabel(workout.equipment)} · {intensityLabel(workout.intensity)} · {formatDuration(workoutDurationSeconds(workout))}
-      </Text>
+    <AppScreen eyebrow={workout.isVault ? 'The Vault' : 'My Workouts'} title="Workout details" left={<BackButton onPress={onBack} />}>
+      <View style={styles.heroCard}>
+        <View style={styles.badges}>
+          <View style={styles.badge}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
+        </View>
 
-      <View style={styles.metrics}>
-        <View style={styles.metric}><Text style={styles.metricValue}>{workout.rounds}</Text><Text style={styles.metricLabel}>Rounds</Text></View>
-        <View style={styles.metric}><Text style={styles.metricValue}>{workout.startupSeconds}s</Text><Text style={styles.metricLabel}>Start</Text></View>
-        <View style={styles.metric}><Text style={styles.metricValue}>{workout.workSeconds}s</Text><Text style={styles.metricLabel}>Work</Text></View>
-        <View style={styles.metric}><Text style={styles.metricValue}>{workout.restSeconds}s</Text><Text style={styles.metricLabel}>Rest</Text></View>
+        <View style={styles.heroContent}>
+          <View style={styles.heroCopy}>
+            <View style={styles.primaryMetrics}>
+              <View style={styles.primaryMetric}><Text style={styles.primaryValue}>{workout.rounds}</Text><Text style={styles.primaryLabel}>Rounds</Text></View>
+              <Text style={styles.metricDivider}>·</Text>
+              <View style={styles.primaryMetric}><Text style={styles.primaryValue}>{workout.exercises.length}</Text><Text style={styles.primaryLabel}>Movements</Text></View>
+            </View>
+            <Text style={styles.nameLabel}>WORKOUT</Text>
+            <Text style={styles.workoutName}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
+            <Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text>
+          </View>
+          <View style={styles.visual}>
+            <View style={styles.artworkDisc} />
+            <Image accessibilityIgnoresInvertColors resizeMode="contain" source={equipmentArtwork[workout.equipment]} style={styles.artwork} />
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.intervalSection}>
+        <Text style={styles.sectionHeading}>TIMING</Text>
+        <View style={styles.intervalMetrics}>
+          <View style={styles.intervalMetric}><Text style={styles.intervalValue}>{workout.startupSeconds}s</Text><Text style={styles.intervalLabel}>Get ready</Text></View>
+          <View style={styles.intervalMetric}><Text style={styles.intervalValue}>{workout.workSeconds}s</Text><Text style={styles.intervalLabel}>Work</Text></View>
+          <View style={styles.intervalMetric}><Text style={styles.intervalValue}>{workout.restSeconds}s</Text><Text style={styles.intervalLabel}>Breathe</Text></View>
+        </View>
       </View>
 
       <View style={styles.exerciseBox}>
-        <Text style={styles.exerciseHeading}>MOVEMENTS</Text>
+        <View style={styles.exerciseHeader}>
+          <Text style={styles.sectionHeading}>MOVEMENTS</Text>
+          <Text style={styles.exerciseCount}>{workout.exercises.length} total</Text>
+        </View>
         {workout.exercises.map((exercise, index) => (
-          <View key={exercise.id} style={styles.exerciseRow}>
-            <Text style={styles.exerciseNumber}>{index + 1}</Text>
+          <View key={exercise.id} style={[styles.exerciseRow, index === workout.exercises.length - 1 && styles.lastExerciseRow]}>
+            <View style={styles.exerciseNumber}><Text style={styles.exerciseNumberText}>{index + 1}</Text></View>
             <Text style={styles.exerciseName}>{exercise.name}</Text>
           </View>
         ))}
@@ -48,14 +74,35 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onSave, onEdit }
 }
 
 const styles = StyleSheet.create({
-  summary: { color: colors.textMuted, fontSize: 15, lineHeight: 22, marginTop: -spacing.sm },
-  metrics: { flexDirection: 'row', gap: spacing.sm },
-  metric: { flex: 1, backgroundColor: colors.surfaceRaised, borderRadius: radii.md, padding: spacing.md, alignItems: 'center' },
-  metricValue: { color: colors.text, fontSize: 22, fontWeight: '900' },
-  metricLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '700', marginTop: 2 },
-  exerciseBox: { backgroundColor: colors.surface, borderRadius: radii.lg, borderWidth: 1, borderColor: colors.border, padding: spacing.lg },
-  exerciseHeading: { color: colors.work, fontSize: 12, fontWeight: '800', letterSpacing: 1, marginBottom: spacing.sm },
+  heroCard: { backgroundColor: colors.featuredSurface, borderColor: '#153936', borderRadius: radii.lg, borderWidth: 2, gap: spacing.md, overflow: 'hidden', padding: spacing.lg },
+  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
+  badge: { backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 7 },
+  badgeText: { color: '#153936', fontSize: 10, fontWeight: '900', letterSpacing: 0.7, textTransform: 'uppercase' },
+  heroContent: { alignItems: 'center', flexDirection: 'row', minHeight: 142 },
+  heroCopy: { flex: 1, gap: spacing.sm, zIndex: 1 },
+  primaryMetrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
+  primaryMetric: { alignItems: 'baseline', flexDirection: 'row', gap: 4 },
+  primaryValue: { color: '#153936', fontSize: 28, fontWeight: '900', lineHeight: 32 },
+  primaryLabel: { color: '#315B56', fontSize: 9, fontWeight: '900', letterSpacing: 0.4, textTransform: 'uppercase' },
+  metricDivider: { color: colors.primary, fontSize: 26, fontWeight: '900' },
+  nameLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '900', letterSpacing: 1.1, marginTop: spacing.xs },
+  workoutName: { color: '#153936', fontSize: 18, fontWeight: '900', lineHeight: 23 },
+  intensity: { color: colors.textMuted, fontSize: 13, fontWeight: '700' },
+  visual: { height: 130, marginRight: -12, position: 'relative', width: 112 },
+  artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 54, borderWidth: 2, height: 106, position: 'absolute', right: -5, top: 8, width: 106 },
+  artwork: { height: 112, position: 'absolute', right: -7, top: 3, width: 112 },
+  intervalSection: { gap: spacing.sm },
+  sectionHeading: { color: colors.work, fontSize: 11, fontWeight: '900', letterSpacing: 1.1 },
+  intervalMetrics: { flexDirection: 'row', gap: spacing.sm },
+  intervalMetric: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radii.md, borderWidth: 1, flex: 1, padding: spacing.md },
+  intervalValue: { color: colors.text, fontSize: 22, fontWeight: '900' },
+  intervalLabel: { color: colors.textMuted, fontSize: 11, fontWeight: '700', marginTop: 2 },
+  exerciseBox: { backgroundColor: colors.surface, borderRadius: radii.lg, borderWidth: 2, borderColor: '#153936', padding: spacing.lg },
+  exerciseHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', marginBottom: spacing.sm },
+  exerciseCount: { color: colors.textMuted, fontSize: 11, fontWeight: '700' },
   exerciseRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingVertical: spacing.md, borderBottomWidth: 1, borderBottomColor: colors.border },
-  exerciseNumber: { color: colors.primary, fontSize: 15, fontWeight: '900', width: 22 },
+  lastExerciseRow: { borderBottomWidth: 0 },
+  exerciseNumber: { alignItems: 'center', backgroundColor: '#FFE7A3', borderRadius: 15, height: 30, justifyContent: 'center', width: 30 },
+  exerciseNumberText: { color: colors.primary, fontSize: 13, fontWeight: '900' },
   exerciseName: { color: colors.text, fontSize: 17, fontWeight: '700' }
 });
