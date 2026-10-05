@@ -33,7 +33,6 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onEdit }: Props)
               <Text style={styles.metricDivider}>·</Text>
               <View style={styles.primaryMetric}><Text style={styles.primaryValue}>{workout.exercises.length}</Text><Text style={styles.primaryLabel}>Movements</Text></View>
             </View>
-            <Text style={styles.nameLabel}>WORKOUT</Text>
             <Text style={styles.workoutName}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
           </View>
           <View style={styles.visual}>
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
   primaryValue: { color: '#153936', fontSize: 28, fontWeight: '900', lineHeight: 32 },
   primaryLabel: { color: '#315B56', fontSize: 9, fontWeight: '900', letterSpacing: 0.4, textTransform: 'uppercase' },
   metricDivider: { color: colors.primary, fontSize: 26, fontWeight: '900' },
-  nameLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '900', letterSpacing: 1.1, marginTop: spacing.xs },
   workoutName: { color: '#153936', fontSize: 18, fontWeight: '900', lineHeight: 23 },
   visual: { height: 130, marginRight: -12, position: 'relative', width: 112 },
   artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 54, borderWidth: 2, height: 106, position: 'absolute', right: -5, top: 8, width: 106 },

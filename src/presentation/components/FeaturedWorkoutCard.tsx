@@ -23,7 +23,6 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
         <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
       </View>
 
-      <Text style={styles.nameLabel}>WORKOUT</Text>
       <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
 
       <View style={styles.showcase}>
@@ -81,7 +80,6 @@ const styles = StyleSheet.create({
   metricValue: { color: '#153936', fontSize: 30, fontWeight: '900', lineHeight: 34 },
   metricLabel: { color: '#315B56', fontSize: 10, fontWeight: '900', letterSpacing: 0.5, textTransform: 'uppercase' },
   artwork: { height: 116, marginRight: -12, width: 116 },
-  nameLabel: { color: '#55706D', fontSize: 10, fontWeight: '900', letterSpacing: 1.2, zIndex: 1 },
   title: {
     color: '#153936',
     fontSize: 18,
