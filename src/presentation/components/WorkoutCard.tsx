@@ -56,7 +56,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: colors.featuredSurface, borderRadius: radii.lg, padding: spacing.lg, borderWidth: 2, borderColor: '#153936', gap: spacing.md, overflow: 'hidden' },
+  card: { backgroundColor: colors.featuredSurface, borderRadius: radii.lg, padding: spacing.lg, borderWidth: 2, borderColor: '#153936', gap: spacing.sm, overflow: 'hidden' },
   pressed: { opacity: 0.78 },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   intensityBadge: { borderColor: colors.primary },
   badgeText: { color: '#153936', fontSize: 12, fontWeight: '900', letterSpacing: 0.4, textTransform: 'uppercase' },
   intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
-  contentRow: { alignItems: 'center', flexDirection: 'row', minHeight: 112 },
+  contentRow: { alignItems: 'flex-start', flexDirection: 'row', minHeight: 112 },
   copy: { flex: 1, gap: spacing.sm, zIndex: 1 },
   metrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
   metric: { alignItems: 'baseline', flexDirection: 'row', gap: 4 },

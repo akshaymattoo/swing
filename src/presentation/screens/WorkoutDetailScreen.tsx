@@ -28,12 +28,12 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onEdit }: Props)
 
         <View style={styles.heroContent}>
           <View style={styles.heroCopy}>
+            <Text style={styles.workoutName}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
             <View style={styles.primaryMetrics}>
               <View style={styles.primaryMetric}><Text style={styles.primaryValue}>{workout.rounds}</Text><Text style={styles.primaryLabel}>Rounds</Text></View>
               <Text style={styles.metricDivider}>·</Text>
               <View style={styles.primaryMetric}><Text style={styles.primaryValue}>{workout.exercises.length}</Text><Text style={styles.primaryLabel}>Movements</Text></View>
             </View>
-            <Text style={styles.workoutName}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
           </View>
           <View style={styles.visual}>
             <View style={styles.artworkDisc} />
@@ -71,13 +71,13 @@ export function WorkoutDetailScreen({ workout, onBack, onStart, onEdit }: Props)
 }
 
 const styles = StyleSheet.create({
-  heroCard: { backgroundColor: colors.featuredSurface, borderColor: '#153936', borderRadius: radii.lg, borderWidth: 2, gap: spacing.md, overflow: 'hidden', padding: spacing.lg },
+  heroCard: { backgroundColor: colors.featuredSurface, borderColor: '#153936', borderRadius: radii.lg, borderWidth: 2, gap: spacing.sm, overflow: 'hidden', padding: spacing.lg },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
   badge: { backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 7 },
   intensityBadge: { borderColor: colors.primary },
   badgeText: { color: '#153936', fontSize: 12, fontWeight: '900', letterSpacing: 0.5, textTransform: 'uppercase' },
   intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
-  heroContent: { alignItems: 'center', flexDirection: 'row', minHeight: 142 },
+  heroContent: { alignItems: 'flex-start', flexDirection: 'row', minHeight: 142 },
   heroCopy: { flex: 1, gap: spacing.sm, zIndex: 1 },
   primaryMetrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
   primaryMetric: { alignItems: 'baseline', flexDirection: 'row', gap: 4 },
