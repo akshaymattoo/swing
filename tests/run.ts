@@ -181,7 +181,8 @@ async function vaultSeedTests() {
 
   await seedVault(workouts);
   const spidey = await workouts.getById('vault-bodyweight-1');
-  equal(spidey?.name, 'Spidey Bite 20', 'existing installs receive refreshed Vault names');
+  equal(spidey?.name, 'Spidey Bite', 'existing installs receive refreshed Vault names');
+  equal(spidey?.intensity, 'hot', 'Spidey Bite reflects its high-density intensity');
   equal(spidey?.isSaved, true, 'Vault refresh preserves the saved state');
   equal(spidey ? workoutDurationSeconds(spidey) : 0, 1210, 'Spidey Bite is approximately twenty minutes including preparation');
   const vault = await workouts.listVault();
@@ -192,8 +193,9 @@ async function vaultSeedTests() {
   assert(vault.every((item) => workoutDurationSeconds(item) >= 600), 'every Vault workout lasts at least ten minutes');
   assert(vault.every((item) => workoutDurationSeconds(item) <= 1_800), 'every Vault workout stays within thirty minutes');
   const casket = vault.find((item) => item.id === 'vault-kettlebell-3');
-  equal(casket?.name, "John Wick's Casket Circuit", 'video-derived Vault workouts use creative names');
+  equal(casket?.name, 'Wick Circuit', 'video-derived Vault workouts use compact creative names');
   equal(casket?.exercises.length, 4, 'video-derived Vault workouts preserve the source movement structure');
+  assert(vault.every((item) => item.name.length <= 18), 'Vault names stay compact enough for workout cards');
 
   await seedVault(workouts);
   equal((await workouts.listVault()).length, 40, 'Vault refresh is idempotent');
