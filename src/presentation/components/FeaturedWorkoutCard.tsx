@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import type { WorkoutTemplate } from '../../domain/workout';
 import { equipmentLabel, intensityLabel, workoutDurationSeconds } from '../../domain/workout';
+import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { equipmentArtwork } from '../equipmentArtwork';
 import { ActionButton } from './Buttons';
@@ -19,6 +20,7 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
       <View style={styles.badges}>
         <View style={styles.badge}><Text style={styles.badgeText}>{equipmentLabel(workout.equipment)}</Text></View>
         <View style={[styles.badge, styles.durationBadge]}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
+        <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
       </View>
 
       <View style={styles.showcase}>
@@ -37,7 +39,6 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
 
       <Text style={styles.nameLabel}>WORKOUT</Text>
       <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
-      <View style={styles.intensityPill}><Text style={styles.intensity}>{intensityLabel(workout.intensity)}</Text></View>
       <ActionButton onPress={onStart} style={styles.startButton}>Start workout</ActionButton>
     </View>
   );
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, zIndex: 1 },
   badge: { backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 2, paddingHorizontal: spacing.md, paddingVertical: 7 },
   durationBadge: { backgroundColor: '#FFF7E3' },
+  intensityBadge: { borderColor: colors.primary },
   badgeText: {
     color: '#153936',
     fontSize: 11,
@@ -87,8 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     zIndex: 1
   },
-  intensityPill: { alignSelf: 'flex-start', backgroundColor: '#FFFFFF', borderColor: '#153936', borderRadius: radii.pill, borderWidth: 1.5, paddingHorizontal: spacing.sm, paddingVertical: 6, zIndex: 1 },
-  intensity: { color: '#153936', fontSize: 13, fontWeight: '900' },
+  intensityText: { color: '#153936', fontSize: 11, fontWeight: '900' },
   startButton: { borderColor: '#153936', borderWidth: 2, marginTop: spacing.xs, zIndex: 1 },
   sunDisc: {
     backgroundColor: '#FFD574',
