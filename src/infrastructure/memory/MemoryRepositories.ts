@@ -15,7 +15,7 @@ export class MemoryWorkoutRepository implements WorkoutRepository {
   }
 
   async listSaved() {
-    return this.records.filter((workout) => workout.isSaved);
+    return this.records.filter((workout) => workout.isSaved && !workout.isVault);
   }
 
   async getById(id: string) {
@@ -26,11 +26,6 @@ export class MemoryWorkoutRepository implements WorkoutRepository {
     const index = this.records.findIndex((record) => record.id === workout.id);
     if (index >= 0) this.records[index] = workout;
     else this.records.push(workout);
-  }
-
-  async setSaved(id: string, saved: boolean) {
-    const workout = this.records.find((record) => record.id === id);
-    if (workout) workout.isSaved = saved;
   }
 
   async deleteById(id: string) {

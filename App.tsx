@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 
@@ -121,7 +121,7 @@ export default function App() {
   } else if (route === 'vault') {
     screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
-    screen = <WorkoutListScreen eyebrow="Built for you" title="My Workouts" description="Your saved and custom workouts." emptyTitle="Build your first workout" emptyMessage="Build your own workout or save one from The Vault." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
+    screen = <WorkoutListScreen eyebrow="Built for you" title="My Workouts" description="Workouts you build, ready whenever you are." emptyTitle="Build your first workout" emptyMessage="Create a workout with your own movements and timing." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
   } else if (route === 'history') {
     screen = <HistoryScreen container={container} onBack={() => setRoute('home')} />;
   } else if (route === 'create') {
@@ -129,11 +129,7 @@ export default function App() {
   } else if (route === 'edit' && selectedWorkout) {
     screen = <CreateWorkoutScreen container={container} initialWorkout={selectedWorkout} onBack={() => setRoute('detail')} onCreated={(workout) => { setSelectedWorkout(workout); setRoute('detail'); }} />;
   } else if (route === 'detail' && selectedWorkout) {
-    screen = <WorkoutDetailScreen workout={selectedWorkout} onBack={() => setRoute(selectedWorkout.isVault ? 'vault' : 'saved')} onStart={() => void startWorkout(selectedWorkout)} onEdit={() => setRoute('edit')} onSave={async () => {
-      const saved = await container.workouts.copyToSaved(selectedWorkout.id);
-      setSelectedWorkout(saved);
-      Alert.alert('Saved', `${saved.name} is now in your workouts.`);
-    }} />;
+    screen = <WorkoutDetailScreen workout={selectedWorkout} onBack={() => setRoute(selectedWorkout.isVault ? 'vault' : 'saved')} onStart={() => void startWorkout(selectedWorkout)} onEdit={() => setRoute('edit')} />;
   } else if (route === 'runner' && activeSession) {
     screen = <RunnerScreen container={container} initialSession={activeSession} onBell={playBell} onComplete={(session) => { setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
   } else if (route === 'complete' && activeSession) {

@@ -25,7 +25,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
           <View style={styles.badge}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
           <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
         </View>
-        {workout.isSaved ? <Text style={styles.saved}>♥</Text> : null}
+        {workout.isSaved && !workout.isVault ? <Text style={styles.saved}>♥</Text> : null}
       </View>
 
       <View style={styles.contentRow}>

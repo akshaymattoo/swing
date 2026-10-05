@@ -37,7 +37,7 @@ export class SqlWorkoutRepository implements WorkoutRepository {
   }
 
   listSaved() {
-    return this.listWhere('is_saved = 1');
+    return this.listWhere('is_saved = 1 AND is_vault = 0');
   }
 
   async getById(id: string) {
@@ -80,13 +80,6 @@ export class SqlWorkoutRepository implements WorkoutRepository {
         );
       }
     });
-  }
-
-  async setSaved(id: string, saved: boolean) {
-    await this.database.run(
-      'UPDATE workout_templates SET is_saved = ?, updated_at = ? WHERE id = ?',
-      [saved ? 1 : 0, new Date().toISOString(), id]
-    );
   }
 
   async deleteById(id: string) {

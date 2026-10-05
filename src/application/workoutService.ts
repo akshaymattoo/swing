@@ -80,21 +80,10 @@ export class WorkoutService {
     return workout;
   }
 
-  async copyToSaved(id: string) {
-    const source = await this.workouts.getById(id);
-    if (!source) throw new Error('Workout not found');
-    if (source.isSaved) return source;
-    await this.workouts.setSaved(id, true);
-    return { ...source, isSaved: true };
-  }
-
   async deleteSavedWorkout(id: string) {
     const workout = await this.workouts.getById(id);
     if (!workout) return;
-    if (workout.isVault) {
-      await this.workouts.setSaved(id, false);
-      return;
-    }
+    if (workout.isVault) throw new Error('Vault workouts are always available and cannot be deleted');
     await this.workouts.deleteById(id);
   }
 

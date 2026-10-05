@@ -8,7 +8,6 @@ export interface WorkoutRepository {
   listSaved(): Promise<WorkoutTemplate[]>;
   getById(id: string): Promise<WorkoutTemplate | null>;
   save(workout: WorkoutTemplate): Promise<void>;
-  setSaved(id: string, saved: boolean): Promise<void>;
   deleteById(id: string): Promise<void>;
 }
 

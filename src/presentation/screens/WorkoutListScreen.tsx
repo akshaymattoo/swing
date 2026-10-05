@@ -46,8 +46,8 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
 
   const confirmDelete = (workout: WorkoutTemplate) => {
     Alert.alert(
-      'Delete saved workout?',
-      `${workout.name} will be removed from Saved workouts. Your completed history will stay intact.`,
+      'Delete workout?',
+      `${workout.name} will be permanently removed from My Workouts. Your completed history will stay intact.`,
       [
         { text: 'Cancel', style: 'cancel' },
         {

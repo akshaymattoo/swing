@@ -165,8 +165,7 @@ async function serviceTests() {
     rejectedVaultEdit = true;
   }
   assert(rejectedVaultEdit, 'Vault workouts must be copied instead of edited directly');
-  await workoutService.deleteSavedWorkout(savedVaultWorkout.id);
-  equal((await workouts.getById(savedVaultWorkout.id))?.isSaved, false, 'deleting a saved Vault workout only removes its saved status');
+  equal((await workoutService.listSaved()).some((item) => item.id === savedVaultWorkout.id), false, 'Vault workouts do not appear in My Workouts');
 }
 
 async function vaultSeedTests() {
