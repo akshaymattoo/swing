@@ -85,7 +85,7 @@ export function HomeScreen(props: Props) {
         <View style={styles.vaultCopy}>
           <Text style={styles.vaultKicker}>WANT SOMETHING DIFFERENT?</Text>
           <Text style={styles.vaultTitle}>Explore the Vault</Text>
-          <Text style={styles.vaultDescription}>Choose by equipment, intensity, or duration.</Text>
+          <Text style={styles.vaultDescription}>Browse ready-made workouts and pick what feels right today.</Text>
           <View style={styles.vaultAction}>
             <Text style={styles.vaultActionText}>Browse workouts</Text>
             <Text style={styles.vaultActionArrow}>→</Text>
