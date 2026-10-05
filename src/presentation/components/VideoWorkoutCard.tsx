@@ -37,6 +37,7 @@ function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
 
       <View style={styles.editorialBody}>
         <View style={styles.editorialCopy}>
+          <Text style={styles.editorialCoachLabel}>TODAY'S COACH</Text>
           <Text style={styles.editorialChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
           <Text style={styles.editorialFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
         </View>
@@ -77,6 +78,7 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
           <Text style={styles.simpleBadgeText}>{formatDuration(workout.durationSeconds)}</Text>
         </View>
       </View>
+      <Text style={styles.simpleCoachLabel}>TODAY'S COACH</Text>
       <Text style={styles.simpleChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
       <Text style={styles.simpleFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
       <ActionButton onPress={onOpen} style={styles.simpleButton}>
@@ -125,7 +127,8 @@ const styles = StyleSheet.create({
     minHeight: 122,
     zIndex: 1
   },
-  editorialCopy: { flex: 1, gap: spacing.sm, paddingRight: spacing.xs },
+  editorialCopy: { flex: 1, gap: spacing.xs, paddingRight: spacing.xs },
+  editorialCoachLabel: { color: '#55706D', fontSize: 10, fontWeight: '900', letterSpacing: 1.2 },
   editorialChannel: {
     color: '#153936',
     fontSize: 18,
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     lineHeight: 22
   },
-  editorialFocus: { color: '#315B56', fontSize: 14, fontWeight: '700', lineHeight: 19 },
+  editorialFocus: { color: '#315B56', fontSize: 14, fontWeight: '700', lineHeight: 19, marginTop: spacing.xs },
   equipmentArtwork: { height: 126, marginRight: -10, width: 126 },
   editorialButton: {
     borderColor: '#153936',
@@ -184,12 +187,12 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.8
   },
+  simpleCoachLabel: { color: colors.featuredMuted, fontSize: 10, fontWeight: '900', letterSpacing: 1.2, marginTop: spacing.xs },
   simpleChannel: {
     color: colors.onFeatured,
     fontSize: 20,
     lineHeight: 25,
     fontWeight: '900',
-    marginTop: spacing.xs
   },
   simpleFocus: { color: colors.featuredMuted, fontSize: 14, lineHeight: 20 },
   simpleButton: { marginTop: spacing.sm }
