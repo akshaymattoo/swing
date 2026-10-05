@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   badgeText: { color: '#153936', fontSize: 12, fontWeight: '900', letterSpacing: 0.5, textTransform: 'uppercase' },
   intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
   heroContent: { alignItems: 'flex-start', flexDirection: 'row', minHeight: 130 },
-  heroCopy: { alignSelf: 'stretch', flex: 1, justifyContent: 'space-between', paddingBottom: spacing.sm, zIndex: 1 },
+  heroCopy: { alignSelf: 'stretch', flex: 1, gap: spacing.lg, justifyContent: 'center', zIndex: 1 },
   primaryMetrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
   primaryMetric: { alignItems: 'baseline', flexDirection: 'row', gap: 4 },
   primaryValue: { color: '#153936', fontSize: 28, fontWeight: '900', lineHeight: 32 },

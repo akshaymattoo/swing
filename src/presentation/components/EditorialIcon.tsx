@@ -30,7 +30,7 @@ function IconShape({ name, color, accent }: { name: EditorialIconName; color: st
   if (name === 'progress') return <><View style={[styles.barOne, { backgroundColor: color }]} /><View style={[styles.barTwo, { backgroundColor: color }]} /><View style={[styles.barThree, { backgroundColor: accent }]} /><View style={[styles.progressLine, { backgroundColor: accent }]} /><View style={[styles.progressTip, { borderBottomColor: accent }]} /></>;
   if (name === 'back') return <View style={[styles.chevronBack, { borderColor: color }]} />;
   if (name === 'arrow') return <View style={[styles.chevronForward, { borderColor: color }]} />;
-  if (name === 'refresh') return <><View style={[styles.refreshRing, { borderColor: color }]} /><View style={[styles.refreshTip, { borderBottomColor: accent }]} /></>;
+  if (name === 'refresh') return <><View style={[styles.refreshRing, { borderColor: color, borderRightColor: 'transparent' }]} /><View style={[styles.refreshTip, { borderBottomColor: accent }]} /></>;
   if (name === 'delete') return <><View style={[styles.binLid, { backgroundColor: color }]} /><View style={[styles.bin, { borderColor: color }]}><View style={[styles.binLine, { backgroundColor: color }]} /></View></>;
   if (name === 'plus') return <><View style={[styles.controlDisc, { backgroundColor: accent, borderColor: color }]} /><View style={[styles.controlHorizontal, { backgroundColor: color }]} /><View style={[styles.controlVertical, { backgroundColor: color }]} /></>;
   if (name === 'minus') return <><View style={[styles.controlDisc, { backgroundColor: '#FFE7A3', borderColor: color }]} /><View style={[styles.controlHorizontal, { backgroundColor: color }]} /></>;

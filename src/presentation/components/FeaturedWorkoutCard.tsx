@@ -23,17 +23,18 @@ export function FeaturedWorkoutCard({ workout, onStart }: Props) {
         <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
       </View>
 
-      <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
-
       <View style={styles.showcase}>
-        <View style={styles.metrics}>
-          <View style={styles.metric}>
-            <Text style={styles.metricValue}>{workout.rounds}</Text>
-            <Text style={styles.metricLabel}>Rounds</Text>
-          </View>
-          <View style={styles.metric}>
-            <Text style={styles.metricValue}>{workout.exercises.length}</Text>
-            <Text style={styles.metricLabel}>Movements</Text>
+        <View style={styles.featuredCopy}>
+          <Text style={styles.title} numberOfLines={2}>{workout.emoji ? `${workout.emoji} ` : ''}{workout.name}</Text>
+          <View style={styles.metrics}>
+            <View style={styles.metric}>
+              <Text style={styles.metricValue}>{workout.rounds}</Text>
+              <Text style={styles.metricLabel}>Rounds</Text>
+            </View>
+            <View style={styles.metric}>
+              <Text style={styles.metricValue}>{workout.exercises.length}</Text>
+              <Text style={styles.metricLabel}>Movements</Text>
+            </View>
           </View>
         </View>
         <Image accessibilityIgnoresInvertColors resizeMode="contain" source={equipmentArtwork[workout.equipment]} style={styles.artwork} />
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   showcase: { alignItems: 'center', flexDirection: 'row', minHeight: 112, zIndex: 1 },
-  metrics: { flex: 1, flexDirection: 'row', gap: spacing.sm },
+  featuredCopy: { flex: 1, gap: spacing.md, justifyContent: 'center', minHeight: 112 },
+  metrics: { flexDirection: 'row', gap: spacing.sm },
   metric: {
     alignItems: 'center',
     backgroundColor: '#FFF7E3',

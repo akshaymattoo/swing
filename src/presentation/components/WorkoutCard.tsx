@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   badgeText: { color: '#153936', fontSize: 12, fontWeight: '900', letterSpacing: 0.4, textTransform: 'uppercase' },
   intensityText: { color: '#153936', fontSize: 12, fontWeight: '900' },
   contentRow: { alignItems: 'flex-start', flexDirection: 'row', minHeight: 112 },
-  copy: { alignSelf: 'stretch', flex: 1, justifyContent: 'space-between', paddingBottom: spacing.xs, zIndex: 1 },
+  copy: { alignSelf: 'stretch', flex: 1, gap: spacing.lg, justifyContent: 'center', zIndex: 1 },
   metrics: { alignItems: 'baseline', flexDirection: 'row', gap: 6 },
   metric: { alignItems: 'baseline', flexDirection: 'row', gap: 4 },
   metricValue: { color: '#153936', fontSize: 24, fontWeight: '900', lineHeight: 28 },
