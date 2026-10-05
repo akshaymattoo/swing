@@ -7,6 +7,7 @@ import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton } from '../components/Buttons';
+import { EditorialIcon } from '../components/EditorialIcon';
 
 type Props = {
   container: AppContainer;
@@ -110,7 +111,7 @@ export function RunnerScreen({ container, initialSession, onBell, onComplete, on
         <View style={styles.nextCard}>
           <View style={styles.nextHeadingRow}>
             <Text style={styles.nextKicker}>{nextMovement ? (preparing ? 'FIRST UP' : 'UP NEXT') : 'FINISH LINE'}</Text>
-            <Text style={styles.nextArrow}>{nextMovement ? '→' : '◆'}</Text>
+            <EditorialIcon color={nextMovement ? colors.primary : colors.text} name={nextMovement ? 'arrow' : 'finish'} size={22} />
           </View>
           <Text style={styles.nextMovement}>{nextMovement?.name ?? 'Last interval — finish strong'}</Text>
           <Text style={styles.nextHint}>{preparing ? 'Get your space and equipment ready.' : resting ? 'Start when the bell rings.' : 'Coming after this interval.'}</Text>
@@ -228,7 +229,6 @@ const styles = StyleSheet.create({
   },
   nextHeadingRow: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
   nextKicker: { color: '#315B56', fontSize: 11, fontWeight: '900', letterSpacing: 1.4 },
-  nextArrow: { color: colors.primary, fontSize: 22, fontWeight: '900' },
   nextMovement: { color: '#153936', fontSize: 22, fontWeight: '900', lineHeight: 27, marginTop: spacing.xs },
   nextHint: { color: '#55706D', fontSize: 13, fontWeight: '700', marginTop: spacing.xs },
   controls: { gap: spacing.md, marginTop: spacing.lg, width: '100%' },

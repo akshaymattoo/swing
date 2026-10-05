@@ -3,6 +3,7 @@ import { Animated, PanResponder, Pressable, StyleSheet, Text, View } from 'react
 
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
+import { EditorialIcon } from './EditorialIcon';
 import { clampSwipePosition, swipeDeleteTarget } from './swipeToDelete';
 
 const ACTION_WIDTH = 96;
@@ -62,7 +63,7 @@ export function SwipeToDeleteRow({ accessibilityLabel, children, onDelete }: Pro
           onPress={onDelete}
           style={({ pressed }) => [styles.deleteButton, pressed && styles.pressed]}
         >
-          <Text style={styles.deleteIcon}>⌫</Text>
+          <EditorialIcon color={colors.onPrimary} accent="#FFE7A3" name="delete" size={24} />
           <Text style={styles.deleteLabel}>Delete</Text>
         </Pressable>
       </View>
@@ -81,7 +82,6 @@ const styles = StyleSheet.create({
   actionContainer: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, alignItems: 'flex-end' },
   deleteButton: { width: ACTION_WIDTH, flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: spacing.sm },
   pressed: { opacity: 0.72 },
-  deleteIcon: { color: colors.onPrimary, fontSize: 21, fontWeight: '900' },
   deleteLabel: { color: colors.onPrimary, fontSize: 12, fontWeight: '800', marginTop: 2 },
   foreground: { backgroundColor: colors.background }
 });

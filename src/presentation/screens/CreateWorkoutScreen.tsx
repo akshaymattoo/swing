@@ -23,6 +23,7 @@ import { colors } from "../../theme/colors";
 import { radii, spacing } from "../../theme/spacing";
 import { AppScreen } from "../components/AppScreen";
 import { ActionButton, BackButton } from "../components/Buttons";
+import { EditorialIcon } from "../components/EditorialIcon";
 import { formatDuration } from "../formatters";
 
 type Props = {
@@ -154,20 +155,22 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
         <FieldLabel>Rounds</FieldLabel>
         <View style={styles.stepper}>
           <Pressable
+            accessibilityLabel="Decrease rounds"
             style={styles.stepperButton}
             onPress={() => setRounds((value) => Math.max(1, value - 1))}
           >
-            <Text style={styles.stepperSymbol}>−</Text>
+            <EditorialIcon name="minus" size={28} />
           </Pressable>
           <View style={styles.stepperValue}>
             <Text style={styles.stepperNumber}>{rounds}</Text>
             <Text style={styles.stepperCaption}>rounds</Text>
           </View>
           <Pressable
+            accessibilityLabel="Increase rounds"
             style={styles.stepperButton}
             onPress={() => setRounds((value) => Math.min(20, value + 1))}
           >
-            <Text style={styles.stepperSymbol}>＋</Text>
+            <EditorialIcon name="plus" size={28} />
           </Pressable>
         </View>
 
@@ -199,9 +202,12 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
         <View style={styles.movementHeader}>
           <FieldLabel>{`Movements (${filledMovements.length})`}</FieldLabel>
           <Pressable
+            accessibilityLabel="Add movement"
             onPress={() => setMovements((current) => [...current, ""])}
+            style={styles.addMovementButton}
           >
-            <Text style={styles.addMovement}>＋ Add</Text>
+            <EditorialIcon name="plus" size={20} />
+            <Text style={styles.addMovement}>Add</Text>
           </Pressable>
         </View>
         {movements.map((movement, index) => (
@@ -219,13 +225,15 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
             />
             {movements.length > 1 ? (
               <Pressable
+                accessibilityLabel={`Remove movement ${index + 1}`}
                 onPress={() =>
                   setMovements((current) =>
                     current.filter((_, position) => position !== index),
                   )
                 }
+                style={styles.removeButton}
               >
-                <Text style={styles.remove}>×</Text>
+                <EditorialIcon color={colors.danger} name="delete" size={20} />
               </Pressable>
             ) : null}
           </View>
@@ -346,7 +354,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: colors.surfaceRaised,
   },
-  stepperSymbol: { color: colors.text, fontSize: 24, fontWeight: "800" },
   stepperValue: { width: 82, alignItems: "center" },
   stepperNumber: { color: colors.text, fontSize: 21, fontWeight: "900" },
   stepperCaption: { color: colors.textMuted, fontSize: 11 },
@@ -355,7 +362,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  addMovement: { color: colors.primary, fontSize: 14, fontWeight: "900" },
+  addMovementButton: { alignItems: "center", flexDirection: "row", gap: 5 },
+  addMovement: { color: colors.text, fontSize: 14, fontWeight: "900" },
   movementRow: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
   movementNumber: {
     color: colors.primary,
@@ -364,12 +372,7 @@ const styles = StyleSheet.create({
     width: 20,
   },
   movementInput: { flex: 1 },
-  remove: {
-    color: colors.danger,
-    fontSize: 26,
-    width: 24,
-    textAlign: "center",
-  },
+  removeButton: { alignItems: "center", height: 36, justifyContent: "center", width: 32 },
   estimate: {
     backgroundColor: colors.surfaceRaised,
     borderRadius: radii.md,

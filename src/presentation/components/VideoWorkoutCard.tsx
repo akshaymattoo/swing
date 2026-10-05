@@ -49,7 +49,7 @@ function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
       </View>
 
       <ActionButton onPress={onOpen} style={styles.editorialButton}>
-        Workout of the day →
+        Workout of the day
       </ActionButton>
     </View>
   );
@@ -80,7 +80,7 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
       <Text style={styles.simpleChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
       <Text style={styles.simpleFocus} numberOfLines={2}>{formatVideoFocus(workout.focus)}</Text>
       <ActionButton onPress={onOpen} style={styles.simpleButton}>
-        Workout of the day →
+        Workout of the day
       </ActionButton>
     </View>
   );

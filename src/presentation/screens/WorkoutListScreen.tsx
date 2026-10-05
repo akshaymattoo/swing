@@ -6,6 +6,7 @@ import { colors } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton, BackButton } from '../components/Buttons';
+import { EditorialIcon } from '../components/EditorialIcon';
 import { FeaturedWorkoutCard } from '../components/FeaturedWorkoutCard';
 import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { WorkoutCard } from '../components/WorkoutCard';
@@ -85,7 +86,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       {description ? <Text style={styles.description}>{description}</Text> : null}
       {onCreate && workouts.length ? (
         <>
-          <ActionButton onPress={onCreate}>＋ Build a workout</ActionButton>
+          <ActionButton onPress={onCreate}>Build a workout</ActionButton>
           <Text style={styles.sectionLabel}>YOUR WORKOUTS</Text>
         </>
       ) : null}
@@ -94,7 +95,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
           <View style={styles.featuredHeader}>
             <Text style={styles.sectionLabel}>TRY THIS ONE</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
-              <Text style={styles.refreshIcon}>↻</Text>
+              <EditorialIcon color={colors.text} accent={colors.primary} name="refresh" size={17} />
               <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
           </View>
@@ -104,7 +105,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
         </>
       ) : workouts.length ? workouts.map(renderWorkout) : (
         <View style={styles.empty}>
-          <View style={styles.emptyIcon}><Text style={styles.emptyIconText}>＋</Text></View>
+          <View style={styles.emptyIcon}><EditorialIcon color={colors.text} name="build" size={38} /></View>
           <Text style={styles.emptyTitle}>{emptyTitle}</Text>
           <Text style={styles.emptyCopy}>{emptyMessage}</Text>
           {onCreate ? <ActionButton onPress={onCreate}>Build a workout</ActionButton> : null}
@@ -120,11 +121,9 @@ const styles = StyleSheet.create({
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
   refreshButton: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 999, borderWidth: 1, flexDirection: 'row', gap: 5, paddingHorizontal: spacing.md, paddingVertical: 7 },
   refreshPressed: { opacity: 0.68 },
-  refreshIcon: { color: colors.primary, fontSize: 17, fontWeight: '900', lineHeight: 17 },
   refresh: { color: colors.work, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
   emptyIcon: { alignItems: 'center', backgroundColor: '#FFC83D', borderColor: colors.text, borderRadius: 36, borderWidth: 2, height: 72, justifyContent: 'center', width: 72 },
-  emptyIconText: { color: colors.primary, fontSize: 38, fontWeight: '700', lineHeight: 40 },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
   emptyCopy: { color: colors.textMuted, fontSize: 15, textAlign: 'center', lineHeight: 22 }
 });

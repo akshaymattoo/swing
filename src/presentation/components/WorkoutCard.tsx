@@ -5,6 +5,7 @@ import { equipmentLabel, intensityLabel, workoutDurationSeconds } from '../../do
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { equipmentArtwork } from '../equipmentArtwork';
+import { EditorialIcon } from './EditorialIcon';
 import { formatDuration } from '../formatters';
 
 type Props = {
@@ -25,7 +26,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
           <View style={styles.badge}><Text style={styles.badgeText}>{formatDuration(workoutDurationSeconds(workout))}</Text></View>
           <View style={[styles.badge, styles.intensityBadge]}><Text style={styles.intensityText}>{intensityLabel(workout.intensity)}</Text></View>
         </View>
-        {workout.isSaved && !workout.isVault ? <Text style={styles.saved}>♥</Text> : null}
+        {workout.isSaved && !workout.isVault ? <EditorialIcon name="workouts" size={20} /> : null}
       </View>
 
       <View style={styles.contentRow}>
@@ -47,7 +48,7 @@ export function WorkoutCard({ workout, onPress }: Props) {
         <View style={styles.visual}>
           <View style={styles.artworkDisc} />
           <Image accessibilityIgnoresInvertColors resizeMode="contain" source={equipmentArtwork[workout.equipment]} style={styles.artwork} />
-          <View style={styles.arrowButton}><Text style={styles.arrow}>→</Text></View>
+          <View style={styles.arrowButton}><EditorialIcon color={colors.onPrimary} name="arrow" size={18} /></View>
         </View>
       </View>
     </Pressable>
@@ -75,6 +76,4 @@ const styles = StyleSheet.create({
   artworkDisc: { backgroundColor: '#FFE7A3', borderColor: '#153936', borderRadius: 48, borderWidth: 2, height: 92, position: 'absolute', right: -9, top: 2, width: 92 },
   artwork: { height: 94, position: 'absolute', right: -7, top: 0, width: 94 },
   arrowButton: { alignItems: 'center', backgroundColor: colors.primary, borderColor: '#153936', borderRadius: 17, borderWidth: 2, bottom: 0, height: 34, justifyContent: 'center', position: 'absolute', right: 0, width: 34 },
-  arrow: { color: colors.onPrimary, fontSize: 20, fontWeight: '900', lineHeight: 21 },
-  saved: { color: colors.primary, fontSize: 18 },
 });

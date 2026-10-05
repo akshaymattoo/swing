@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, type ViewStyle } from 'react-native';
 
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
+import { EditorialIcon } from './EditorialIcon';
 
 type Props = PropsWithChildren<{
   onPress: () => void;
@@ -41,7 +42,7 @@ export function BackButton({ onPress }: { onPress: () => void }) {
       onPress={onPress}
       style={({ pressed }) => [styles.back, pressed && styles.backPressed]}
     >
-      <Text style={styles.backArrow}>←</Text>
+      <EditorialIcon color={colors.text} name="back" size={22} />
     </Pressable>
   );
 }
@@ -64,9 +65,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border
+    borderWidth: 2,
+    borderColor: colors.text
   },
-  backPressed: { backgroundColor: colors.surfaceRaised, transform: [{ scale: 0.96 }] },
-  backArrow: { color: colors.text, fontSize: 24, lineHeight: 27, fontWeight: '700' }
+  backPressed: { backgroundColor: '#FFE7A3', transform: [{ scale: 0.96 }] }
 });

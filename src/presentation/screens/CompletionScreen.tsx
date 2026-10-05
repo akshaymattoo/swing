@@ -5,6 +5,7 @@ import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton } from '../components/Buttons';
+import { EditorialIcon } from '../components/EditorialIcon';
 
 type Props = { session: WorkoutSession; onDone: () => void; onRepeat: () => void };
 
@@ -12,7 +13,7 @@ export function CompletionScreen({ session, onDone, onRepeat }: Props) {
   return (
     <AppScreen scroll={false}>
       <View style={styles.content}>
-        <View style={styles.check}><Text style={styles.checkText}>✓</Text></View>
+        <View style={styles.check}><EditorialIcon accent="#FFE7A3" color={colors.onPrimary} name="check" size={48} /></View>
         <Text style={styles.eyebrow}>WORKOUT COMPLETE</Text>
         <Text style={styles.title}>You gave it{`\n`}a swing.</Text>
         <Text style={styles.summary}>{session.workoutSnapshot.emoji} {session.workoutSnapshot.name} · {session.workoutSnapshot.rounds} rounds</Text>
@@ -29,7 +30,6 @@ export function CompletionScreen({ session, onDone, onRepeat }: Props) {
 const styles = StyleSheet.create({
   content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   check: { width: 88, height: 88, borderRadius: 44, backgroundColor: colors.success, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.xl },
-  checkText: { color: colors.onPrimary, fontSize: 50, fontWeight: '900' },
   eyebrow: { color: colors.work, fontSize: 12, fontWeight: '900', letterSpacing: 1.5 },
   title: { color: colors.text, fontSize: 42, lineHeight: 46, fontWeight: '900', letterSpacing: -1.5, textAlign: 'center', marginTop: spacing.sm },
   summary: { color: colors.textMuted, fontSize: 15, marginTop: spacing.md },

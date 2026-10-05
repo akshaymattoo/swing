@@ -7,6 +7,7 @@ import type { VideoWorkout } from '../../domain/videoWorkout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
+import { EditorialIcon } from '../components/EditorialIcon';
 import { VideoWorkoutCard } from '../components/VideoWorkoutCard';
 
 type Props = {
@@ -61,7 +62,7 @@ export function HomeScreen(props: Props) {
             <Text style={styles.resumeKicker}>Workout in progress</Text>
             <Text style={styles.resumeTitle}>{active.workoutSnapshot.emoji} {active.workoutSnapshot.name}</Text>
           </View>
-          <Text style={styles.resumeAction}>Resume →</Text>
+          <View style={styles.resumeAction}><Text style={styles.resumeActionText}>Resume</Text><EditorialIcon color={colors.primary} name="arrow" size={16} /></View>
         </Pressable>
       ) : null}
 
@@ -88,7 +89,7 @@ export function HomeScreen(props: Props) {
           <Text style={styles.vaultDescription}>Browse ready-made workouts and pick what feels right today.</Text>
           <View style={styles.vaultAction}>
             <Text style={styles.vaultActionText}>Browse workouts</Text>
-            <Text style={styles.vaultActionArrow}>→</Text>
+            <EditorialIcon color={colors.onPrimary} name="arrow" size={16} />
           </View>
         </View>
       </Pressable>
@@ -96,15 +97,15 @@ export function HomeScreen(props: Props) {
       <Text style={styles.utilityHeading}>YOUR WORKOUTS</Text>
       <View style={styles.actionGrid}>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onCreate}>
-          <Text style={styles.actionIcon}>＋</Text>
+          <View style={styles.actionIconPlate}><EditorialIcon color={colors.text} name="build" size={28} /></View>
           <Text style={styles.actionTitle}>Build</Text>
         </Pressable>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onSaved}>
-          <Text style={styles.actionIcon}>♥</Text>
+          <View style={styles.actionIconPlate}><EditorialIcon color={colors.text} name="workouts" size={28} /></View>
           <Text style={styles.actionTitle}>My Workouts</Text>
         </Pressable>
         <Pressable style={({ pressed }) => [styles.actionTile, pressed && styles.pressed]} onPress={props.onHistory}>
-          <Text style={styles.actionIcon}>↺</Text>
+          <View style={styles.actionIconPlate}><EditorialIcon color={colors.text} name="progress" size={28} /></View>
           <Text style={styles.actionTitle}>Progress</Text>
         </Pressable>
       </View>
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
   resume: { backgroundColor: colors.surfaceRaised, borderRadius: radii.md, padding: spacing.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   resumeKicker: { color: colors.work, fontSize: 11, fontWeight: '800', textTransform: 'uppercase' },
   resumeTitle: { color: colors.text, fontSize: 18, fontWeight: '900', marginTop: spacing.xs },
-  resumeAction: { color: colors.primary, fontSize: 15, fontWeight: '800' },
+  resumeAction: { alignItems: 'center', flexDirection: 'row', gap: spacing.xs },
+  resumeActionText: { color: colors.primary, fontSize: 15, fontWeight: '800' },
   vaultCard: {
     backgroundColor: colors.work,
     borderColor: '#153936',
@@ -146,7 +148,6 @@ const styles = StyleSheet.create({
     paddingVertical: 9
   },
   vaultActionText: { color: colors.onPrimary, fontSize: 13, fontWeight: '900' },
-  vaultActionArrow: { color: colors.onPrimary, fontSize: 18, fontWeight: '900', lineHeight: 18 },
   vaultDecoration: { bottom: 0, position: 'absolute', right: 0, top: 0, width: 128 },
   vaultOrbit: {
     borderColor: '#79D6CF',
@@ -188,6 +189,6 @@ const styles = StyleSheet.create({
     minHeight: 92,
     padding: spacing.md
   },
-  actionIcon: { color: colors.primary, fontSize: 24, fontWeight: '700' },
+  actionIconPlate: { alignItems: 'center', backgroundColor: '#FFE7A3', borderColor: colors.text, borderRadius: 13, borderWidth: 2, height: 46, justifyContent: 'center', width: 46 },
   actionTitle: { color: colors.text, fontSize: 14, fontWeight: '900', lineHeight: 18, marginTop: spacing.sm }
 });
