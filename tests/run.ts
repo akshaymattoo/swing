@@ -205,13 +205,15 @@ async function vaultSeedTests() {
   assert(visibleVault.every((item) => ['bodyweight', 'kettlebell'].includes(item.equipment)), 'the MVP Vault hides dormant equipment');
   const clearMovements = new Set([
     'Air squats', 'Alternating lunges', 'Bent-over rows', 'Bird dogs', 'Chair squats',
-    'Dead bugs', 'Floor press', 'Glute bridges', 'Goblet squats', 'High knees', 'Kettlebell deadlifts',
-    'Kettlebell swings', 'Kneeling push-ups', 'March in place', 'Mountain climbers', 'Overhead press',
+    'Cossack squats', 'Dead bugs', 'Floor press', 'Glute bridges', 'Goblet squats', 'Gorilla rows', 'High knees',
+    'Hollow hold', 'Kettlebell cleans', 'Kettlebell deadlifts', 'Kettlebell snatches', 'Kettlebell swings',
+    'Kneeling push-ups', 'March in place', 'Mountain climbers', 'Overhead press',
     'Fast squats', 'Plank hold', 'Plank shoulder taps', 'Push-ups', 'Reverse lunges', 'Side lunges', 'Skater steps',
     'Slow squats', 'Standing calf raises', 'Standing knee drives', 'Step-back burpees', 'Step jacks',
     'Sumo squats', 'Superman lifts', 'Supported rows', 'Suitcase march', 'Wall push-ups'
   ]);
   assert(visibleVault.every((item) => item.exercises.every((exercise) => clearMovements.has(exercise.name))), 'every visible movement uses the audited plain-language vocabulary');
+  assert(visibleVault.every((item) => item.exercises.every((exercise) => !['Prone swimmers', 'Prone W raises'].includes(exercise.name))), 'unfamiliar prone movement names stay out of the Vault');
 
   await seedVault(workouts);
   equal((await workouts.listVault()).length, 70, 'Vault refresh is idempotent');
