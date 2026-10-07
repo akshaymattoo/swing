@@ -15,6 +15,7 @@ import {
 import type { WorkoutTemplate } from '../src/domain/workout';
 import type { VideoWorkout } from '../src/domain/videoWorkout';
 import { equipmentEmoji, workoutDurationSeconds } from '../src/domain/workout';
+import { classifyWorkoutIntensity, movementDemand, workoutDemandScore } from '../src/domain/workoutIntensity';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
 import {
   MemoryDailyVideoWorkoutRepository,
@@ -214,6 +215,23 @@ async function vaultSeedTests() {
   ]);
   assert(visibleVault.every((item) => item.exercises.every((exercise) => clearMovements.has(exercise.name))), 'every visible movement uses the audited plain-language vocabulary');
   assert(visibleVault.every((item) => item.exercises.every((exercise) => !['Prone swimmers', 'Prone W raises'].includes(exercise.name))), 'unfamiliar prone movement names stay out of the Vault');
+  assert(visibleVault.every((item) => item.exercises.every((exercise) => movementDemand[exercise.name] !== undefined)), 'every Vault movement has an explicit demand rating');
+  assert(visibleVault.every((item) => item.intensity === classifyWorkoutIntensity({
+    equipment: item.equipment,
+    rounds: item.rounds,
+    workSeconds: item.workSeconds,
+    restSeconds: item.restSeconds,
+    exercises: item.exercises.map((exercise) => exercise.name)
+  })), 'every Vault emoji is derived from the intensity algorithm');
+  equal(visibleVault.filter((item) => item.intensity === 'mild').length, 10, 'the algorithm identifies ten mild workouts');
+  equal(visibleVault.filter((item) => item.intensity === 'spicy').length, 19, 'the algorithm identifies nineteen spicy workouts');
+  equal(visibleVault.filter((item) => item.intensity === 'hot').length, 21, 'the algorithm identifies twenty-one hot workouts');
+
+  const batBase = visibleVault.find((item) => item.id === 'vault-bodyweight-4');
+  const deadpool = visibleVault.find((item) => item.id === 'vault-kettlebell-6');
+  assert(batBase && deadpool, 'calibration workouts exist');
+  assert(workoutDemandScore({ ...batBase, exercises: batBase.exercises.map((exercise) => exercise.name) }) < 48, 'supported low-density work stays mild');
+  assert(workoutDemandScore({ ...deadpool, exercises: deadpool.exercises.map((exercise) => exercise.name) }) >= 68, 'loaded technical high-density work stays hot');
 
   await seedVault(workouts);
   equal((await workouts.listVault()).length, 70, 'Vault refresh is idempotent');
