@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { useAnalytics } from '../../analytics/useAnalytics';
 import type { WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'Nothing here yet.', emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
+  const analytics = useAnalytics();
   const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
   const [featuredIndex, setFeaturedIndex] = useState(0);
 
@@ -34,15 +36,28 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
     load().then((loaded) => {
       setWorkouts(loaded);
       setFeaturedIndex(0);
-    });
-  }, [load]);
+      analytics.capture('workout_list_loaded', {
+        list: showFeatured ? 'vault' : 'library',
+        workout_count: loaded.length
+      });
+    }).catch((error) => analytics.error('workout list load failed', error, {
+      list: showFeatured ? 'vault' : 'library'
+    }));
+  }, [analytics, load, showFeatured]);
 
   const featuredWorkout = showFeatured ? workouts[featuredIndex] : null;
   const remainingWorkouts = featuredWorkout
     ? workouts.filter((workout) => workout.id !== featuredWorkout.id)
     : workouts;
   const refreshWorkout = () => {
-    if (workouts.length > 1) setFeaturedIndex((current) => (current + 1) % workouts.length);
+    if (workouts.length > 1) {
+      const nextIndex = (featuredIndex + 1) % workouts.length;
+      analytics.capture('vault_featured_refreshed', {
+        previous_workout_id: workouts[featuredIndex]?.id,
+        next_workout_id: workouts[nextIndex]?.id
+      });
+      setFeaturedIndex(nextIndex);
+    }
   };
 
   const confirmDelete = (workout: WorkoutTemplate) => {
@@ -58,8 +73,14 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
             if (!onDeleteWorkout) return;
             try {
               await onDeleteWorkout(workout);
+              analytics.capture('saved_workout_deleted', {
+                workout_id: workout.id,
+                equipment: workout.equipment,
+                intensity: workout.intensity
+              });
               setWorkouts((current) => current.filter((item) => item.id !== workout.id));
-            } catch {
+            } catch (error) {
+              analytics.error('saved workout deletion failed', error, { workout_id: workout.id });
               Alert.alert('Could not delete workout', 'Please try again.');
             }
           }

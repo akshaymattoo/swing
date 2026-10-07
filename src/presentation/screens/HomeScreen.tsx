@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import type { AppContainer } from "../../application/appContainer";
+import { useAnalytics } from "../../analytics/useAnalytics";
 import type { WorkoutSession } from "../../domain/session";
 import type { VideoWorkout } from "../../domain/videoWorkout";
 import { colors } from "../../theme/colors";
@@ -28,6 +29,7 @@ type Props = {
 const homeFeatureGreen = "#A9D8D2";
 
 export function HomeScreen(props: Props) {
+  const analytics = useAnalytics();
   const [dailyWorkout, setDailyWorkout] = useState<VideoWorkout | null>(null);
   const [active, setActive] = useState<WorkoutSession | null>(null);
 
@@ -38,8 +40,8 @@ export function HomeScreen(props: Props) {
     ]).then(([video, session]) => {
       setDailyWorkout(video);
       setActive(session);
-    });
-  }, [props.container]);
+    }).catch((error) => analytics.error("home data load failed", error));
+  }, [analytics, props.container]);
 
   useEffect(() => {
     let midnightTimer: ReturnType<typeof setTimeout>;
@@ -52,7 +54,9 @@ export function HomeScreen(props: Props) {
       );
       midnightTimer = setTimeout(
         () => {
-          props.container.videoWorkoutOfDay.getForDate().then(setDailyWorkout);
+          props.container.videoWorkoutOfDay.getForDate()
+            .then(setDailyWorkout)
+            .catch((error) => analytics.error("daily video refresh failed", error));
           scheduleNextDay();
         },
         nextDay.getTime() - now.getTime() + 100,
@@ -61,13 +65,22 @@ export function HomeScreen(props: Props) {
 
     scheduleNextDay();
     return () => clearTimeout(midnightTimer);
-  }, [props.container]);
+  }, [analytics, props.container]);
 
   const openDailyWorkout = async () => {
     if (!dailyWorkout) return;
     try {
+      analytics.capture("daily_video_opened", {
+        video_id: dailyWorkout.id,
+        equipment: dailyWorkout.equipment,
+        duration_seconds: dailyWorkout.durationSeconds,
+        content_kind: dailyWorkout.contentKind,
+      });
       await Linking.openURL(dailyWorkout.youtubeUrl);
-    } catch {
+    } catch (error) {
+      analytics.error("daily video open failed", error, {
+        video_id: dailyWorkout.id,
+      });
       Alert.alert(
         "Could not open YouTube",
         "Please check your connection and try again.",

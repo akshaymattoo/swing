@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { Pressable, StyleSheet, Text, type ViewStyle } from 'react-native';
 
+import { useAnalytics } from '../../analytics/useAnalytics';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { EditorialIcon } from './EditorialIcon';
@@ -13,11 +14,19 @@ type Props = PropsWithChildren<{
 }>;
 
 export function ActionButton({ children, onPress, disabled, variant = 'primary', style }: Props) {
+  const analytics = useAnalytics();
+  const handlePress = () => {
+    analytics.capture('button_clicked', {
+      button_name: typeof children === 'string' ? children : 'action',
+      button_variant: variant
+    });
+    onPress();
+  };
   return (
     <Pressable
       accessibilityRole="button"
       disabled={disabled}
-      onPress={onPress}
+      onPress={handlePress}
       style={({ pressed }) => [
         styles.base,
         styles[variant],
@@ -34,12 +43,16 @@ export function ActionButton({ children, onPress, disabled, variant = 'primary',
 }
 
 export function BackButton({ onPress }: { onPress: () => void }) {
+  const analytics = useAnalytics();
   return (
     <Pressable
       accessibilityLabel="Back"
       accessibilityRole="button"
       hitSlop={8}
-      onPress={onPress}
+      onPress={() => {
+        analytics.capture('button_clicked', { button_name: 'back', button_variant: 'navigation' });
+        onPress();
+      }}
       style={({ pressed }) => [styles.back, pressed && styles.backPressed]}
     >
       <EditorialIcon color={colors.text} name="back" size={22} />

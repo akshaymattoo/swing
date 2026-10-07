@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Animated, AppState, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
+import { useAnalytics } from '../../analytics/useAnalytics';
 import { currentExercise, nextExercise, remainingMs, workoutBellCue, type WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export function RunnerScreen({ container, initialSession, onBell, onComplete, onEnd }: Props) {
+  const analytics = useAnalytics();
   const { height: windowHeight } = useWindowDimensions();
   const [session, setSession] = useState(initialSession);
   const [now, setNow] = useState(Date.now());
@@ -66,12 +68,26 @@ export function RunnerScreen({ container, initialSession, onBell, onComplete, on
 
   const togglePause = async () => {
     const updated = paused ? await container.sessions.resume(session) : await container.sessions.pause(session);
+    analytics.capture(paused ? 'workout_resumed' : 'workout_paused', {
+      session_id: session.id,
+      workout_id: session.workoutTemplateId,
+      phase: session.timerState.phase,
+      round: session.timerState.roundIndex + 1,
+      movement: session.timerState.exerciseIndex + 1
+    });
     setSession(updated);
     setNow(Date.now());
   };
 
   const skip = async () => {
     const updated = await container.sessions.skip(session);
+    analytics.capture('workout_interval_skipped', {
+      session_id: session.id,
+      workout_id: session.workoutTemplateId,
+      phase: session.timerState.phase,
+      round: session.timerState.roundIndex + 1,
+      movement: session.timerState.exerciseIndex + 1
+    });
     if (workoutBellCue(session.timerState, updated.timerState)) onBell();
     setSession(updated);
     setNow(Date.now());
@@ -81,7 +97,17 @@ export function RunnerScreen({ container, initialSession, onBell, onComplete, on
   const confirmEnd = () => {
     Alert.alert('End workout?', 'This attempt will be kept in History as ended early.', [
       { text: 'Keep going', style: 'cancel' },
-      { text: 'End workout', style: 'destructive', onPress: async () => { await container.sessions.end(session); onEnd(); } }
+      { text: 'End workout', style: 'destructive', onPress: async () => {
+        await container.sessions.end(session);
+        analytics.capture('workout_ended_early', {
+          session_id: session.id,
+          workout_id: session.workoutTemplateId,
+          phase: session.timerState.phase,
+          round: session.timerState.roundIndex + 1,
+          movement: session.timerState.exerciseIndex + 1
+        });
+        onEnd();
+      } }
     ]);
   };
 

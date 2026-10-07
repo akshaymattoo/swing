@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import type { AppContainer } from "../../application/appContainer";
+import { useAnalytics } from "../../analytics/useAnalytics";
 import {
   DEFAULT_STARTUP_SECONDS,
   mvpEquipmentOptions,
@@ -38,6 +39,7 @@ const startupOptions = [0, 5, 10, 20, 30, 45, 60];
 const restOptions = [0, 5, 10, 15, 20, 30, 45, 60];
 
 export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorkout }: Props) {
+  const analytics = useAnalytics();
   const isEditing = Boolean(initialWorkout);
   const isEditingCopy = Boolean(initialWorkout?.isVault);
   const [name, setName] = useState(initialWorkout?.name ?? "");
@@ -97,8 +99,26 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
       const workout = initialWorkout && !initialWorkout.isVault
         ? await container.workouts.updateWorkout(initialWorkout.id, draft)
         : await container.workouts.createWorkout(draft);
+      analytics.capture(initialWorkout && !initialWorkout.isVault ? "custom_workout_updated" : "custom_workout_created", {
+        workout_id: workout.id,
+        source: isEditingCopy ? "vault_copy" : isEditing ? "library" : "new",
+        equipment: workout.equipment,
+        intensity: workout.intensity,
+        rounds: workout.rounds,
+        movements: workout.exercises.length,
+        startup_seconds: workout.startupSeconds,
+        work_seconds: workout.workSeconds,
+        rest_seconds: workout.restSeconds,
+      });
       onCreated(workout);
     } catch (error) {
+      analytics.error("custom workout save failed", error, {
+        mode: isEditingCopy ? "vault_copy" : isEditing ? "edit" : "create",
+        equipment,
+        intensity,
+        rounds,
+        movements: filledMovements.length,
+      });
       Alert.alert(
         "Almost there",
         error instanceof Error ? error.message : "Unable to save workout",

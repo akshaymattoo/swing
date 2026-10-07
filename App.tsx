@@ -2,8 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
+import { PostHogProvider } from 'posthog-react-native';
 
+import { useAnalytics } from './src/analytics/useAnalytics';
 import { createAppContainer, type AppContainer } from './src/application/appContainer';
+import { analyticsConfig } from './src/config/analyticsConfig';
 import { appConfig } from './src/config/appConfig';
 import type { WorkoutSession } from './src/domain/session';
 import type { WorkoutTemplate } from './src/domain/workout';
@@ -22,6 +25,15 @@ import { WorkoutListScreen } from './src/presentation/screens/WorkoutListScreen'
 type Route = 'home' | 'vault' | 'saved' | 'create' | 'edit' | 'detail' | 'runner' | 'complete' | 'history';
 
 export default function App() {
+  return (
+    <PostHogProvider apiKey={analyticsConfig.apiKey} options={{ host: analyticsConfig.host }}>
+      <SwingApp />
+    </PostHogProvider>
+  );
+}
+
+function SwingApp() {
+  const analytics = useAnalytics();
   const [container, setContainer] = useState<AppContainer | null>(null);
   const [initializationError, setInitializationError] = useState<string | null>(null);
   const [route, setRoute] = useState<Route>('home');
@@ -43,8 +55,9 @@ export default function App() {
       bellPlayer.play();
     } catch (error) {
       console.warn('Swing could not play the workout bell.', error);
+      analytics.error('workout bell playback failed', error);
     }
-  }, [bellPlayer]);
+  }, [analytics, bellPlayer]);
 
   const playBell = useCallback(() => {
     if (!bellStatus.isLoaded) {
@@ -66,20 +79,30 @@ export default function App() {
     void setAudioModeAsync({
       playsInSilentMode: true,
       interruptionMode: 'doNotMix'
-    }).catch((error) => console.warn('Swing could not configure workout audio.', error));
-  }, []);
+    }).catch((error) => {
+      console.warn('Swing could not configure workout audio.', error);
+      analytics.error('workout audio configuration failed', error);
+    });
+  }, [analytics]);
 
   const initialize = useCallback(async () => {
     setInitializationError(null);
     try {
       const repositories = await appConfig.persistence.createRepositories();
       setContainer(createAppContainer(repositories));
+      analytics.capture('app_initialized', { persistence: 'sqlite' });
+      analytics.info('app initialized', { persistence: 'sqlite' });
     } catch (error) {
+      analytics.error('app initialization failed', error, { persistence: 'sqlite' });
       setInitializationError(error instanceof Error ? error.message : 'Could not open the local database');
     }
-  }, []);
+  }, [analytics]);
 
   useEffect(() => { void initialize(); }, [initialize]);
+
+  useEffect(() => {
+    analytics.screen(route, { has_active_session: Boolean(activeSession) });
+  }, [activeSession, analytics, route]);
 
   const loadVault = useCallback(() => container?.workouts.listVault() ?? Promise.resolve([]), [container]);
   const loadSaved = useCallback(() => container?.workouts.listSaved() ?? Promise.resolve([]), [container]);
@@ -102,22 +125,51 @@ export default function App() {
   }
 
   const openWorkout = (workout: WorkoutTemplate) => {
+    analytics.capture('workout_selected', {
+      workout_id: workout.id,
+      source: workout.isVault ? 'vault' : 'library',
+      equipment: workout.equipment,
+      intensity: workout.intensity,
+      rounds: workout.rounds,
+      movements: workout.exercises.length
+    });
     setSelectedWorkout(workout);
     setRoute('detail');
   };
 
   const startWorkout = async (workout: WorkoutTemplate) => {
-    const session = await container.sessions.startWorkout(workout.id);
-    setActiveSession(session);
-    setRoute('runner');
+    try {
+      const session = await container.sessions.startWorkout(workout.id);
+      analytics.capture('workout_started', {
+        workout_id: workout.id,
+        source: workout.isVault ? 'vault' : 'library',
+        equipment: workout.equipment,
+        intensity: workout.intensity,
+        rounds: workout.rounds,
+        movements: workout.exercises.length
+      });
+      analytics.info('workout started', {
+        workout_id: workout.id,
+        source: workout.isVault ? 'vault' : 'library',
+        equipment: workout.equipment,
+        intensity: workout.intensity
+      });
+      setActiveSession(session);
+      setRoute('runner');
+    } catch (error) {
+      analytics.error('workout start failed', error, { workout_id: workout.id });
+    }
   };
 
-  const openTab = (tab: 'home' | 'vault' | 'saved' | 'history') => setRoute(tab);
+  const openTab = (tab: 'home' | 'vault' | 'saved' | 'history') => {
+    analytics.capture('bottom_navigation_clicked', { destination: tab, source: route });
+    setRoute(tab);
+  };
   const activeTab = route === 'home' || route === 'vault' || route === 'saved' || route === 'history' ? route : null;
 
   let screen;
   if (route === 'home') {
-    screen = <HomeScreen container={container} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
+    screen = <HomeScreen container={container} onCreate={() => { analytics.capture('home_action_clicked', { action: 'build_workout' }); setRoute('create'); }} onVault={() => { analytics.capture('home_action_clicked', { action: 'explore_vault' }); setRoute('vault'); }} onSaved={() => { analytics.capture('home_action_clicked', { action: 'open_library' }); setRoute('saved'); }} onResume={(session) => { analytics.capture('workout_resumed_from_home', { session_id: session.id, workout_id: session.workoutTemplateId }); setActiveSession(session); setRoute('runner'); }} />;
   } else if (route === 'vault') {
     screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
@@ -131,9 +183,10 @@ export default function App() {
   } else if (route === 'detail' && selectedWorkout) {
     screen = <WorkoutDetailScreen workout={selectedWorkout} onBack={() => setRoute(selectedWorkout.isVault ? 'vault' : 'saved')} onStart={() => void startWorkout(selectedWorkout)} onEdit={() => setRoute('edit')} />;
   } else if (route === 'runner' && activeSession) {
-    screen = <RunnerScreen container={container} initialSession={activeSession} onBell={playBell} onComplete={(session) => { setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
+    screen = <RunnerScreen container={container} initialSession={activeSession} onBell={playBell} onComplete={(session) => { const properties = { session_id: session.id, workout_id: session.workoutTemplateId, equipment: session.workoutSnapshot.equipment, intensity: session.workoutSnapshot.intensity, rounds: session.workoutSnapshot.rounds, movements: session.workoutSnapshot.exercises.length }; analytics.capture('workout_completed', properties); analytics.info('workout completed', properties); setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
   } else if (route === 'complete' && activeSession) {
-    screen = <CompletionScreen session={activeSession} onDone={() => { setActiveSession(null); setRoute('home'); }} onRepeat={async () => {
+    screen = <CompletionScreen session={activeSession} onDone={() => { analytics.capture('completion_action_clicked', { action: 'done', session_id: activeSession.id }); setActiveSession(null); setRoute('home'); }} onRepeat={async () => {
+      analytics.capture('completion_action_clicked', { action: 'repeat', session_id: activeSession.id });
       const workoutId = activeSession.workoutTemplateId;
       if (!workoutId) return;
       const workout = await container.workouts.getWorkout(workoutId);

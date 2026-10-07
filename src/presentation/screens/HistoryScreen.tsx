@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
+import { useAnalytics } from '../../analytics/useAnalytics';
 import type { WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
@@ -12,11 +13,20 @@ import { formatSessionDate } from '../formatters';
 type Props = { container: AppContainer; onBack: () => void };
 
 export function HistoryScreen({ container, onBack }: Props) {
+  const analytics = useAnalytics();
   const [sessions, setSessions] = useState<WorkoutSession[]>([]);
 
   useEffect(() => {
-    container.sessions.listHistory().then(setSessions);
-  }, [container]);
+    container.sessions.listHistory()
+      .then((history) => {
+        setSessions(history);
+        analytics.capture('history_loaded', {
+          session_count: history.length,
+          completed_count: history.filter((session) => session.status === 'completed').length
+        });
+      })
+      .catch((error) => analytics.error('history load failed', error));
+  }, [analytics, container]);
 
   return (
     <AppScreen eyebrow="Your effort" title="History" left={<BackButton onPress={onBack} />}>
