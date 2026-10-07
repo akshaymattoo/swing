@@ -13,7 +13,7 @@ import {
 import type { AppContainer } from "../../application/appContainer";
 import {
   DEFAULT_STARTUP_SECONDS,
-  equipmentOptions,
+  mvpEquipmentOptions,
   intensityOptions,
   type Equipment,
   type Intensity,
@@ -139,7 +139,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
 
         <FieldLabel>Equipment</FieldLabel>
         <ChoiceRow
-          values={equipmentOptions}
+          values={mvpEquipmentOptions}
           selected={equipment}
           onSelect={(value) => setEquipment(value as Equipment)}
         />

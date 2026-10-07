@@ -136,6 +136,13 @@ if (invalidDurations.length) {
   throw new Error(`Approved videos outside the 20–35 minute window: ${invalidDurations.map((video) => video.youtubeVideoId).join(', ')}`);
 }
 
+const invalidEquipment = videos.filter(
+  (video) => video.wodEligible && !['bodyweight', 'kettlebell'].includes(video.equipment)
+);
+if (invalidEquipment.length) {
+  throw new Error(`Approved videos outside the MVP equipment set: ${invalidEquipment.map((video) => video.youtubeVideoId).join(', ')}`);
+}
+
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await fs.writeFile(outputPath, `${JSON.stringify(videos, null, 2)}\n`);
 

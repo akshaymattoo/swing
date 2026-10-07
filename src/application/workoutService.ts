@@ -1,13 +1,14 @@
 import { createId } from '../domain/id';
 import type { WorkoutDraft, WorkoutTemplate } from '../domain/workout';
-import { workoutDurationSeconds } from '../domain/workout';
+import { isMvpEquipment, workoutDurationSeconds } from '../domain/workout';
 import type { WorkoutRepository } from './ports';
 
 export class WorkoutService {
   constructor(private readonly workouts: WorkoutRepository) {}
 
-  listVault() {
-    return this.workouts.listVault();
+  async listVault() {
+    const workouts = await this.workouts.listVault();
+    return workouts.filter((workout) => isMvpEquipment(workout.equipment));
   }
 
   listSaved() {

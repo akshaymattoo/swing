@@ -197,6 +197,10 @@ async function vaultSeedTests() {
   equal(casket?.exercises.length, 4, 'video-derived Vault workouts preserve the source movement structure');
   assert(vault.every((item) => item.name.length <= 18), 'Vault names stay compact enough for workout cards');
 
+  const visibleVault = await new WorkoutService(workouts).listVault();
+  equal(visibleVault.length, 20, 'the MVP Vault presents twenty kettlebell and bodyweight workouts');
+  assert(visibleVault.every((item) => ['bodyweight', 'kettlebell'].includes(item.equipment)), 'the MVP Vault hides dormant equipment');
+
   await seedVault(workouts);
   equal((await workouts.listVault()).length, 40, 'Vault refresh is idempotent');
 }
@@ -245,6 +249,7 @@ async function videoWorkoutOfDayTests() {
   const videos = new MemoryVideoWorkoutRepository([
     base,
     { ...base, id: 'video-b', youtubeVideoId: 'b', title: 'Workout B' },
+    { ...base, id: 'video-dumbbell', youtubeVideoId: 'd', title: 'Dumbbell Workout', equipment: 'dumbbells' },
     { ...base, id: 'video-ineligible', youtubeVideoId: 'c', title: 'Tutorial', wodEligible: false }
   ]);
   const assignments = new MemoryDailyVideoWorkoutRepository();
@@ -262,6 +267,16 @@ async function videoWorkoutOfDayTests() {
   const third = await service.getForDate(new Date(2026, 9, 1, 8));
   equal(third?.id, first?.id, 'after exhausting the catalog the least recently shown video rotates back in');
   equal((await assignments.listAll()).length, 3, 'one durable assignment is stored per local calendar day');
+
+  const oldDate = new Date(2026, 9, 2, 8);
+  const oldDateKey = '2026-10-02';
+  const staleAssignments = new MemoryDailyVideoWorkoutRepository([{
+    localDate: oldDateKey,
+    workoutVideoId: 'video-dumbbell',
+    selectedAt: oldDate.toISOString()
+  }]);
+  const replacement = await new VideoWorkoutOfDayService(videos, staleAssignments).getForDate(oldDate);
+  assert(replacement?.equipment !== 'dumbbells', 'a cached assignment using dormant equipment is replaced');
 }
 
 async function videoCatalogTests() {
@@ -270,11 +285,14 @@ async function videoCatalogTests() {
   assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
   assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell', 'dumbbells', 'bands'].includes(video.equipment)), 'equipment names are normalized');
   const eligible = videoCatalog.filter((video) => video.wodEligible);
-  equal(eligible.length, 50, 'the daily rotation contains exactly the approved MVP shortlist');
-  equal(new Set(approvedVideoIds).size, 50, 'the approval whitelist contains fifty unique videos');
+  equal(eligible.length, 60, 'the daily rotation contains exactly the approved MVP shortlist');
+  equal(new Set(approvedVideoIds).size, 60, 'the approval whitelist contains sixty unique videos');
   assert(eligible.every((video) => approvedVideoIds.includes(video.youtubeVideoId)), 'only manually approved videos enter the rotation');
   assert(approvedVideoIds.every((id) => eligible.some((video) => video.youtubeVideoId === id)), 'every approved video enters the rotation');
   assert(eligible.every((video) => video.durationSeconds >= 20 * 60 && video.durationSeconds <= 35 * 60), 'approved daily workouts are between twenty and thirty-five minutes');
+  assert(eligible.every((video) => ['bodyweight', 'kettlebell'].includes(video.equipment)), 'approved daily workouts use only MVP equipment');
+  equal(eligible.filter((video) => video.equipment === 'kettlebell').length, 30, 'the daily rotation has thirty kettlebell workouts');
+  equal(eligible.filter((video) => video.equipment === 'bodyweight').length, 30, 'the daily rotation has thirty bodyweight workouts');
   equal(equipmentEmoji('bodyweight'), '🤸', 'bodyweight has a distinct action emoji');
   equal(equipmentEmoji('kettlebell'), '🔔', 'kettlebells have a distinct action emoji');
   equal(equipmentEmoji('dumbbells'), '🏋️', 'dumbbells have a distinct action emoji');

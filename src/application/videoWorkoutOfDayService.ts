@@ -1,4 +1,5 @@
 import { localDateKey, type VideoWorkout } from '../domain/videoWorkout';
+import { isMvpEquipment } from '../domain/workout';
 import type { DailyVideoWorkoutRepository, VideoWorkoutRepository } from './ports';
 
 export class VideoWorkoutOfDayService {
@@ -12,10 +13,11 @@ export class VideoWorkoutOfDayService {
     const existing = await this.assignments.getByDate(dateKey);
     if (existing) {
       const video = await this.videos.getById(existing.workoutVideoId);
-      if (video?.isActive && video.wodEligible) return video;
+      if (video?.isActive && video.wodEligible && isMvpEquipment(video.equipment)) return video;
     }
 
-    const eligible = await this.videos.listEligible();
+    const eligible = (await this.videos.listEligible())
+      .filter((video) => isMvpEquipment(video.equipment));
     if (eligible.length === 0) return null;
 
     const history = await this.assignments.listAll();

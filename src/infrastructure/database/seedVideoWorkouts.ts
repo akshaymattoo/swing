@@ -20,7 +20,7 @@ type CatalogVideo = {
 
 export async function seedVideoWorkouts(database: DatabaseClient, repository: VideoWorkoutRepository) {
   const createdAt = new Date(0).toISOString();
-  const contentVersion = '2026-10-01T00:00:00.000Z';
+  const contentVersion = '2026-10-06T00:00:00.000Z';
   const metadataKey = 'video_workout_catalog_version';
   const existingVersion = await database.first<{ value: string }>('SELECT value FROM app_metadata WHERE key = ?', [metadataKey]);
   if (existingVersion?.value === contentVersion) return;

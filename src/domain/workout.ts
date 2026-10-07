@@ -1,6 +1,15 @@
 export const equipmentOptions = ['bodyweight', 'kettlebell', 'dumbbells', 'bands'] as const;
 export type Equipment = (typeof equipmentOptions)[number];
 
+// Keep the broader type for existing local data and an easy future re-launch,
+// while the current MVP presents only the two lowest-barrier options.
+export const mvpEquipmentOptions = ['bodyweight', 'kettlebell'] as const satisfies readonly Equipment[];
+export type MvpEquipment = (typeof mvpEquipmentOptions)[number];
+
+export function isMvpEquipment(equipment: Equipment): equipment is MvpEquipment {
+  return mvpEquipmentOptions.some((option) => option === equipment);
+}
+
 export const intensityOptions = ['mild', 'spicy', 'hot'] as const;
 export type Intensity = (typeof intensityOptions)[number];
 export const DEFAULT_STARTUP_SECONDS = 20;
