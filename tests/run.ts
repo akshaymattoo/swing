@@ -184,25 +184,37 @@ async function vaultSeedTests() {
   equal(spidey?.name, 'Spidey Bite', 'existing installs receive refreshed Vault names');
   equal(spidey?.intensity, 'hot', 'Spidey Bite reflects its high-density intensity');
   equal(spidey?.isSaved, true, 'Vault refresh preserves the saved state');
-  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1210, 'Spidey Bite is approximately twenty minutes including preparation');
+  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1105, 'Spidey Bite is approximately eighteen minutes including preparation');
   const vault = await workouts.listVault();
-  equal(vault.length, 40, 'Vault contains forty curated full-body workouts');
-  for (const equipment of ['bodyweight', 'kettlebell', 'dumbbells', 'bands'] as const) {
-    equal(vault.filter((item) => item.equipment === equipment).length, 10, `Vault contains ten ${equipment} workouts`);
-  }
+  equal(vault.length, 70, 'the seed catalog retains dormant equipment while expanding the active Vault');
+  equal(vault.filter((item) => item.equipment === 'bodyweight').length, 25, 'Vault contains twenty-five bodyweight workouts');
+  equal(vault.filter((item) => item.equipment === 'kettlebell').length, 25, 'Vault contains twenty-five kettlebell workouts');
+  equal(vault.filter((item) => item.equipment === 'dumbbells').length, 10, 'Vault retains ten dormant dumbbell workouts');
+  equal(vault.filter((item) => item.equipment === 'bands').length, 10, 'Vault retains ten dormant band workouts');
   assert(vault.every((item) => workoutDurationSeconds(item) >= 600), 'every Vault workout lasts at least ten minutes');
   assert(vault.every((item) => workoutDurationSeconds(item) <= 1_800), 'every Vault workout stays within thirty minutes');
   const casket = vault.find((item) => item.id === 'vault-kettlebell-3');
   equal(casket?.name, 'Wick Circuit', 'video-derived Vault workouts use compact creative names');
-  equal(casket?.exercises.length, 4, 'video-derived Vault workouts preserve the source movement structure');
+  equal(casket?.exercises.length, 5, 'full-body Vault workouts cover five easy-to-follow movement patterns');
   assert(vault.every((item) => item.name.length <= 18), 'Vault names stay compact enough for workout cards');
 
   const visibleVault = await new WorkoutService(workouts).listVault();
-  equal(visibleVault.length, 20, 'the MVP Vault presents twenty kettlebell and bodyweight workouts');
+  equal(visibleVault.length, 50, 'the MVP Vault presents fifty kettlebell and bodyweight workouts');
+  equal(visibleVault.filter((item) => item.equipment === 'bodyweight').length, 25, 'the MVP Vault balances twenty-five bodyweight workouts');
+  equal(visibleVault.filter((item) => item.equipment === 'kettlebell').length, 25, 'the MVP Vault balances twenty-five kettlebell workouts');
   assert(visibleVault.every((item) => ['bodyweight', 'kettlebell'].includes(item.equipment)), 'the MVP Vault hides dormant equipment');
+  const clearMovements = new Set([
+    'Air squats', 'Alternating lunges', 'Bent-over rows', 'Bird dogs', 'Chair squats',
+    'Dead bugs', 'Floor press', 'Glute bridges', 'Goblet squats', 'High knees', 'Kettlebell deadlifts',
+    'Kettlebell swings', 'Kneeling push-ups', 'March in place', 'Mountain climbers', 'Overhead press',
+    'Fast squats', 'Plank hold', 'Plank shoulder taps', 'Push-ups', 'Reverse lunges', 'Side lunges', 'Skater steps',
+    'Slow squats', 'Standing calf raises', 'Standing knee drives', 'Step-back burpees', 'Step jacks',
+    'Sumo squats', 'Superman lifts', 'Supported rows', 'Suitcase march', 'Wall push-ups'
+  ]);
+  assert(visibleVault.every((item) => item.exercises.every((exercise) => clearMovements.has(exercise.name))), 'every visible movement uses the audited plain-language vocabulary');
 
   await seedVault(workouts);
-  equal((await workouts.listVault()).length, 40, 'Vault refresh is idempotent');
+  equal((await workouts.listVault()).length, 70, 'Vault refresh is idempotent');
 }
 
 async function dailyWorkoutTests() {

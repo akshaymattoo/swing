@@ -21,54 +21,56 @@ type Seed = {
 // Spicy: sustained full-body work with moderate density or one demanding compound pattern.
 // Hot: short recovery plus explosive, ballistic, or repeated multi-joint work that is hard to sustain.
 const seeds: Seed[] = [
-  { id: 'vault-bodyweight-1', name: 'Spidey Bite', emoji: '🕷️', equipment: 'bodyweight', intensity: 'hot', rounds: 8, workSeconds: 40, restSeconds: 10, exercises: ['Pull-ups', 'Push-ups', 'Air squats'] },
-  { id: 'vault-bodyweight-2', name: 'Mogambo Mayhem', emoji: '😈', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 35, restSeconds: 15, exercises: ['Burpees', 'Mountain climbers', 'Reverse lunges'] },
-  { id: 'vault-bodyweight-3', name: 'Krrish Kalesh', emoji: '🌪️', equipment: 'bodyweight', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 20, exercises: ['Squat jumps', 'Push-ups', 'High knees', 'Plank jacks'] },
-  { id: 'vault-bodyweight-4', name: 'Bat Base', emoji: '🦇', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 35, restSeconds: 20, exercises: ['Bodyweight good mornings', 'Air squats', 'Push-ups', 'Prone W raises', 'Dead bugs'] },
-  { id: 'vault-bodyweight-5', name: 'Pushpa Fire', emoji: '🌺', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Squat to knee drive', 'Hand-release push-ups', 'Bear crawls', 'Single-leg glute bridges', 'Plank shoulder taps'] },
-  { id: 'vault-bodyweight-6', name: 'Panther Pounce', emoji: '🐾', equipment: 'bodyweight', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 15, exercises: ['Skater hops', 'Push-up to rotation', 'Split squats', 'Superman pull-downs', 'Mountain climbers'] },
-  { id: 'vault-bodyweight-7', name: 'Zindagi Zen', emoji: '🌤️', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 20, exercises: ['Tempo squats', 'Kneeling push-ups', 'Reverse snow angels', 'Glute bridge march', 'Bird dogs'] },
-  { id: 'vault-bodyweight-8', name: 'Rocky Rumble', emoji: '🥊', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 45, restSeconds: 15, exercises: ['Squat thrusts', 'Push-ups', 'Alternating lunges', 'Prone swimmers', 'Hollow hold'] },
-  { id: 'vault-bodyweight-9', name: 'Hanuman Hustle', emoji: '🔥', equipment: 'bodyweight', intensity: 'hot', rounds: 5, workSeconds: 35, restSeconds: 15, exercises: ['Burpees', 'Pike push-ups', 'Jump lunges', 'Superman pull-downs', 'Plank knee drives'] },
-  { id: 'vault-bodyweight-10', name: 'Wednesday Chaos', emoji: '🖤', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Cossack squats', 'Slow push-ups', 'Crab toe touches', 'Reverse plank marches', 'Dead bugs'] },
-  {
-    id: 'vault-kettlebell-1', name: 'Rocky Bell', emoji: '🥊', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20,
-    exercises: ['Kettlebell swings', 'Single-arm presses', 'Front-rack squats'],
-    sourceTitle: 'The BEST Kettlebell Workout For Anyone (Beginner/Advanced)', sourceUrl: 'https://www.youtube.com/watch?v=zGxnnKrvDvY'
-  },
-  {
-    id: 'vault-kettlebell-2', name: 'Pathaan Fury', emoji: '🔥', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20,
-    exercises: ['Single-arm swings', 'Front-rack squats', 'High pulls', 'Single-arm presses', 'Push-ups'],
-    sourceTitle: 'Establishing Consistency', sourceUrl: 'https://www.youtube.com/watch?v=cVmcf7jZq3U'
-  },
-  {
-    id: 'vault-kettlebell-3', name: 'Wick Circuit', emoji: '🪦', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 45, restSeconds: 15,
-    exercises: ['Bent-over rows', 'Push press', 'Goblet squats', 'Push-ups'],
-    sourceTitle: 'FULL UNEDITED - The CASKET Double Kettlebell Ladder Workout For Time', sourceUrl: 'https://www.youtube.com/watch?v=JayvrrXJPlQ'
-  },
-  {
-    id: 'vault-kettlebell-4', name: 'Shaktimaan Switch', emoji: '⚡', equipment: 'kettlebell', intensity: 'spicy', rounds: 5, workSeconds: 45, restSeconds: 15,
-    exercises: ['Clean, squat and reverse lunge', 'Row, waiter clean and press'],
-    sourceTitle: '15 Minute Follow Along Kettlebell Workout: Full Body Strength and Conditioning', sourceUrl: 'https://www.youtube.com/watch?v=jeRYegot0iU'
-  },
-  {
-    id: 'vault-kettlebell-5', name: 'Avengers Assemble', emoji: '🛡️', equipment: 'kettlebell', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 20,
-    exercises: ['Kettlebell swings', 'Single-arm rows', 'Cleans', 'Goblet squats', 'Snatches'],
-    sourceTitle: "C.A.R.s, Get Up's, & FUNctional Fitness w/Peter Nieman | Sessions Vol. 4", sourceUrl: 'https://www.youtube.com/watch?v=6nakYJVxk-8'
-  },
-  {
-    id: 'vault-kettlebell-6', name: 'Deadpool Buffet', emoji: '🌮', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 45, restSeconds: 15,
-    exercises: ['Snatch to squat', 'Swing to push-up', 'High pulls', 'Clean to reverse lunge'],
-    sourceTitle: 'Can you really get shredded in 20 minutes?', sourceUrl: 'https://www.youtube.com/watch?v=eUrYcHQcf4o'
-  },
-  {
-    id: 'vault-kettlebell-7', name: 'Matrix Protocol', emoji: '🕶️', equipment: 'kettlebell', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 20,
-    exercises: ['Single-arm snatches', 'Single-arm thrusters', 'Single-arm rows'],
-    sourceTitle: 'One Kettlebell = An Entire Gym', sourceUrl: 'https://www.youtube.com/watch?v=tmX3UZEQdoI'
-  },
-  { id: 'vault-kettlebell-8', name: 'Baahubali Armor', emoji: '⚔️', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 45, restSeconds: 15, exercises: ['Kettlebell deadlifts', 'Kettlebell swings', 'Clean and press', 'Front-rack squats', 'Single-arm rows', 'Suitcase march'] },
-  { id: 'vault-kettlebell-9', name: 'Mando March', emoji: '🪐', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Half-kneeling press', 'Supported rows', 'Suitcase march'] },
-  { id: 'vault-kettlebell-10', name: 'Gadar Rebellion', emoji: '🚂', equipment: 'kettlebell', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Alternating cleans', 'Push press', 'Front-rack reverse lunges', 'Gorilla rows'] },
+  { id: 'vault-bodyweight-1', name: 'Spidey Bite', emoji: '🕷️', equipment: 'bodyweight', intensity: 'hot', rounds: 5, workSeconds: 40, restSeconds: 15, exercises: ['Push-ups', 'Air squats', 'Mountain climbers', 'Superman lifts'] },
+  { id: 'vault-bodyweight-2', name: 'Mogambo Mayhem', emoji: '😈', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 35, restSeconds: 20, exercises: ['Air squats', 'Kneeling push-ups', 'Reverse lunges', 'Dead bugs', 'High knees'] },
+  { id: 'vault-bodyweight-3', name: 'Krrish Kalesh', emoji: '🌪️', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Fast squats', 'Push-ups', 'High knees', 'Glute bridges', 'Plank shoulder taps'] },
+  { id: 'vault-bodyweight-4', name: 'Bat Base', emoji: '🦇', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 35, restSeconds: 25, exercises: ['Air squats', 'Wall push-ups', 'Glute bridges', 'Bird dogs', 'Standing knee drives'] },
+  { id: 'vault-bodyweight-5', name: 'Pushpa Fire', emoji: '🌺', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Air squats', 'Push-ups', 'Reverse lunges', 'Superman lifts', 'Plank shoulder taps'] },
+  { id: 'vault-bodyweight-6', name: 'Panther Pounce', emoji: '🐾', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Skater steps', 'Push-ups', 'Alternating lunges', 'Superman lifts', 'Mountain climbers'] },
+  { id: 'vault-bodyweight-7', name: 'Zindagi Zen', emoji: '🌤️', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Slow squats', 'Kneeling push-ups', 'Glute bridges', 'Bird dogs', 'Dead bugs'] },
+  { id: 'vault-bodyweight-8', name: 'Rocky Rumble', emoji: '🥊', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Step-back burpees', 'Push-ups', 'Alternating lunges', 'Superman lifts', 'Plank hold'] },
+  { id: 'vault-bodyweight-9', name: 'Hanuman Hustle', emoji: '🔥', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 35, restSeconds: 15, exercises: ['Step-back burpees', 'Kneeling push-ups', 'Reverse lunges', 'Superman lifts', 'Mountain climbers'] },
+  { id: 'vault-bodyweight-10', name: 'Wednesday Walk', emoji: '🖤', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Side lunges', 'Wall push-ups', 'Glute bridges', 'Bird dogs', 'Standing knee drives'] },
+  { id: 'vault-bodyweight-11', name: 'Neo No Gear', emoji: '🕶️', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Air squats', 'Push-ups', 'Alternating lunges', 'Dead bugs', 'Step jacks'] },
+  { id: 'vault-bodyweight-12', name: 'Barbie Bounce', emoji: '💖', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 35, restSeconds: 20, exercises: ['Sumo squats', 'Kneeling push-ups', 'Glute bridges', 'Plank shoulder taps', 'High knees'] },
+  { id: 'vault-bodyweight-13', name: 'Mando Basics', emoji: '🪐', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Chair squats', 'Wall push-ups', 'Standing calf raises', 'Bird dogs', 'March in place'] },
+  { id: 'vault-bodyweight-14', name: 'Dhoom Dash', emoji: '🏍️', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Fast squats', 'Push-ups', 'Mountain climbers', 'Alternating lunges', 'High knees'] },
+  { id: 'vault-bodyweight-15', name: 'Gully Groove', emoji: '🎤', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Air squats', 'Kneeling push-ups', 'Side lunges', 'Superman lifts', 'Step jacks'] },
+  { id: 'vault-bodyweight-16', name: 'Jadoo Jumpstart', emoji: '👽', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 35, restSeconds: 25, exercises: ['Chair squats', 'Wall push-ups', 'Glute bridges', 'Dead bugs', 'March in place'] },
+  { id: 'vault-bodyweight-17', name: 'Thor Thunder', emoji: '🔨', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Step-back burpees', 'Push-ups', 'Air squats', 'Plank shoulder taps', 'High knees'] },
+  { id: 'vault-bodyweight-18', name: 'Queen Circuit', emoji: '👑', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Sumo squats', 'Kneeling push-ups', 'Reverse lunges', 'Bird dogs', 'Mountain climbers'] },
+  { id: 'vault-bodyweight-19', name: 'Hulk at Home', emoji: '💚', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Fast squats', 'Push-ups', 'Reverse lunges', 'Superman lifts', 'Mountain climbers'] },
+  { id: 'vault-bodyweight-20', name: 'Lasso Light', emoji: '⚽', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Air squats', 'Wall push-ups', 'Glute bridges', 'Bird dogs', 'Step jacks'] },
+  { id: 'vault-bodyweight-21', name: 'Furiosa Flow', emoji: '🏜️', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 35, restSeconds: 20, exercises: ['Air squats', 'Push-ups', 'Alternating lunges', 'Dead bugs', 'High knees'] },
+  { id: 'vault-bodyweight-22', name: 'RRR Rush', emoji: '🐯', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Step-back burpees', 'Air squats', 'Push-ups', 'Mountain climbers', 'Glute bridges'] },
+  { id: 'vault-bodyweight-23', name: 'Kantara Calm', emoji: '🌲', equipment: 'bodyweight', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Slow squats', 'Wall push-ups', 'Reverse lunges', 'Bird dogs', 'March in place'] },
+  { id: 'vault-bodyweight-24', name: 'Marvel Move', emoji: '✨', equipment: 'bodyweight', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Sumo squats', 'Kneeling push-ups', 'Side lunges', 'Superman lifts', 'Plank shoulder taps'] },
+  { id: 'vault-bodyweight-25', name: 'Singham Sprint', emoji: '🦁', equipment: 'bodyweight', intensity: 'hot', rounds: 4, workSeconds: 35, restSeconds: 15, exercises: ['Fast squats', 'Push-ups', 'Alternating lunges', 'Mountain climbers', 'High knees'] },
+  { id: 'vault-kettlebell-1', name: 'Rocky Bell', emoji: '🥊', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-2', name: 'Pathaan Fury', emoji: '🔥', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Floor press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-3', name: 'Wick Circuit', emoji: '🪦', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Mountain climbers'] },
+  { id: 'vault-kettlebell-4', name: 'Shaktimaan Bell', emoji: '⚡', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Reverse lunges', 'Bent-over rows', 'Overhead press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-5', name: 'Avengers Bell', emoji: '🛡️', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Push-ups', 'Suitcase march'] },
+  { id: 'vault-kettlebell-6', name: 'Deadpool Bell', emoji: '🌮', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Reverse lunges', 'Bent-over rows', 'Floor press', 'Mountain climbers'] },
+  { id: 'vault-kettlebell-7', name: 'Matrix Bell', emoji: '🕶️', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Dead bugs'] },
+  { id: 'vault-kettlebell-8', name: 'Baahubali Bell', emoji: '⚔️', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-9', name: 'Mando March', emoji: '🪐', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Chair squats', 'Supported rows', 'Floor press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-10', name: 'Gadar Bell', emoji: '🚂', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'High knees'] },
+  { id: 'vault-kettlebell-11', name: 'Barbie Bell', emoji: '💖', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Supported rows', 'Floor press', 'March in place'] },
+  { id: 'vault-kettlebell-12', name: 'Thor Bell', emoji: '🔨', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Glute bridges'] },
+  { id: 'vault-kettlebell-13', name: 'Jadoo Bell', emoji: '👽', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 35, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Chair squats', 'Supported rows', 'Floor press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-14', name: 'Dhoom Bell', emoji: '🏍️', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Reverse lunges', 'Bent-over rows', 'Push-ups', 'High knees'] },
+  { id: 'vault-kettlebell-15', name: 'Gully Bell', emoji: '🎤', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Dead bugs'] },
+  { id: 'vault-kettlebell-16', name: 'Panther Bell', emoji: '🐾', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Floor press', 'Mountain climbers'] },
+  { id: 'vault-kettlebell-17', name: 'Queen Bell', emoji: '👑', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Reverse lunges', 'Supported rows', 'Floor press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-18', name: 'Hulk Bell', emoji: '💚', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Mountain climbers'] },
+  { id: 'vault-kettlebell-19', name: 'Lasso Bell', emoji: '⚽', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Chair squats', 'Supported rows', 'Floor press', 'March in place'] },
+  { id: 'vault-kettlebell-20', name: 'Furiosa Bell', emoji: '🏜️', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell swings', 'Reverse lunges', 'Bent-over rows', 'Overhead press', 'Suitcase march'] },
+  { id: 'vault-kettlebell-21', name: 'RRR Bell', emoji: '🐯', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Goblet squats', 'Bent-over rows', 'Push-ups', 'High knees'] },
+  { id: 'vault-kettlebell-22', name: 'Kantara Bell', emoji: '🌲', equipment: 'kettlebell', intensity: 'mild', rounds: 3, workSeconds: 40, restSeconds: 25, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Supported rows', 'Floor press', 'Bird dogs'] },
+  { id: 'vault-kettlebell-23', name: 'Marvel Bell', emoji: '✨', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Bent-over rows', 'Overhead press', 'Plank shoulder taps'] },
+  { id: 'vault-kettlebell-24', name: 'Singham Bell', emoji: '🦁', equipment: 'kettlebell', intensity: 'hot', rounds: 4, workSeconds: 40, restSeconds: 15, exercises: ['Kettlebell swings', 'Reverse lunges', 'Bent-over rows', 'Floor press', 'Mountain climbers'] },
+  { id: 'vault-kettlebell-25', name: 'Pushpa Bell', emoji: '🌺', equipment: 'kettlebell', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Kettlebell deadlifts', 'Goblet squats', 'Bent-over rows', 'Push-ups', 'Suitcase march'] },
   { id: 'vault-dumbbells-1', name: 'Dhoom Dhamaka', emoji: '🏍️', equipment: 'dumbbells', intensity: 'spicy', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Thrusters', 'Bent-over rows', 'Romanian deadlifts'] },
   { id: 'vault-dumbbells-2', name: 'Munna Muscle', emoji: '😎', equipment: 'dumbbells', intensity: 'mild', rounds: 4, workSeconds: 40, restSeconds: 20, exercises: ['Goblet squats', 'Floor press', 'Alternating rows'] },
   { id: 'vault-dumbbells-3', name: 'Hulk Havoc', emoji: '💚', equipment: 'dumbbells', intensity: 'hot', rounds: 5, workSeconds: 45, restSeconds: 15, exercises: ['Devil press', 'Reverse lunges', 'Renegade rows', 'Thrusters'] },
@@ -93,7 +95,7 @@ const seeds: Seed[] = [
 
 export async function seedVault(workouts: WorkoutRepository) {
   const createdAt = new Date(0).toISOString();
-  const contentVersion = '2026-10-05T18:00:00.000Z';
+  const contentVersion = '2026-10-06T18:00:00.000Z';
   for (const seed of seeds) {
     const { sourceTitle: _sourceTitle, sourceUrl: _sourceUrl, ...template } = seed;
     const existing = await workouts.getById(seed.id);
