@@ -18,7 +18,7 @@ const config: ExpoConfig = {
       backgroundColor: palette.text
     }
   },
-  plugins: ['expo-sqlite', 'expo-localization']
+  plugins: ['expo-sqlite', 'expo-localization', 'expo-asset']
 };
 
 export default config;
