@@ -6,6 +6,7 @@ const config: ExpoConfig = {
   name: 'Swing',
   slug: 'swing',
   version: '1.0.0',
+  icon: './assets/brand/app-icon.png',
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
   ios: {
@@ -15,10 +16,28 @@ const config: ExpoConfig = {
   android: {
     package: 'com.akshaymattoo.swing',
     adaptiveIcon: {
-      backgroundColor: palette.text
+      foregroundImage: './assets/brand/adaptive-icon.png',
+      backgroundColor: palette.background
     }
   },
-  plugins: ['expo-sqlite', 'expo-localization', 'expo-asset']
+  plugins: [
+    'expo-sqlite',
+    'expo-localization',
+    'expo-asset',
+    [
+      'expo-splash-screen',
+      {
+        image: './assets/brand/splash-icon.png',
+        imageWidth: 210,
+        resizeMode: 'contain',
+        backgroundColor: palette.background,
+        dark: {
+          image: './assets/brand/splash-icon.png',
+          backgroundColor: palette.background
+        }
+      }
+    ]
+  ]
 };
 
 export default config;
