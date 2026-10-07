@@ -15,20 +15,23 @@ type CatalogVideo = {
   focus: string;
   publishedText: string;
   contentKind: VideoContentKind;
+  viewCount: number;
   wodEligible: boolean;
 };
 
 export async function seedVideoWorkouts(database: DatabaseClient, repository: VideoWorkoutRepository) {
   const createdAt = new Date(0).toISOString();
-  const contentVersion = '2026-10-06T00:00:00.000Z';
+  const contentVersion = '2026-10-07T03:10:18.213Z';
   const metadataKey = 'video_workout_catalog_version';
   const existingVersion = await database.first<{ value: string }>('SELECT value FROM app_metadata WHERE key = ?', [metadataKey]);
   if (existingVersion?.value === contentVersion) return;
 
   await database.transaction(async () => {
+    await database.run('UPDATE workout_videos SET wod_eligible = 0, is_active = 0');
     for (const item of catalog as CatalogVideo[]) {
+      const { viewCount: _viewCount, ...catalogVideo } = item;
       const video: VideoWorkout = {
-        ...item,
+        ...catalogVideo,
         isActive: true,
         createdAt,
         updatedAt: contentVersion

@@ -38,10 +38,10 @@ The core test suite compiles separately and validates the timer, service/reposit
 The app ships with a generated catalog containing regular YouTube videos only. Shorts are excluded. To rebuild it from an updated CSV:
 
 ```bash
-npm run catalog:build -- /absolute/path/to/workout_catalog.csv
+npm run catalog:build -- /absolute/path/to/workouts_flat.json
 ```
 
-The importer normalizes equipment and duration values, removes duplicate video IDs, and classifies content. Only IDs in `scripts/approved-video-workout-ids.json` are marked for daily rotation; the importer fails if an approved video disappears or falls outside the 20–35 minute window.
+The JSON is the source of truth. The importer keeps long-form kettlebell and bodyweight workouts from 10 to under 40 minutes, excludes tutorials, mobility, body-part-only videos, and double-kettlebell-only sessions, then selects the 30 most-viewed qualifying videos for each equipment category. It regenerates both the bundled catalog and `scripts/approved-video-workout-ids.json`.
 
 ## Change the colors
 

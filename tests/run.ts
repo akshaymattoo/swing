@@ -294,19 +294,28 @@ async function videoWorkoutOfDayTests() {
 }
 
 async function videoCatalogTests() {
-  equal(videoCatalog.length, 601, 'the generated catalog includes every regular video from the source CSV');
+  equal(videoCatalog.length, 352, 'the generated catalog includes every qualifying video from workouts_flat.json');
   equal(new Set(videoCatalog.map((video) => video.youtubeVideoId)).size, videoCatalog.length, 'YouTube video IDs are unique');
   assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
-  assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell', 'dumbbells', 'bands'].includes(video.equipment)), 'equipment names are normalized');
+  assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell'].includes(video.equipment)), 'the source catalog contains only active MVP equipment');
   const eligible = videoCatalog.filter((video) => video.wodEligible);
   equal(eligible.length, 60, 'the daily rotation contains exactly the approved MVP shortlist');
   equal(new Set(approvedVideoIds).size, 60, 'the approval whitelist contains sixty unique videos');
-  assert(eligible.every((video) => approvedVideoIds.includes(video.youtubeVideoId)), 'only manually approved videos enter the rotation');
+  assert(eligible.every((video) => approvedVideoIds.includes(video.youtubeVideoId)), 'only ranked videos enter the rotation');
   assert(approvedVideoIds.every((id) => eligible.some((video) => video.youtubeVideoId === id)), 'every approved video enters the rotation');
-  assert(eligible.every((video) => video.durationSeconds >= 20 * 60 && video.durationSeconds <= 35 * 60), 'approved daily workouts are between twenty and thirty-five minutes');
+  assert(eligible.every((video) => video.durationSeconds >= 10 * 60 && video.durationSeconds < 40 * 60), 'daily workouts are at least ten and under forty minutes');
   assert(eligible.every((video) => ['bodyweight', 'kettlebell'].includes(video.equipment)), 'approved daily workouts use only MVP equipment');
   equal(eligible.filter((video) => video.equipment === 'kettlebell').length, 30, 'the daily rotation has thirty kettlebell workouts');
   equal(eligible.filter((video) => video.equipment === 'bodyweight').length, 30, 'the daily rotation has thirty bodyweight workouts');
+  for (const equipment of ['kettlebell', 'bodyweight'] as const) {
+    const expectedTopIds = videoCatalog
+      .filter((video) => video.equipment === equipment)
+      .sort((left, right) => right.viewCount - left.viewCount || left.youtubeVideoId.localeCompare(right.youtubeVideoId))
+      .slice(0, 30)
+      .map((video) => video.youtubeVideoId);
+    const selectedIds = eligible.filter((video) => video.equipment === equipment).map((video) => video.youtubeVideoId);
+    assert(expectedTopIds.every((id) => selectedIds.includes(id)), `the ${equipment} rotation contains the thirty most-viewed qualifying videos`);
+  }
   equal(equipmentEmoji('bodyweight'), '🤸', 'bodyweight has a distinct action emoji');
   equal(equipmentEmoji('kettlebell'), '🔔', 'kettlebells have a distinct action emoji');
   equal(equipmentEmoji('dumbbells'), '🏋️', 'dumbbells have a distinct action emoji');

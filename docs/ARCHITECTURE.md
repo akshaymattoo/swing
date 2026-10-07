@@ -54,7 +54,7 @@ The session snapshot protects history when a workout template changes later.
 
 `VideoWorkoutOfDayService` first returns an existing assignment for the local date. For a new day it selects from active, eligible videos by lowest display count and then oldest display date. As a result, every eligible video is shown before one repeats. A date-based hash provides a stable tie-break without coupling the service to SQLite.
 
-The checked-in catalog is generated from the source CSV. Regular videos are retained, Shorts are excluded, and equipment and durations are normalized. Daily eligibility comes from the manually reviewed ID whitelist in `scripts/approved-video-workout-ids.json`; every approved video must remain between 20 and 35 minutes. Catalog seeding is versioned in `app_metadata`, so the full import only runs when the bundled catalog changes.
+The checked-in catalog is generated from `workouts_flat.json`, which is the source of truth. The importer retains long-form, broad/full-body kettlebell and bodyweight workouts from 10 to under 40 minutes, excludes tutorials, mobility, body-part-only videos, and double-kettlebell-only sessions, and ranks candidates by approximate view count. The daily rotation contains the 30 most-viewed qualifying videos in each equipment category. `scripts/approved-video-workout-ids.json` is a generated record of that selection. Catalog seeding is versioned in `app_metadata`; before importing a new version, previous catalog rows are made inactive so removed selections cannot remain in the rotation.
 
 ## Timer correctness
 
