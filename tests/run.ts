@@ -194,7 +194,7 @@ async function vaultSeedTests() {
   assert(vault.every((item) => workoutDurationSeconds(item) >= 600), 'every Vault workout lasts at least ten minutes');
   assert(vault.every((item) => workoutDurationSeconds(item) <= 1_800), 'every Vault workout stays within thirty minutes');
   const casket = vault.find((item) => item.id === 'vault-kettlebell-3');
-  equal(casket?.name, 'Wick Circuit', 'video-derived Vault workouts use compact creative names');
+  equal(casket?.name, "Wick's Last Round", 'Vault workouts use compact creative names');
   equal(casket?.exercises.length, 5, 'full-body Vault workouts cover five easy-to-follow movement patterns');
   assert(vault.every((item) => item.name.length <= 18), 'Vault names stay compact enough for workout cards');
 
