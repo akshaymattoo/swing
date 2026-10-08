@@ -12,7 +12,10 @@ const config: ExpoConfig = {
   userInterfaceStyle: 'automatic',
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.akshaymattoo.swing'
+    bundleIdentifier: 'com.akshaymattoo.swing',
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false
+    }
   },
   android: {
     package: 'com.akshaymattoo.swing',
