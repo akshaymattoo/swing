@@ -5,6 +5,7 @@ import palette from './src/theme/palette.json';
 const config: ExpoConfig = {
   name: 'Swing',
   slug: 'swing',
+  owner: 'akshaymattoo',
   version: '1.0.0',
   icon: './assets/brand/app-icon.png',
   orientation: 'portrait',
@@ -18,6 +19,11 @@ const config: ExpoConfig = {
     adaptiveIcon: {
       foregroundImage: './assets/brand/adaptive-icon.png',
       backgroundColor: palette.background
+    }
+  },
+  extra: {
+    eas: {
+      projectId: '7e7fb441-2538-40f1-a6c0-b9c4d53045a7'
     }
   },
   plugins: [
