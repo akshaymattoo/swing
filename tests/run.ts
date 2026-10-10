@@ -187,7 +187,7 @@ async function vaultSeedTests() {
   equal(spidey?.name, 'Spidey Bite', 'existing installs receive refreshed Vault names');
   equal(spidey?.intensity, 'hot', 'Spidey Bite reflects its high-density intensity');
   equal(spidey?.isSaved, true, 'Vault refresh preserves the saved state');
-  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1105, 'Spidey Bite is approximately eighteen minutes including preparation');
+  equal(spidey ? workoutDurationSeconds(spidey) : 0, 1145, 'Spidey Bite includes the one-minute preparation period');
   const vault = await workouts.listVault();
   equal(vault.length, 70, 'the seed catalog retains dormant equipment while expanding the active Vault');
   equal(vault.filter((item) => item.equipment === 'bodyweight').length, 25, 'Vault contains twenty-five bodyweight workouts');
