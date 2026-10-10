@@ -14,7 +14,7 @@ import { WorkoutCard } from '../components/WorkoutCard';
 
 type Props = {
   title?: string;
-  eyebrow: string;
+  eyebrow?: string;
   description?: string;
   emptyTitle?: string;
   emptyMessage: string;
