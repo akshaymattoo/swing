@@ -173,7 +173,7 @@ function SwingApp() {
   } else if (route === 'vault') {
     screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
-    screen = <WorkoutListScreen eyebrow="Built for you" title="My Workouts" description="Workouts you build, ready whenever you are." emptyTitle="Build your first workout" emptyMessage="Create a workout with your own movements and timing." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
+    screen = <WorkoutListScreen eyebrow="Built for you" emptyTitle="" emptyMessage="Create a workout with your own movements and timing." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
   } else if (route === 'history') {
     screen = <HistoryScreen container={container} onBack={() => setRoute('home')} />;
   } else if (route === 'create') {

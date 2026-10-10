@@ -13,7 +13,7 @@ import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { WorkoutCard } from '../components/WorkoutCard';
 
 type Props = {
-  title: string;
+  title?: string;
   eyebrow: string;
   description?: string;
   emptyTitle?: string;
@@ -162,7 +162,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       ) : workouts.length ? workouts.map(renderWorkout) : (
         <View style={styles.empty}>
           <View style={styles.emptyIcon}><EditorialIcon color={colors.text} name="build" size={38} /></View>
-          <Text style={styles.emptyTitle}>{emptyTitle}</Text>
+          {emptyTitle ? <Text style={styles.emptyTitle}>{emptyTitle}</Text> : null}
           <Text style={styles.emptyCopy}>{emptyMessage}</Text>
           {onCreate ? <ActionButton onPress={onCreate}>Build a workout</ActionButton> : null}
         </View>
