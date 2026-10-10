@@ -133,11 +133,9 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <AppScreen
-        eyebrow={isEditingCopy ? "Edit a copy" : isEditing ? "Edit workout" : "New workout"}
-        title="Make it yours."
+        title={isEditing && !isEditingCopy ? "Edit" : "Build"}
         left={<BackButton onPress={onBack} />}
       >
-        <FieldLabel>Name and emoji</FieldLabel>
         <View style={styles.nameRow}>
           <TextInput
             value={emoji}
