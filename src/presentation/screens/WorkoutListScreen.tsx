@@ -33,13 +33,11 @@ const vaultEquipmentFilters: readonly VaultEquipmentFilter[] = ['all', 'bodyweig
 export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'Nothing here yet.', emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
   const analytics = useAnalytics();
   const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
   const [equipmentFilter, setEquipmentFilter] = useState<VaultEquipmentFilter>('all');
 
   useEffect(() => {
     load().then((loaded) => {
       setWorkouts(loaded);
-      setFeaturedIndex(0);
       analytics.capture('workout_list_loaded', {
         list: showFeatured ? 'vault' : 'library',
         workout_count: loaded.length
@@ -52,7 +50,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
   const visibleWorkouts = showFeatured && equipmentFilter !== 'all'
     ? workouts.filter((workout) => workout.equipment === equipmentFilter)
     : workouts;
-  const featuredWorkout = showFeatured ? visibleWorkouts[featuredIndex] : null;
+  const featuredWorkout = showFeatured ? visibleWorkouts[0] : null;
   const remainingWorkouts = featuredWorkout
     ? visibleWorkouts.filter((workout) => workout.id !== featuredWorkout.id)
     : visibleWorkouts;
@@ -63,18 +61,6 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       to_equipment: filter
     });
     setEquipmentFilter(filter);
-    setFeaturedIndex(0);
-  };
-  const refreshWorkout = () => {
-    if (visibleWorkouts.length > 1) {
-      const nextIndex = (featuredIndex + 1) % visibleWorkouts.length;
-      analytics.capture('vault_featured_refreshed', {
-        equipment_filter: equipmentFilter,
-        previous_workout_id: visibleWorkouts[featuredIndex]?.id,
-        next_workout_id: visibleWorkouts[nextIndex]?.id
-      });
-      setFeaturedIndex(nextIndex);
-    }
   };
 
   const confirmDelete = (workout: WorkoutTemplate) => {
@@ -150,11 +136,6 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       ) : null}
       {featuredWorkout && onStartWorkout ? (
         <>
-          <View style={styles.featuredHeader}>
-            <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
-              <Text style={styles.refresh}>Refresh</Text>
-            </Pressable>
-          </View>
           <FeaturedWorkoutCard workout={featuredWorkout} onStart={() => onStartWorkout(featuredWorkout)} />
           <Text style={styles.sectionLabel}>MORE WORKOUTS</Text>
           {remainingWorkouts.map(renderWorkout)}
@@ -178,11 +159,7 @@ const styles = StyleSheet.create({
   filterOptionSelected: { backgroundColor: colors.text },
   filterText: { color: colors.textMuted, fontSize: 12, fontWeight: '800' },
   filterTextSelected: { color: colors.onPrimary },
-  featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
-  refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 6 },
-  refreshPressed: { backgroundColor: colors.surfaceRaised, opacity: 0.72 },
-  refresh: { color: colors.primary, fontSize: 13, fontWeight: '900' },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 64, gap: spacing.md },
   emptyIcon: { alignItems: 'center', backgroundColor: '#FFC83D', borderColor: colors.text, borderRadius: 36, borderWidth: 2, height: 72, justifyContent: 'center', width: 72 },
   emptyTitle: { color: colors.text, fontSize: 24, fontWeight: '900' },
