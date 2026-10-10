@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useAnalytics } from '../../analytics/useAnalytics';
-import type { WorkoutTemplate } from '../../domain/workout';
+import { equipmentLabel, type MvpEquipment, type WorkoutTemplate } from '../../domain/workout';
 import { colors } from '../../theme/colors';
 import { radii, spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
@@ -27,10 +27,14 @@ type Props = {
   onDeleteWorkout?: (workout: WorkoutTemplate) => Promise<void>;
 };
 
+type VaultEquipmentFilter = 'all' | MvpEquipment;
+const vaultEquipmentFilters: readonly VaultEquipmentFilter[] = ['all', 'bodyweight', 'kettlebell'];
+
 export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'Nothing here yet.', emptyMessage, load, onOpenWorkout, onBack, onCreate, showFeatured = false, onStartWorkout, onDeleteWorkout }: Props) {
   const analytics = useAnalytics();
   const [workouts, setWorkouts] = useState<WorkoutTemplate[]>([]);
   const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [equipmentFilter, setEquipmentFilter] = useState<VaultEquipmentFilter>('all');
 
   useEffect(() => {
     load().then((loaded) => {
@@ -45,16 +49,29 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
     }));
   }, [analytics, load, showFeatured]);
 
-  const featuredWorkout = showFeatured ? workouts[featuredIndex] : null;
-  const remainingWorkouts = featuredWorkout
-    ? workouts.filter((workout) => workout.id !== featuredWorkout.id)
+  const visibleWorkouts = showFeatured && equipmentFilter !== 'all'
+    ? workouts.filter((workout) => workout.equipment === equipmentFilter)
     : workouts;
+  const featuredWorkout = showFeatured ? visibleWorkouts[featuredIndex] : null;
+  const remainingWorkouts = featuredWorkout
+    ? visibleWorkouts.filter((workout) => workout.id !== featuredWorkout.id)
+    : visibleWorkouts;
+  const selectEquipmentFilter = (filter: VaultEquipmentFilter) => {
+    if (filter === equipmentFilter) return;
+    analytics.capture('vault_equipment_filter_changed', {
+      from_equipment: equipmentFilter,
+      to_equipment: filter
+    });
+    setEquipmentFilter(filter);
+    setFeaturedIndex(0);
+  };
   const refreshWorkout = () => {
-    if (workouts.length > 1) {
-      const nextIndex = (featuredIndex + 1) % workouts.length;
+    if (visibleWorkouts.length > 1) {
+      const nextIndex = (featuredIndex + 1) % visibleWorkouts.length;
       analytics.capture('vault_featured_refreshed', {
-        previous_workout_id: workouts[featuredIndex]?.id,
-        next_workout_id: workouts[nextIndex]?.id
+        equipment_filter: equipmentFilter,
+        previous_workout_id: visibleWorkouts[featuredIndex]?.id,
+        next_workout_id: visibleWorkouts[nextIndex]?.id
       });
       setFeaturedIndex(nextIndex);
     }
@@ -111,6 +128,26 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
           <Text style={styles.sectionLabel}>YOUR WORKOUTS</Text>
         </>
       ) : null}
+      {showFeatured && workouts.length ? (
+        <View accessibilityRole="tablist" style={styles.filterBar}>
+          {vaultEquipmentFilters.map((filter) => {
+            const selected = filter === equipmentFilter;
+            return (
+              <Pressable
+                accessibilityRole="tab"
+                accessibilityState={{ selected }}
+                key={filter}
+                onPress={() => selectEquipmentFilter(filter)}
+                style={[styles.filterOption, selected && styles.filterOptionSelected]}
+              >
+                <Text style={[styles.filterText, selected && styles.filterTextSelected]}>
+                  {filter === 'all' ? 'All' : equipmentLabel(filter)}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      ) : null}
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>
@@ -136,6 +173,11 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
 
 const styles = StyleSheet.create({
   description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
+  filterBar: { alignSelf: 'flex-start', backgroundColor: colors.surfaceRaised, borderColor: colors.border, borderRadius: radii.pill, borderWidth: 1, flexDirection: 'row', padding: 3 },
+  filterOption: { borderRadius: radii.pill, justifyContent: 'center', minHeight: 36, paddingHorizontal: spacing.md },
+  filterOptionSelected: { backgroundColor: colors.text },
+  filterText: { color: colors.textMuted, fontSize: 12, fontWeight: '800' },
+  filterTextSelected: { color: colors.onPrimary },
   featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
   refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 6 },
