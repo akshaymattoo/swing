@@ -29,7 +29,7 @@ export function HistoryScreen({ container, onBack }: Props) {
   }, [analytics, container]);
 
   return (
-    <AppScreen eyebrow="Your effort" title="History" left={<BackButton onPress={onBack} />}>
+    <AppScreen title="History" left={<BackButton onPress={onBack} />}>
       {sessions.length ? sessions.map((session) => (
         <View key={session.id} style={styles.row}>
           <View style={styles.copy}>
@@ -41,7 +41,7 @@ export function HistoryScreen({ container, onBack }: Props) {
           </Text>
         </View>
       )) : (
-        <View style={styles.empty}><Text style={styles.emptyTitle}>Your first swing is waiting.</Text><Text style={styles.date}>Completed workouts will appear here.</Text></View>
+        <View style={styles.empty}><Text style={styles.emptyTitle}>Your first swing is waiting.</Text></View>
       )}
     </AppScreen>
   );
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
   status: { fontSize: 12, fontWeight: '800', paddingHorizontal: spacing.md, paddingVertical: spacing.sm, borderRadius: radii.pill },
   complete: { color: colors.success, backgroundColor: colors.successSurface },
   abandoned: { color: colors.danger, backgroundColor: colors.dangerSurface },
-  empty: { alignItems: 'center', paddingVertical: 80 },
-  emptyTitle: { color: colors.text, fontSize: 22, fontWeight: '900' }
+  empty: { alignItems: 'center', flex: 1, justifyContent: 'center' },
+  emptyTitle: { color: colors.text, fontSize: 22, fontWeight: '900', textAlign: 'center' }
 });

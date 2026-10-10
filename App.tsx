@@ -171,7 +171,7 @@ function SwingApp() {
   if (route === 'home') {
     screen = <HomeScreen container={container} onCreate={() => { analytics.capture('home_action_clicked', { action: 'build_workout' }); setRoute('create'); }} onVault={() => { analytics.capture('home_action_clicked', { action: 'explore_vault' }); setRoute('vault'); }} onSaved={() => { analytics.capture('home_action_clicked', { action: 'open_library' }); setRoute('saved'); }} onResume={(session) => { analytics.capture('workout_resumed_from_home', { session_id: session.id, workout_id: session.workoutTemplateId }); setActiveSession(session); setRoute('runner'); }} />;
   } else if (route === 'vault') {
-    screen = <WorkoutListScreen eyebrow="Ready when you are" title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
+    screen = <WorkoutListScreen title="The Vault" emptyMessage="Vault workouts could not be loaded." load={loadVault} onOpenWorkout={openWorkout} onStartWorkout={(workout) => void startWorkout(workout)} showFeatured onBack={() => setRoute('home')} />;
   } else if (route === 'saved') {
     screen = <WorkoutListScreen title="Build a workout" emptyTitle="" emptyMessage="Create a workout with your own movements and timing." load={loadSaved} onOpenWorkout={openWorkout} onDeleteWorkout={(workout) => container.workouts.deleteSavedWorkout(workout.id)} onBack={() => setRoute('home')} onCreate={() => setRoute('create')} />;
   } else if (route === 'history') {

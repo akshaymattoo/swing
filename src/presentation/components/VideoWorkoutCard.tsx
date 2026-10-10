@@ -38,9 +38,9 @@ function EditorialVideoWorkoutCard({ workout, onOpen }: Props) {
 
       <View style={styles.editorialBody}>
         <View style={styles.editorialCopy}>
-          <Text style={styles.editorialCoachLabel}>TODAY'S COACH</Text>
+          <Text style={styles.editorialCoachLabel}>Today's Coach</Text>
           <Text style={styles.editorialChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
-          <Text style={[styles.editorialFocus, focus.isSingleWord && styles.editorialFocusSingle]} numberOfLines={1}>{focus.label}</Text>
+          <Text style={styles.editorialFocus} numberOfLines={1}>{focus.label}</Text>
         </View>
         <Image
           accessibilityIgnoresInvertColors
@@ -80,9 +80,9 @@ function SimpleVideoWorkoutCard({ workout, onOpen }: Props) {
           <Text style={styles.simpleBadgeText}>{formatDuration(workout.durationSeconds)}</Text>
         </View>
       </View>
-      <Text style={styles.simpleCoachLabel}>TODAY'S COACH</Text>
+      <Text style={styles.simpleCoachLabel}>Today's Coach</Text>
       <Text style={styles.simpleChannel} numberOfLines={1}>{formatChannelName(workout.channelName)}</Text>
-      <Text style={[styles.simpleFocus, focus.isSingleWord && styles.simpleFocusSingle]} numberOfLines={1}>{focus.label}</Text>
+      <Text style={styles.simpleFocus} numberOfLines={1}>{focus.label}</Text>
       <ActionButton onPress={onOpen} style={styles.simpleButton}>
         Start Workout
       </ActionButton>
@@ -138,8 +138,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     lineHeight: 22
   },
-  editorialFocus: { color: '#315B56', fontSize: 14, fontWeight: '700', lineHeight: 19, marginTop: spacing.xs },
-  editorialFocusSingle: { color: '#153936', fontSize: 18, fontWeight: '900', letterSpacing: 0.8, lineHeight: 22 },
+  editorialFocus: { color: '#55706D', fontSize: 14, fontWeight: '500', lineHeight: 20, marginTop: spacing.xs },
   equipmentArtwork: { height: 126, marginRight: -10, width: 126 },
   editorialButton: {
     borderColor: '#153936',
@@ -197,7 +196,6 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     fontWeight: '900',
   },
-  simpleFocus: { color: colors.featuredMuted, fontSize: 14, lineHeight: 20 },
-  simpleFocusSingle: { color: colors.onFeatured, fontSize: 18, fontWeight: '900', letterSpacing: 0.8, lineHeight: 22 },
+  simpleFocus: { color: colors.featuredMuted, fontSize: 14, fontWeight: '500', lineHeight: 20 },
   simpleButton: { marginTop: spacing.sm }
 });

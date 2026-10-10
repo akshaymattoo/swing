@@ -14,7 +14,7 @@ type Props = {
 export function EditorialIcon({ name, size = 24, color = colors.text, accent = colors.primary }: Props) {
   const scale = size / 24;
   return (
-    <View style={{ height: size, width: size }}>
+    <View style={[styles.wrapper, { height: size, width: size }]}>
       <View style={[styles.canvas, { transform: [{ scale }] }]}>
         <IconShape name={name} color={color} accent={accent} />
       </View>
@@ -39,7 +39,8 @@ function IconShape({ name, color, accent }: { name: EditorialIconName; color: st
 }
 
 const styles = StyleSheet.create({
-  canvas: { height: 24, left: 0, position: 'absolute', top: 0, width: 24 },
+  wrapper: { alignItems: 'center', justifyContent: 'center' },
+  canvas: { height: 24, width: 24 },
   homeRoof: { borderLeftWidth: 2.5, borderTopWidth: 2.5, height: 14, left: 5, position: 'absolute', top: 1, transform: [{ rotate: '45deg' }], width: 14 },
   homeBody: { borderBottomLeftRadius: 3, borderBottomRightRadius: 3, borderBottomWidth: 2.5, borderLeftWidth: 2.5, borderRightWidth: 2.5, bottom: 1, height: 12, left: 4, position: 'absolute', width: 16 },
   homeDoor: { borderTopLeftRadius: 2, borderTopRightRadius: 2, bottom: 0, height: 7, left: 5, position: 'absolute', width: 4 },
