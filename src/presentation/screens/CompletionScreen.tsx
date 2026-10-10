@@ -4,30 +4,26 @@ import { StyleSheet, Text, View } from 'react-native';
 import { completionMessageForSession } from '../../domain/completionMessages';
 import type { WorkoutSession } from '../../domain/session';
 import { colors } from '../../theme/colors';
-import { radii, spacing } from '../../theme/spacing';
+import { spacing } from '../../theme/spacing';
 import { AppScreen } from '../components/AppScreen';
 import { ActionButton } from '../components/Buttons';
 import { CompletionConfetti } from '../components/CompletionConfetti';
 import { EditorialIcon } from '../components/EditorialIcon';
 
-type Props = { session: WorkoutSession; onDone: () => void; onRepeat: () => void };
+type Props = { session: WorkoutSession; onDone: () => void };
 
-export function CompletionScreen({ session, onDone, onRepeat }: Props) {
+export function CompletionScreen({ session, onDone }: Props) {
   const message = useMemo(() => completionMessageForSession(session.id), [session.id]);
 
   return (
     <AppScreen scroll={false}>
       <View style={styles.content}>
         <CompletionConfetti />
-        <View style={styles.check}><EditorialIcon accent="#FFE7A3" color={colors.onPrimary} name="check" size={48} /></View>
-        <Text style={styles.eyebrow}>WORKOUT COMPLETE</Text>
+        <View style={styles.check}><EditorialIcon accent="#FFE7A3" color={colors.onPrimary} name="check" size={40} /></View>
         <Text style={styles.title}>You earned{`\n`}this sweat.</Text>
         <Text style={styles.message}>{message}</Text>
-        <Text style={styles.summary}>{session.workoutSnapshot.emoji} {session.workoutSnapshot.name} · {session.workoutSnapshot.rounds} rounds</Text>
-        <View style={styles.saved}><Text style={styles.savedKicker}>SAVED AUTOMATICALLY</Text><Text style={styles.savedTitle}>Added to History</Text></View>
-        <View style={styles.actions}>
+        <View style={styles.action}>
           <ActionButton onPress={onDone}>Done</ActionButton>
-          <ActionButton variant="secondary" onPress={onRepeat}>Do it again</ActionButton>
         </View>
       </View>
     </AppScreen>
@@ -36,13 +32,8 @@ export function CompletionScreen({ session, onDone, onRepeat }: Props) {
 
 const styles = StyleSheet.create({
   content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  check: { width: 88, height: 88, borderRadius: 44, backgroundColor: colors.success, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.xl },
-  eyebrow: { color: colors.work, fontSize: 12, fontWeight: '900', letterSpacing: 1.5 },
-  title: { color: colors.text, fontSize: 42, lineHeight: 46, fontWeight: '900', letterSpacing: -1.5, textAlign: 'center', marginTop: spacing.sm },
-  message: { color: colors.work, fontSize: 17, fontWeight: '800', lineHeight: 23, marginTop: spacing.md, textAlign: 'center' },
-  summary: { color: colors.textMuted, fontSize: 15, marginTop: spacing.sm },
-  saved: { width: '100%', backgroundColor: colors.surfaceRaised, borderRadius: radii.lg, padding: spacing.xl, alignItems: 'center', marginTop: spacing.xxl },
-  savedKicker: { color: colors.work, fontSize: 11, fontWeight: '900', letterSpacing: 1 },
-  savedTitle: { color: colors.text, fontSize: 20, fontWeight: '900', marginTop: spacing.xs },
-  actions: { width: '100%', gap: spacing.md, marginTop: spacing.xl }
+  check: { width: 72, height: 72, borderRadius: 36, backgroundColor: colors.success, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.xl },
+  title: { color: colors.text, fontSize: 40, lineHeight: 44, fontWeight: '900', letterSpacing: -1.5, textAlign: 'center' },
+  message: { color: colors.work, fontSize: 17, fontWeight: '800', lineHeight: 23, marginTop: spacing.lg, maxWidth: 280, textAlign: 'center' },
+  action: { width: '100%', marginTop: spacing.xxl }
 });

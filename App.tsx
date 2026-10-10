@@ -185,13 +185,7 @@ function SwingApp() {
   } else if (route === 'runner' && activeSession) {
     screen = <RunnerScreen container={container} initialSession={activeSession} onBell={playBell} onComplete={(session) => { const properties = { session_id: session.id, workout_id: session.workoutTemplateId, equipment: session.workoutSnapshot.equipment, intensity: session.workoutSnapshot.intensity, rounds: session.workoutSnapshot.rounds, movements: session.workoutSnapshot.exercises.length }; analytics.capture('workout_completed', properties); analytics.info('workout completed', properties); setActiveSession(session); setRoute('complete'); }} onEnd={() => { setActiveSession(null); setRoute('home'); }} />;
   } else if (route === 'complete' && activeSession) {
-    screen = <CompletionScreen session={activeSession} onDone={() => { analytics.capture('completion_action_clicked', { action: 'done', session_id: activeSession.id }); setActiveSession(null); setRoute('home'); }} onRepeat={async () => {
-      analytics.capture('completion_action_clicked', { action: 'repeat', session_id: activeSession.id });
-      const workoutId = activeSession.workoutTemplateId;
-      if (!workoutId) return;
-      const workout = await container.workouts.getWorkout(workoutId);
-      if (workout) await startWorkout(workout);
-    }} />;
+    screen = <CompletionScreen session={activeSession} onDone={() => { analytics.capture('completion_action_clicked', { action: 'done', session_id: activeSession.id }); setActiveSession(null); setRoute('home'); }} />;
   } else {
     screen = <HomeScreen container={container} onCreate={() => setRoute('create')} onVault={() => setRoute('vault')} onSaved={() => setRoute('saved')} onResume={(session) => { setActiveSession(session); setRoute('runner'); }} />;
   }
