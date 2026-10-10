@@ -114,7 +114,6 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
       {featuredWorkout && onStartWorkout ? (
         <>
           <View style={styles.featuredHeader}>
-            <Text style={styles.sectionLabel}>TRY THIS WORKOUT</Text>
             <Pressable accessibilityRole="button" onPress={refreshWorkout} hitSlop={8} style={({ pressed }) => [styles.refreshButton, pressed && styles.refreshPressed]}>
               <Text style={styles.refresh}>Refresh</Text>
             </Pressable>
@@ -137,7 +136,7 @@ export function WorkoutListScreen({ title, eyebrow, description, emptyTitle = 'N
 
 const styles = StyleSheet.create({
   description: { color: colors.textMuted, fontSize: 15, lineHeight: 21, marginTop: -spacing.sm },
-  featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  featuredHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end' },
   sectionLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1 },
   refreshButton: { alignItems: 'center', backgroundColor: 'transparent', borderColor: colors.primary, borderRadius: radii.sm, borderWidth: 1.5, paddingHorizontal: spacing.md, paddingVertical: 6 },
   refreshPressed: { backgroundColor: colors.surfaceRaised, opacity: 0.72 },

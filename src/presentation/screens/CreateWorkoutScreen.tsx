@@ -35,8 +35,7 @@ type Props = {
 };
 
 const workOptions = [5, 10, 20, 30, 45, 60];
-const startupOptions = [0, 5, 10, 20, 30, 45, 60];
-const restOptions = [0, 5, 10, 15, 20, 30, 45, 60];
+const restOptions = [0, 10, 20, 30, 45, 60];
 
 export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorkout }: Props) {
   const analytics = useAnalytics();
@@ -47,7 +46,7 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
   const [equipment, setEquipment] = useState<Equipment>(initialWorkout?.equipment ?? "bodyweight");
   const [intensity, setIntensity] = useState<Intensity>(initialWorkout?.intensity ?? "spicy");
   const [rounds, setRounds] = useState(initialWorkout?.rounds ?? 4);
-  const [startupSeconds, setStartupSeconds] = useState(initialWorkout?.startupSeconds ?? DEFAULT_STARTUP_SECONDS);
+  const startupSeconds = DEFAULT_STARTUP_SECONDS;
   const [workSeconds, setWorkSeconds] = useState(initialWorkout?.workSeconds ?? 45);
   const [restSeconds, setRestSeconds] = useState(initialWorkout?.restSeconds ?? 20);
   const [movements, setMovements] = useState(initialWorkout?.exercises.map((exercise) => exercise.name) ?? ["", "", ""]);
@@ -194,15 +193,6 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
           </Pressable>
         </View>
 
-        <FieldLabel>Initial start time</FieldLabel>
-        <Text style={styles.helper}>Runs once before the first movement.</Text>
-        <ChoiceRow
-          values={startupOptions}
-          selected={startupSeconds}
-          onSelect={(value) => setStartupSeconds(Number(value))}
-          suffix="s"
-        />
-
         <FieldLabel>Work per movement</FieldLabel>
         <ChoiceRow
           values={workOptions}
@@ -325,7 +315,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     marginBottom: -spacing.sm,
   },
-  helper: { color: colors.textMuted, fontSize: 13, marginTop: -spacing.md },
   input: {
     minHeight: 50,
     backgroundColor: colors.surface,

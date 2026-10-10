@@ -12,7 +12,7 @@ export function isMvpEquipment(equipment: Equipment): equipment is MvpEquipment 
 
 export const intensityOptions = ['mild', 'spicy', 'hot'] as const;
 export type Intensity = (typeof intensityOptions)[number];
-export const DEFAULT_STARTUP_SECONDS = 20;
+export const DEFAULT_STARTUP_SECONDS = 60;
 
 export type WorkoutExercise = {
   id: string;

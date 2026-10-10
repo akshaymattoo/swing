@@ -112,7 +112,8 @@ export function HomeScreen(props: Props) {
   };
 
   return (
-    <AppScreen eyebrow="Swing" title={"What are we\ndoing today?"}>
+    <AppScreen>
+      <Text accessibilityRole="header" style={styles.brand}>SWING</Text>
       {active ? (
         <Pressable style={styles.resume} onPress={() => props.onResume(active)}>
           <View>
@@ -216,6 +217,12 @@ export function HomeScreen(props: Props) {
 }
 
 const styles = StyleSheet.create({
+  brand: {
+    color: colors.work,
+    fontSize: 28,
+    fontWeight: "900",
+    letterSpacing: 3,
+  },
   section: { gap: spacing.sm },
   dailyHeader: {
     alignItems: "center",

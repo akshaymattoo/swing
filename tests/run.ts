@@ -15,7 +15,7 @@ import {
 import type { WorkoutTemplate } from '../src/domain/workout';
 import { completionMessageForSession, completionMessages } from '../src/domain/completionMessages';
 import { defaultDailyVideoEquipment, type VideoWorkout } from '../src/domain/videoWorkout';
-import { equipmentEmoji, workoutDurationSeconds } from '../src/domain/workout';
+import { DEFAULT_STARTUP_SECONDS, equipmentEmoji, workoutDurationSeconds } from '../src/domain/workout';
 import { classifyWorkoutIntensity, movementDemand, workoutDemandScore } from '../src/domain/workoutIntensity';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
 import {
@@ -59,6 +59,7 @@ const workout: WorkoutTemplate = {
 };
 
 async function timerTests() {
+  equal(DEFAULT_STARTUP_SECONDS, 60, 'custom workouts use a one-minute preparation period');
   const snapshot: WorkoutSnapshot = workout;
   const initial = createTimerState(snapshot, 0);
   equal(initial.phase, 'prepare', 'workouts start with a preparation phase');
