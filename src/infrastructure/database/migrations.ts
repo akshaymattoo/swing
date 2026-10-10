@@ -1,6 +1,6 @@
 import type { DatabaseClient } from './DatabaseClient';
 
-const DATABASE_VERSION = 3;
+const DATABASE_VERSION = 4;
 
 export async function migrateDatabase(database: DatabaseClient) {
   const version = await database.first<{ user_version: number }>('PRAGMA user_version');
@@ -96,6 +96,32 @@ export async function migrateDatabase(database: DatabaseClient) {
         CREATE INDEX IF NOT EXISTS idx_workout_videos_eligible
           ON workout_videos(wod_eligible, is_active, equipment);
         CREATE INDEX IF NOT EXISTS idx_daily_workout_video
+          ON daily_workout_assignments(workout_video_id, local_date DESC);
+      `);
+    }
+    if (currentVersion < 4) {
+      await transaction.exec(`
+        CREATE TABLE daily_workout_assignments_v4 (
+          local_date TEXT NOT NULL,
+          equipment TEXT NOT NULL,
+          workout_video_id TEXT NOT NULL,
+          selected_at TEXT NOT NULL,
+          PRIMARY KEY (local_date, equipment),
+          FOREIGN KEY (workout_video_id) REFERENCES workout_videos(id) ON DELETE RESTRICT
+        );
+
+        INSERT OR IGNORE INTO daily_workout_assignments_v4 (
+          local_date, equipment, workout_video_id, selected_at
+        )
+        SELECT assignments.local_date, videos.equipment, assignments.workout_video_id, assignments.selected_at
+        FROM daily_workout_assignments AS assignments
+        INNER JOIN workout_videos AS videos ON videos.id = assignments.workout_video_id
+        WHERE videos.equipment IN ('bodyweight', 'kettlebell');
+
+        DROP TABLE daily_workout_assignments;
+        ALTER TABLE daily_workout_assignments_v4 RENAME TO daily_workout_assignments;
+
+        CREATE INDEX idx_daily_workout_video
           ON daily_workout_assignments(workout_video_id, local_date DESC);
       `);
     }

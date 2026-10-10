@@ -24,7 +24,7 @@ export interface VideoWorkoutRepository {
 }
 
 export interface DailyVideoWorkoutRepository {
-  getByDate(localDate: string): Promise<DailyVideoWorkoutAssignment | null>;
+  getByDateAndEquipment(localDate: string, equipment: DailyVideoWorkoutAssignment['equipment']): Promise<DailyVideoWorkoutAssignment | null>;
   listAll(): Promise<DailyVideoWorkoutAssignment[]>;
   save(assignment: DailyVideoWorkoutAssignment): Promise<void>;
 }

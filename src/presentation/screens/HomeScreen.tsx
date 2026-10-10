@@ -11,7 +11,11 @@ import {
 import type { AppContainer } from "../../application/appContainer";
 import { useAnalytics } from "../../analytics/useAnalytics";
 import type { WorkoutSession } from "../../domain/session";
-import type { VideoWorkout } from "../../domain/videoWorkout";
+import {
+  defaultDailyVideoEquipment,
+  type DailyVideoWorkoutPair,
+} from "../../domain/videoWorkout";
+import { equipmentLabel, type MvpEquipment } from "../../domain/workout";
 import { colors } from "../../theme/colors";
 import { radii, spacing } from "../../theme/spacing";
 import { AppScreen } from "../components/AppScreen";
@@ -30,15 +34,22 @@ const homeFeatureGreen = "#A9D8D2";
 
 export function HomeScreen(props: Props) {
   const analytics = useAnalytics();
-  const [dailyWorkout, setDailyWorkout] = useState<VideoWorkout | null>(null);
+  const [dailyWorkouts, setDailyWorkouts] = useState<DailyVideoWorkoutPair>({
+    bodyweight: null,
+    kettlebell: null,
+  });
+  const [dailyEquipment, setDailyEquipment] = useState<MvpEquipment>(() =>
+    defaultDailyVideoEquipment(new Date()),
+  );
   const [active, setActive] = useState<WorkoutSession | null>(null);
+  const dailyWorkout = dailyWorkouts[dailyEquipment];
 
   useEffect(() => {
     Promise.all([
-      props.container.videoWorkoutOfDay.getForDate(),
+      props.container.videoWorkoutOfDay.getPairForDate(),
       props.container.sessions.getActiveSession(),
-    ]).then(([video, session]) => {
-      setDailyWorkout(video);
+    ]).then(([videos, session]) => {
+      setDailyWorkouts(videos);
       setActive(session);
     }).catch((error) => analytics.error("home data load failed", error));
   }, [analytics, props.container]);
@@ -54,8 +65,11 @@ export function HomeScreen(props: Props) {
       );
       midnightTimer = setTimeout(
         () => {
-          props.container.videoWorkoutOfDay.getForDate()
-            .then(setDailyWorkout)
+          props.container.videoWorkoutOfDay.getPairForDate()
+            .then((videos) => {
+              setDailyWorkouts(videos);
+              setDailyEquipment(defaultDailyVideoEquipment(new Date()));
+            })
             .catch((error) => analytics.error("daily video refresh failed", error));
           scheduleNextDay();
         },
@@ -66,6 +80,15 @@ export function HomeScreen(props: Props) {
     scheduleNextDay();
     return () => clearTimeout(midnightTimer);
   }, [analytics, props.container]);
+
+  const selectDailyEquipment = (equipment: MvpEquipment) => {
+    if (equipment === dailyEquipment) return;
+    analytics.capture("daily_workout_equipment_switched", {
+      from_equipment: dailyEquipment,
+      to_equipment: equipment,
+    });
+    setDailyEquipment(equipment);
+  };
 
   const openDailyWorkout = async () => {
     if (!dailyWorkout) return;
@@ -107,6 +130,27 @@ export function HomeScreen(props: Props) {
 
       {dailyWorkout ? (
         <View style={styles.section}>
+          <View style={styles.dailyHeader}>
+            <Text style={styles.dailyLabel}>TODAY'S WORKOUT</Text>
+            <View accessibilityRole="tablist" style={styles.equipmentSwitch}>
+              {(["bodyweight", "kettlebell"] as const).map((equipment) => {
+                const selected = equipment === dailyEquipment;
+                return (
+                  <Pressable
+                    accessibilityRole="tab"
+                    accessibilityState={{ selected }}
+                    key={equipment}
+                    onPress={() => selectDailyEquipment(equipment)}
+                    style={[styles.equipmentOption, selected && styles.equipmentOptionSelected]}
+                  >
+                    <Text style={[styles.equipmentOptionText, selected && styles.equipmentOptionTextSelected]}>
+                      {equipmentLabel(equipment)}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
           <VideoWorkoutCard
             workout={dailyWorkout}
             onOpen={() => void openDailyWorkout()}
@@ -173,6 +217,41 @@ export function HomeScreen(props: Props) {
 
 const styles = StyleSheet.create({
   section: { gap: spacing.sm },
+  dailyHeader: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  dailyLabel: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: "900",
+    letterSpacing: 1.2,
+  },
+  equipmentSwitch: {
+    backgroundColor: colors.surfaceRaised,
+    borderColor: colors.border,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    flexDirection: "row",
+    padding: 3,
+  },
+  equipmentOption: {
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 7,
+  },
+  equipmentOptionSelected: {
+    backgroundColor: colors.text,
+  },
+  equipmentOptionText: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: "900",
+  },
+  equipmentOptionTextSelected: {
+    color: colors.onPrimary,
+  },
   pressed: { opacity: 0.76, transform: [{ scale: 0.985 }] },
   resume: {
     backgroundColor: colors.surfaceRaised,

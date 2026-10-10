@@ -85,29 +85,29 @@ export class SqlVideoWorkoutRepository implements VideoWorkoutRepository {
 export class SqlDailyVideoWorkoutRepository implements DailyVideoWorkoutRepository {
   constructor(private readonly database: DatabaseClient) {}
 
-  getByDate(localDate: string) {
+  getByDateAndEquipment(localDate: string, equipment: DailyVideoWorkoutAssignment['equipment']) {
     return this.database.first<DailyVideoWorkoutAssignment>(
-      `SELECT local_date AS localDate, workout_video_id AS workoutVideoId, selected_at AS selectedAt
-       FROM daily_workout_assignments WHERE local_date = ?`,
-      [localDate]
+      `SELECT local_date AS localDate, equipment, workout_video_id AS workoutVideoId, selected_at AS selectedAt
+       FROM daily_workout_assignments WHERE local_date = ? AND equipment = ?`,
+      [localDate, equipment]
     );
   }
 
   listAll() {
     return this.database.all<DailyVideoWorkoutAssignment>(
-      `SELECT local_date AS localDate, workout_video_id AS workoutVideoId, selected_at AS selectedAt
-       FROM daily_workout_assignments ORDER BY local_date ASC`
+      `SELECT local_date AS localDate, equipment, workout_video_id AS workoutVideoId, selected_at AS selectedAt
+       FROM daily_workout_assignments ORDER BY local_date ASC, equipment ASC`
     );
   }
 
   save(assignment: DailyVideoWorkoutAssignment) {
     return this.database.run(
-      `INSERT INTO daily_workout_assignments (local_date, workout_video_id, selected_at)
-       VALUES (?, ?, ?)
-       ON CONFLICT(local_date) DO UPDATE SET
+      `INSERT INTO daily_workout_assignments (local_date, equipment, workout_video_id, selected_at)
+       VALUES (?, ?, ?, ?)
+       ON CONFLICT(local_date, equipment) DO UPDATE SET
          workout_video_id = excluded.workout_video_id,
          selected_at = excluded.selected_at`,
-      [assignment.localDate, assignment.workoutVideoId, assignment.selectedAt]
+      [assignment.localDate, assignment.equipment, assignment.workoutVideoId, assignment.selectedAt]
     );
   }
 }

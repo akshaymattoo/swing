@@ -76,8 +76,8 @@ export class MemoryVideoWorkoutRepository implements VideoWorkoutRepository {
 export class MemoryDailyVideoWorkoutRepository implements DailyVideoWorkoutRepository {
   constructor(private readonly records: DailyVideoWorkoutAssignment[] = []) {}
 
-  async getByDate(localDate: string) {
-    return this.records.find((assignment) => assignment.localDate === localDate) ?? null;
+  async getByDateAndEquipment(localDate: string, equipment: DailyVideoWorkoutAssignment['equipment']) {
+    return this.records.find((assignment) => assignment.localDate === localDate && assignment.equipment === equipment) ?? null;
   }
 
   async listAll() {
@@ -85,7 +85,9 @@ export class MemoryDailyVideoWorkoutRepository implements DailyVideoWorkoutRepos
   }
 
   async save(assignment: DailyVideoWorkoutAssignment) {
-    const index = this.records.findIndex((record) => record.localDate === assignment.localDate);
+    const index = this.records.findIndex((record) => (
+      record.localDate === assignment.localDate && record.equipment === assignment.equipment
+    ));
     if (index >= 0) this.records[index] = assignment;
     else this.records.push(assignment);
   }

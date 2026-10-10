@@ -13,7 +13,8 @@ import {
   type WorkoutSnapshot
 } from '../src/domain/session';
 import type { WorkoutTemplate } from '../src/domain/workout';
-import type { VideoWorkout } from '../src/domain/videoWorkout';
+import { completionMessageForSession, completionMessages } from '../src/domain/completionMessages';
+import { defaultDailyVideoEquipment, type VideoWorkout } from '../src/domain/videoWorkout';
 import { equipmentEmoji, workoutDurationSeconds } from '../src/domain/workout';
 import { classifyWorkoutIntensity, movementDemand, workoutDemandScore } from '../src/domain/workoutIntensity';
 import { seedVault } from '../src/infrastructure/database/seedWorkouts';
@@ -281,6 +282,8 @@ async function videoWorkoutOfDayTests() {
   const videos = new MemoryVideoWorkoutRepository([
     base,
     { ...base, id: 'video-b', youtubeVideoId: 'b', title: 'Workout B' },
+    { ...base, id: 'video-body-a', youtubeVideoId: 'body-a', title: 'Bodyweight A', equipment: 'bodyweight' },
+    { ...base, id: 'video-body-b', youtubeVideoId: 'body-b', title: 'Bodyweight B', equipment: 'bodyweight' },
     { ...base, id: 'video-dumbbell', youtubeVideoId: 'd', title: 'Dumbbell Workout', equipment: 'dumbbells' },
     { ...base, id: 'video-ineligible', youtubeVideoId: 'c', title: 'Tutorial', wodEligible: false }
   ]);
@@ -288,27 +291,52 @@ async function videoWorkoutOfDayTests() {
   const service = new VideoWorkoutOfDayService(videos, assignments);
 
   const firstDay = new Date(2026, 8, 29, 8);
-  const first = await service.getForDate(firstDay);
-  const repeated = await service.getForDate(new Date(2026, 8, 29, 20));
-  equal(repeated?.id, first?.id, 'the same local day always returns its saved video assignment');
+  const first = await service.getPairForDate(firstDay);
+  const repeated = await service.getPairForDate(new Date(2026, 8, 29, 20));
+  equal(repeated.bodyweight?.id, first.bodyweight?.id, 'the same local day keeps its bodyweight assignment');
+  equal(repeated.kettlebell?.id, first.kettlebell?.id, 'the same local day keeps its kettlebell assignment');
+  assert(first.bodyweight?.equipment === 'bodyweight', 'every day has a bodyweight workout');
+  assert(first.kettlebell?.equipment === 'kettlebell', 'every day has a kettlebell workout');
+  equal(
+    (await service.getForDate(firstDay))?.equipment,
+    defaultDailyVideoEquipment(firstDay),
+    'the default daily choice alternates deterministically by local date'
+  );
 
-  const second = await service.getForDate(new Date(2026, 8, 30, 8));
-  assert(second?.id !== first?.id, 'an unseen video is selected before repeating one');
-  assert(second?.wodEligible, 'ineligible catalog videos never enter the daily rotation');
+  const secondDay = new Date(2026, 8, 30, 8);
+  const second = await service.getPairForDate(secondDay);
+  assert(second.bodyweight?.id !== first.bodyweight?.id, 'an unseen bodyweight video is selected before repeating one');
+  assert(second.kettlebell?.id !== first.kettlebell?.id, 'an unseen kettlebell video is selected before repeating one');
+  assert(second.bodyweight?.wodEligible && second.kettlebell?.wodEligible, 'ineligible videos never enter either rotation');
+  assert(defaultDailyVideoEquipment(secondDay) !== defaultDailyVideoEquipment(firstDay), 'the initially visible equipment flips each day');
 
-  const third = await service.getForDate(new Date(2026, 9, 1, 8));
-  equal(third?.id, first?.id, 'after exhausting the catalog the least recently shown video rotates back in');
-  equal((await assignments.listAll()).length, 3, 'one durable assignment is stored per local calendar day');
+  const third = await service.getPairForDate(new Date(2026, 9, 1, 8));
+  equal(third.bodyweight?.id, first.bodyweight?.id, 'bodyweight rotates after exhausting its equipment catalog');
+  equal(third.kettlebell?.id, first.kettlebell?.id, 'kettlebell rotates after exhausting its equipment catalog');
+  equal((await assignments.listAll()).length, 6, 'two durable assignments are stored per local calendar day');
 
   const oldDate = new Date(2026, 9, 2, 8);
   const oldDateKey = '2026-10-02';
   const staleAssignments = new MemoryDailyVideoWorkoutRepository([{
     localDate: oldDateKey,
+    equipment: 'kettlebell',
     workoutVideoId: 'video-dumbbell',
     selectedAt: oldDate.toISOString()
   }]);
-  const replacement = await new VideoWorkoutOfDayService(videos, staleAssignments).getForDate(oldDate);
-  assert(replacement?.equipment !== 'dumbbells', 'a cached assignment using dormant equipment is replaced');
+  const replacement = await new VideoWorkoutOfDayService(videos, staleAssignments).getForDate(oldDate, 'kettlebell');
+  assert(replacement?.equipment === 'kettlebell', 'a cached assignment using dormant equipment is replaced');
+}
+
+async function completionMessageTests() {
+  equal(completionMessages.length, 30, 'the completion celebration has thirty messages');
+  equal(new Set(completionMessages).size, 30, 'completion messages are unique');
+  equal(
+    completionMessageForSession('session-stable'),
+    completionMessageForSession('session-stable'),
+    'a completed session keeps the same message across renders'
+  );
+  const rotation = new Set(Array.from({ length: 100 }, (_, index) => completionMessageForSession(`session-${index}`)));
+  assert(rotation.size >= 25, 'session-based message selection rotates across most of the message library');
 }
 
 async function videoCatalogTests() {
@@ -350,6 +378,7 @@ async function run() {
     ['daily workout selection', dailyWorkoutTests],
     ['swipe-to-delete settling', swipeToDeleteTests],
     ['video workout of the day', videoWorkoutOfDayTests],
+    ['completion messages', completionMessageTests],
     ['generated video catalog', videoCatalogTests]
   ];
   for (const [name, test] of tests) {
