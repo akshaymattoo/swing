@@ -25,7 +25,7 @@ import {
   MemoryWorkoutRepository
 } from '../src/infrastructure/memory/MemoryRepositories';
 import { swipeDeleteTarget } from '../src/presentation/components/swipeToDelete';
-import { formatChannelName, formatVideoFocus } from '../src/presentation/formatters';
+import { formatChannelName, formatPrimaryVideoFocus, formatVideoFocus } from '../src/presentation/formatters';
 import videoCatalog from '../src/infrastructure/database/videoWorkoutCatalog.json';
 import approvedVideoIds from '../scripts/approved-video-workout-ids.json';
 
@@ -368,6 +368,8 @@ async function videoCatalogTests() {
   equal(equipmentEmoji('dumbbells'), '🏋️', 'dumbbells have a distinct action emoji');
   equal(equipmentEmoji('bands'), '〰️', 'bands have a distinct action emoji');
   equal(formatVideoFocus('full body; EMOM | kettlebell'), 'full body, EMOM, kettlebell', 'video focus uses a compact comma-separated description');
+  equal(formatPrimaryVideoFocus('full body, EMOM, kettlebell').label, 'Full body', 'multi-part video focus shows only its first exercise label');
+  equal(formatPrimaryVideoFocus('emom').label, 'EMOM', 'single-word video focus is emphasized in uppercase');
   equal(formatChannelName('Vadim Kettlebell (@vadimkettlebell)'), 'Vadim Kettlebell', 'channel names omit parenthetical handles');
 }
 

@@ -24,6 +24,17 @@ export function formatVideoFocus(focus: string) {
     .join(', ');
 }
 
+export function formatPrimaryVideoFocus(focus: string) {
+  const primary = focus.split(/[,;|]/)[0]?.trim() ?? '';
+  const isSingleWord = Boolean(primary) && !/\s/.test(primary);
+  return {
+    label: isSingleWord
+      ? primary.toUpperCase()
+      : primary.charAt(0).toUpperCase() + primary.slice(1).toLowerCase(),
+    isSingleWord
+  };
+}
+
 export function formatChannelName(channelName: string) {
   return channelName
     .replace(/\s*\([^)]*\)\s*/g, ' ')

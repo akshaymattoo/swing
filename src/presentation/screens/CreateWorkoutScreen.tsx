@@ -249,14 +249,12 @@ export function CreateWorkoutScreen({ container, onBack, onCreated, initialWorko
           </View>
         ))}
 
-        <View style={styles.estimate}>
-          <Text style={styles.estimateLabel}>ESTIMATED TIME</Text>
-          <Text style={styles.estimateValue}>
-            {filledMovements.length
-              ? formatDuration(estimatedSeconds)
-              : "Add movements"}
-          </Text>
-        </View>
+        {filledMovements.length ? (
+          <View style={styles.estimate}>
+            <Text style={styles.estimateLabel}>ESTIMATED TIME</Text>
+            <Text style={styles.estimateValue}>{formatDuration(estimatedSeconds)}</Text>
+          </View>
+        ) : null}
         <ActionButton disabled={saving} onPress={save}>
           {saving ? "Saving…" : isEditingCopy ? "Save as new workout" : isEditing ? "Save changes" : "Save workout"}
         </ActionButton>

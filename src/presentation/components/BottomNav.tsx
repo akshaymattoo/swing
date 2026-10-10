@@ -14,7 +14,7 @@ type Props = {
 const tabs: Array<{ id: Tab; label: string; icon: EditorialIconName }> = [
   { id: "home", label: "Home", icon: "home" },
   { id: "vault", label: "Vault", icon: "vault" },
-  { id: "saved", label: "Library", icon: "workouts" },
+  { id: "saved", label: "Build", icon: "build" },
   { id: "history", label: "History", icon: "progress" },
 ];
 

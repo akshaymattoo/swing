@@ -241,19 +241,21 @@ const styles = StyleSheet.create({
     borderRadius: radii.pill,
     borderWidth: 1,
     flexDirection: "row",
-    padding: 3,
+    minHeight: 48,
+    padding: 4,
   },
   equipmentOption: {
     borderRadius: radii.pill,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 7,
+    justifyContent: "center",
+    paddingHorizontal: spacing.lg,
+    paddingVertical: 9,
   },
   equipmentOptionSelected: {
     backgroundColor: colors.text,
   },
   equipmentOptionText: {
     color: colors.textMuted,
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: "900",
   },
   equipmentOptionTextSelected: {
