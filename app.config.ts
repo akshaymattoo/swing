@@ -21,7 +21,7 @@ const config: ExpoConfig = {
     package: 'com.akshaymattoo.swing',
     adaptiveIcon: {
       foregroundImage: './assets/brand/adaptive-icon.png',
-      backgroundColor: palette.background
+      backgroundColor: palette.brandIconBackground
     }
   },
   extra: {
