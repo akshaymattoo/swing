@@ -11,7 +11,7 @@ const config: ExpoConfig = {
   orientation: 'portrait',
   userInterfaceStyle: 'automatic',
   ios: {
-    supportsTablet: true,
+    supportsTablet: false,
     bundleIdentifier: 'com.akshaymattoo.swing',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false
