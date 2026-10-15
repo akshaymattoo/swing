@@ -200,6 +200,8 @@ async function vaultSeedTests() {
   equal(casket?.name, 'Last-Round Loaded', 'Vault workouts use compact creative names');
   equal(casket?.exercises.length, 5, 'full-body Vault workouts cover five easy-to-follow movement patterns');
   assert(vault.every((item) => item.name.length <= 18), 'Vault names stay compact enough for workout cards');
+  const vaultNameWords = vault.flatMap((item) => item.name.toLowerCase().match(/[a-z]+/g) ?? []);
+  equal(new Set(vaultNameWords).size, vaultNameWords.length, 'Vault names do not recycle signature words or themes');
 
   const visibleVault = await new WorkoutService(workouts).listVault();
   equal(visibleVault.length, 50, 'the MVP Vault presents fifty kettlebell and bodyweight workouts');
