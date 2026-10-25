@@ -33,6 +33,8 @@ const config: ExpoConfig = {
     'expo-sqlite',
     'expo-localization',
     'expo-asset',
+    'expo-audio',
+    'expo-status-bar',
     [
       'expo-splash-screen',
       {

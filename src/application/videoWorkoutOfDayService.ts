@@ -6,6 +6,7 @@ import {
 } from '../domain/videoWorkout';
 import { isMvpEquipment, type MvpEquipment } from '../domain/workout';
 import type { DailyVideoWorkoutRepository, VideoWorkoutRepository } from './ports';
+import { seasonalWorkoutPlanForDate } from './seasonalWorkouts';
 
 export class VideoWorkoutOfDayService {
   constructor(
@@ -23,6 +24,20 @@ export class VideoWorkoutOfDayService {
 
   async getForDate(date = new Date(), equipment: MvpEquipment = defaultDailyVideoEquipment(date)) {
     const dateKey = localDateKey(date);
+    const seasonalVideoId = seasonalWorkoutPlanForDate(date)?.videoIds[equipment];
+    if (seasonalVideoId) {
+      const seasonalVideo = await this.videos.getById(seasonalVideoId);
+      if (seasonalVideo?.isActive && seasonalVideo.equipment === equipment) {
+        await this.assignments.save({
+          localDate: dateKey,
+          equipment,
+          workoutVideoId: seasonalVideo.id,
+          selectedAt: date.toISOString()
+        });
+        return seasonalVideo;
+      }
+    }
+
     const existing = await this.assignments.getByDateAndEquipment(dateKey, equipment);
     if (existing) {
       const video = await this.videos.getById(existing.workoutVideoId);

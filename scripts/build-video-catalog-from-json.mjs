@@ -14,8 +14,13 @@ if (!Array.isArray(source.videos)) throw new Error('Expected a videos array in w
 
 const excludedContent = /mobility|stretch|warm.?up|cool.?down|tutorial|how to|mistake|review|podcast|workout plan|habits/i;
 const bodyPartOnly = /\b(ab|abs|arms?|shoulders?|legs?|glutes?|booty|core|upper body|lower body|back|chest|biceps|triceps|calves|thighs)\b/i;
+const equipmentOverrides = new Map([
+  ['Ubj-a2DcyJw', 'kettlebell']
+]);
 
 function equipmentFor(video) {
+  const override = equipmentOverrides.get(video.video_id);
+  if (override) return override;
   const equipment = (video.equipment ?? []).map((item) => String(item).toLowerCase());
   const title = video.title.toLowerCase();
   if (equipment.includes('kettlebell') || /kettlebell|\bkb\b/.test(title)) return 'kettlebell';

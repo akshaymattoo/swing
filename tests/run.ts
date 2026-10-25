@@ -2,6 +2,7 @@ import { SessionService } from '../src/application/sessionService';
 import { WorkoutService } from '../src/application/workoutService';
 import { VideoWorkoutOfDayService } from '../src/application/videoWorkoutOfDayService';
 import { dailyWorkoutIndex, orderWorkoutsForDailyRotation } from '../src/application/dailyWorkout';
+import { seasonalWorkoutPlanForDate } from '../src/application/seasonalWorkouts';
 import {
   advanceTimer,
   createTimerState,
@@ -203,7 +204,8 @@ async function vaultSeedTests() {
   const vaultNameWords = vault.flatMap((item) => item.name.toLowerCase().match(/[a-z]+/g) ?? []);
   equal(new Set(vaultNameWords).size, vaultNameWords.length, 'Vault names do not recycle signature words or themes');
 
-  const visibleVault = await new WorkoutService(workouts).listVault();
+  const workoutService = new WorkoutService(workouts);
+  const visibleVault = await workoutService.listVault(new Date(2026, 8, 19));
   equal(visibleVault.length, 50, 'the MVP Vault presents fifty kettlebell and bodyweight workouts');
   equal(visibleVault.filter((item) => item.equipment === 'bodyweight').length, 25, 'the MVP Vault balances twenty-five bodyweight workouts');
   equal(visibleVault.filter((item) => item.equipment === 'kettlebell').length, 25, 'the MVP Vault balances twenty-five kettlebell workouts');
@@ -230,6 +232,8 @@ async function vaultSeedTests() {
   equal(visibleVault.filter((item) => item.intensity === 'mild').length, 10, 'the algorithm identifies ten mild workouts');
   equal(visibleVault.filter((item) => item.intensity === 'spicy').length, 19, 'the algorithm identifies nineteen spicy workouts');
   equal(visibleVault.filter((item) => item.intensity === 'hot').length, 21, 'the algorithm identifies twenty-one hot workouts');
+  equal((await workoutService.listVault(new Date(2026, 9, 31)))[0]?.id, 'vault-kettlebell-3', 'Last-Round Loaded leads the Vault on Halloween');
+  equal((await workoutService.listVault(new Date(2026, 10, 26)))[0]?.id, 'vault-bodyweight-23', 'Turkey Trot leads the Vault on Thanksgiving');
 
   const batBase = visibleVault.find((item) => item.id === 'vault-bodyweight-4');
   const deadpool = visibleVault.find((item) => item.id === 'vault-kettlebell-6');
@@ -250,6 +254,10 @@ async function dailyWorkoutTests() {
   equal(dailyWorkoutIndex(evening, 12), morningIndex, 'the workout stays consistent throughout the local calendar day');
   equal(dailyWorkoutIndex(nextDay, 12), (morningIndex + 1) % 12, 'the workout rotates on the next local calendar day');
   equal(dailyWorkoutIndex(morning, 0), -1, 'an empty Vault has no daily workout');
+  equal(seasonalWorkoutPlanForDate(new Date(2026, 9, 31))?.occasion, 'halloween', 'Halloween is recognized by local calendar date');
+  equal(seasonalWorkoutPlanForDate(new Date(2026, 10, 26))?.occasion, 'thanksgiving', 'the fourth Thursday in November is Thanksgiving');
+  equal(seasonalWorkoutPlanForDate(new Date(2027, 10, 25))?.occasion, 'thanksgiving', 'Thanksgiving selection works across years');
+  equal(seasonalWorkoutPlanForDate(new Date(2026, 10, 25)), null, 'an ordinary November day keeps the normal rotation');
 
   const reordered = orderWorkoutsForDailyRotation([
     { ...workout, id: 'vault-z' },
@@ -288,7 +296,11 @@ async function videoWorkoutOfDayTests() {
     { ...base, id: 'video-body-a', youtubeVideoId: 'body-a', title: 'Bodyweight A', equipment: 'bodyweight' },
     { ...base, id: 'video-body-b', youtubeVideoId: 'body-b', title: 'Bodyweight B', equipment: 'bodyweight' },
     { ...base, id: 'video-dumbbell', youtubeVideoId: 'd', title: 'Dumbbell Workout', equipment: 'dumbbells' },
-    { ...base, id: 'video-ineligible', youtubeVideoId: 'c', title: 'Tutorial', wodEligible: false }
+    { ...base, id: 'video-ineligible', youtubeVideoId: 'c', title: 'Tutorial', wodEligible: false },
+    { ...base, id: 'youtube-9ld28ugcdpI', youtubeVideoId: '9ld28ugcdpI', title: 'Trick or Treat', equipment: 'bodyweight', wodEligible: false },
+    { ...base, id: 'youtube-czzL1VtVV4A', youtubeVideoId: 'czzL1VtVV4A', title: 'Buried Alive', wodEligible: false },
+    { ...base, id: 'youtube-cbKkB3POqaY', youtubeVideoId: 'cbKkB3POqaY', title: 'Beginner Bodyweight', equipment: 'bodyweight', wodEligible: false },
+    { ...base, id: 'youtube-Ubj-a2DcyJw', youtubeVideoId: 'Ubj-a2DcyJw', title: 'Turkey Day Damage Control', wodEligible: false }
   ]);
   const assignments = new MemoryDailyVideoWorkoutRepository();
   const service = new VideoWorkoutOfDayService(videos, assignments);
@@ -328,6 +340,14 @@ async function videoWorkoutOfDayTests() {
   }]);
   const replacement = await new VideoWorkoutOfDayService(videos, staleAssignments).getForDate(oldDate, 'kettlebell');
   assert(replacement?.equipment === 'kettlebell', 'a cached assignment using dormant equipment is replaced');
+
+  const halloween = await service.getPairForDate(new Date(2026, 9, 31, 8));
+  equal(halloween.bodyweight?.id, 'youtube-9ld28ugcdpI', 'Halloween uses the Trick or Treat bodyweight workout');
+  equal(halloween.kettlebell?.id, 'youtube-czzL1VtVV4A', 'Halloween uses the Buried Alive kettlebell workout');
+
+  const thanksgiving = await service.getPairForDate(new Date(2026, 10, 26, 8));
+  equal(thanksgiving.bodyweight?.id, 'youtube-cbKkB3POqaY', 'Thanksgiving uses the selected approachable bodyweight workout');
+  equal(thanksgiving.kettlebell?.id, 'youtube-Ubj-a2DcyJw', 'Thanksgiving uses Turkey Day Damage Control');
 }
 
 async function completionMessageTests() {
@@ -343,7 +363,7 @@ async function completionMessageTests() {
 }
 
 async function videoCatalogTests() {
-  equal(videoCatalog.length, 352, 'the generated catalog includes every qualifying video from workouts_flat.json');
+  equal(videoCatalog.length, 353, 'the generated catalog includes every qualifying video from workouts_flat.json');
   equal(new Set(videoCatalog.map((video) => video.youtubeVideoId)).size, videoCatalog.length, 'YouTube video IDs are unique');
   assert(videoCatalog.every((video) => !video.youtubeUrl.includes('/shorts/')), 'YouTube Shorts are excluded from the generated catalog');
   assert(videoCatalog.every((video) => ['bodyweight', 'kettlebell'].includes(video.equipment)), 'the source catalog contains only active MVP equipment');
@@ -356,6 +376,9 @@ async function videoCatalogTests() {
   assert(eligible.every((video) => ['bodyweight', 'kettlebell'].includes(video.equipment)), 'approved daily workouts use only MVP equipment');
   equal(eligible.filter((video) => video.equipment === 'kettlebell').length, 30, 'the daily rotation has thirty kettlebell workouts');
   equal(eligible.filter((video) => video.equipment === 'bodyweight').length, 30, 'the daily rotation has thirty bodyweight workouts');
+  const thanksgivingKettlebell = videoCatalog.find((video) => video.youtubeVideoId === 'Ubj-a2DcyJw');
+  equal(thanksgivingKettlebell?.equipment, 'kettlebell', 'the Thanksgiving special uses its verified Precision Kettlebells equipment');
+  equal(thanksgivingKettlebell?.wodEligible, false, 'the Thanksgiving special stays out of the ordinary daily rotation');
   for (const equipment of ['kettlebell', 'bodyweight'] as const) {
     const expectedTopIds = videoCatalog
       .filter((video) => video.equipment === equipment)

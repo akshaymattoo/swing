@@ -2,13 +2,20 @@ import { createId } from '../domain/id';
 import type { WorkoutDraft, WorkoutTemplate } from '../domain/workout';
 import { isMvpEquipment, workoutDurationSeconds } from '../domain/workout';
 import type { WorkoutRepository } from './ports';
+import { seasonalWorkoutPlanForDate } from './seasonalWorkouts';
 
 export class WorkoutService {
   constructor(private readonly workouts: WorkoutRepository) {}
 
-  async listVault() {
+  async listVault(date = new Date()) {
     const workouts = await this.workouts.listVault();
-    return workouts.filter((workout) => isMvpEquipment(workout.equipment));
+    const visible = workouts.filter((workout) => isMvpEquipment(workout.equipment));
+    const seasonalWorkoutId = seasonalWorkoutPlanForDate(date)?.vaultWorkoutId;
+    if (!seasonalWorkoutId) return visible;
+    return [
+      ...visible.filter((workout) => workout.id === seasonalWorkoutId),
+      ...visible.filter((workout) => workout.id !== seasonalWorkoutId)
+    ];
   }
 
   listSaved() {
