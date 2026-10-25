@@ -70,6 +70,15 @@ p { margin-top: 0; }
 }
 .button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); background: var(--orange-dark); }
 .button.secondary { background: white; color: var(--ink); }
+.button.is-disabled {
+  background: var(--surface);
+  color: var(--muted);
+  border-color: var(--muted);
+  box-shadow: none;
+  cursor: default;
+  opacity: .88;
+}
+.button.is-disabled:hover { transform: none; box-shadow: none; background: var(--surface); }
 .hero-art {
   position: relative;
   min-height: 480px;
@@ -107,6 +116,7 @@ p { margin-top: 0; }
 .cta h2 { max-width: 760px; margin-inline: auto; }
 .cta p { margin-bottom: 26px; font-size: 1.15rem; }
 .cta .button { background: white; color: var(--ink); }
+.cta .button.is-disabled { color: var(--muted); border-color: var(--ink); }
 
 .page-hero { padding: 72px 0 42px; }
 .page-hero h1 { font-size: clamp(3rem, 7vw, 6rem); }

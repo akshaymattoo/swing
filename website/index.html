@@ -7,6 +7,7 @@
   <title>Swing — One sweat away from feeling better</title>
   <link rel="icon" href="assets/swing-icon.png">
   <link rel="stylesheet" href="styles.css">
+  <script src="analytics.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -14,8 +15,8 @@
       <a class="brand" href="index.html"><img src="assets/swing-icon.png" alt="">SWING</a>
       <div class="nav-links">
         <a href="#how-it-works">How it works</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
+        <a href="support.html" data-analytics-event="website_navigation_clicked" data-analytics-action="support" data-analytics-destination="support">Support</a>
+        <a href="privacy.html" data-analytics-event="website_navigation_clicked" data-analytics-action="privacy" data-analytics-destination="privacy">Privacy</a>
       </div>
     </nav>
   </header>
@@ -28,7 +29,8 @@
           <h1>One sweat away from <span>feeling better.</span></h1>
           <p class="lead">No planning spiral. Pick today’s bodyweight or kettlebell workout, press start, and let Swing guide the session.</p>
           <div class="actions">
-            <a class="button" href="#how-it-works">See how Swing works</a>
+            <a class="button is-disabled" data-app-store-cta data-app-store-live="false" data-app-store-url="https://apps.apple.com/app/id6820385873" aria-disabled="true">Coming soon on the App Store</a>
+            <a class="button secondary" href="#how-it-works" data-analytics-event="website_cta_clicked" data-analytics-action="learn_more" data-analytics-destination="how_it_works">See how Swing works</a>
           </div>
         </div>
         <div class="hero-art" aria-label="Swing app icon illustration">
@@ -73,13 +75,14 @@
       <p class="eyebrow" style="color:white">Your next good feeling</p>
       <h2>You don’t need the perfect workout. You need one you’ll start.</h2>
       <p>Open Swing, choose today’s workout, and let the timer carry you to done.</p>
+      <a class="button is-disabled" data-app-store-cta data-app-store-live="false" data-app-store-url="https://apps.apple.com/app/id6820385873" aria-disabled="true">Coming soon on the App Store</a>
     </section>
   </main>
 
   <footer>
     <div class="footer-grid shell">
       <a class="brand" href="index.html"><img src="assets/swing-icon.png" alt="">SWING</a>
-      <div class="footer-links"><a href="privacy.html">Privacy</a><a href="support.html">Support</a><a href="mailto:akshaymattoo@gmail.com">Contact</a></div>
+      <div class="footer-links"><a href="privacy.html" data-analytics-event="website_navigation_clicked" data-analytics-action="privacy" data-analytics-destination="privacy">Privacy</a><a href="support.html" data-analytics-event="website_navigation_clicked" data-analytics-action="support" data-analytics-destination="support">Support</a><a href="mailto:akshaymattoo@gmail.com" data-analytics-event="support_email_clicked" data-analytics-action="email" data-analytics-destination="support_email">Contact</a></div>
       <small>© 2026 Swing</small>
     </div>
   </footer>
