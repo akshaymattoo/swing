@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useKeepAwake } from 'expo-keep-awake';
 import { Alert, Animated, AppState, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import type { AppContainer } from '../../application/appContainer';
@@ -19,6 +20,8 @@ type Props = {
 };
 
 export function RunnerScreen({ container, initialSession, onBell, onComplete, onEnd }: Props) {
+  useKeepAwake('active-workout');
+
   const analytics = useAnalytics();
   const { height: windowHeight } = useWindowDimensions();
   const [session, setSession] = useState(initialSession);
